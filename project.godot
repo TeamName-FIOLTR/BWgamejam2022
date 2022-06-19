@@ -8,6 +8,46 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "ConfigResource",
+"language": "GDScript",
+"path": "res://assets/scripts/resources/config_resource.gd"
+}, {
+"base": "Panel",
+"class": "DualButton",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/dual_button.gd"
+}, {
+"base": "Resource",
+"class": "GameSaveResource",
+"language": "GDScript",
+"path": "res://assets/scripts/resources/saveResource.gd"
+}, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://assets/scripts/generics/level.gd"
+}, {
+"base": "Node",
+"class": "LoadUtils",
+"language": "GDScript",
+"path": "res://assets/scripts/statics/load_utils.gd"
+}, {
+"base": "VScrollBar",
+"class": "SavePicker",
+"language": "GDScript",
+"path": "res://scenes/UI/SaveViewUI.gd"
+} ]
+_global_script_class_icons={
+"ConfigResource": "",
+"DualButton": "",
+"GameSaveResource": "",
+"Level": "",
+"LoadUtils": "",
+"SavePicker": ""
+}
+
 [application]
 
 config/name="BWgameJam"
