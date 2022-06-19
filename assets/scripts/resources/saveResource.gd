@@ -6,10 +6,10 @@ class_name GameSaveResource
 
 #the name of the last scene that we saved at
 #equivilent to the name of the root node in that level
-var last_scene : String
+var last_level : String = "level1"
+
 #the name of the save file that we are in
 var game_name : String
-
 
 #initilizes the directory structure if it is not already
 static func initilize_save_dir()->void:
@@ -36,9 +36,9 @@ static func get_save_files()->Array:
 		fname = dir.get_next()
 	return ret_val
 
-#convinence function to get the scene path
-static func get_scene_path(scene_name : String)->String:
-	return "res://scenes/levels/" + scene_name + ".tscn"
+#convinence function to get the level path
+static func get_scene_path(level_name : String)->String:
+	return "res://scenes/levels/" + level_name + ".tscn"
 
 #convinence function for getting the path of a save resource
 static func get_save_resource_path(game_name : String)->String:
@@ -46,6 +46,19 @@ static func get_save_resource_path(game_name : String)->String:
 
 #convinence function to load a save resource from a game name
 static func get_save(game_name : String)->GameSaveResource:
-	return ResourceLoader.load(get_save_resource_path(game_name)) as GameSaveResource
-static func save(game_name : String,gsr : GameSaveResource)->void:
-	ResourceLoader.save(get_save_resource_path(game_name))
+	var ret_val =  ResourceLoader.load(get_save_resource_path(game_name)) as GameSaveResource
+	#just incase data gets desynced
+	ret_val.game_name = game_name
+	return ret_val
+	
+static func save(gsr : GameSaveResource)->void:
+	ResourceSaver.save(get_save_resource_path(gsr.game_name),gsr)
+
+#returns the game to the given save state	
+static func return_to_save(tree : SceneTree,gsr : GameSaveResource)->void:
+	Globals.game_save_data = gsr
+	tree.change_scene(get_scene_path(gsr.last_level))
+	
+
+static func load_game(tree : SceneTree,game_name : String)->void:
+	return_to_save(tree,get_save(game_name))
