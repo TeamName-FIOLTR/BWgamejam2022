@@ -41,6 +41,7 @@ func _process(delta):
 		var hit_volume = linear2db(velocity.length()/3000)
 #		velocity = velocity-velocity.project(collision.normal)
 		velocity = velocity.slide(collision.normal)
+		move_and_slide(velocity,collision.normal)
 		if dropping:
 #			print("gonna start playing")
 			var pitch = lerp(0.9,1.1,randf())
