@@ -8,20 +8,84 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "KinematicBody2D",
+_global_script_classes=[ 
+{"base": "KinematicBody2D",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://assets/scripts/Entity.gd"
+"path": "res://assets/scripts/Entity.gd"},
+{"base": "Button",
+"class": "BackButton",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/backButton.gd"
+}, {
+"base": "Resource",
+"class": "ConfigResource",
+"language": "GDScript",
+"path": "res://assets/scripts/resources/config_resource.gd"
+}, {
+"base": "Panel",
+"class": "DualButton",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/dual_button.gd"
+}, {
+"base": "Resource",
+"class": "GameSaveResource",
+"language": "GDScript",
+"path": "res://assets/scripts/resources/saveResource.gd"
+}, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://assets/scripts/generics/level.gd"
+}, {
+"base": "LineEdit",
+"class": "LineEditHint",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/LineEditHint.gd"
+}, {
+"base": "Node",
+"class": "LoadUtils",
+"language": "GDScript",
+"path": "res://assets/scripts/statics/load_utils.gd"
+}, {
+"base": "Control",
+"class": "MainUI",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/GameStart.gd"
+}, {
+"base": "Button",
+"class": "MenuChangeButton",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/MenuChangeButton.gd"
+}, {
+"base": "ScrollContainer",
+"class": "SavePicker",
+"language": "GDScript",
+"path": "res://scenes/UI/SaveViewUI.gd"
 } ]
 _global_script_class_icons={
-"Entity": ""
-}
+"BackButton": "",
+"ConfigResource": "",
+"DualButton": "",
+"GameSaveResource": "",
+"Level": "",
+"LineEditHint": "",
+"LoadUtils": "",
+"MainUI": "",
+"MenuChangeButton": "",
+"SavePicker": "",
+"Entity":""}
 
 [application]
 
 config/name="BWgameJam"
+run/main_scene="res://scenes/UI/StartLevel.tscn"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://scenes/globals/Globals.tscn"
 
 [debug]
 
@@ -31,11 +95,12 @@ gdscript/completion/autocomplete_setters_and_getters=true
 
 window/size/width=1920
 window/size/height=1080
-window/size/borderless=true
 
 [global]
 
 rate=false
+size=false
+set=false
 
 [input]
 

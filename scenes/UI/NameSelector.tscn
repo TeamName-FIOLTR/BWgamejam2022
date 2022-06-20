@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/scripts/UI/NameSelector.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/UI/LineEditHint.gd" type="Script" id=2]
+
+[node name="GameSelector" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+button_path = NodePath("VBoxContainer/Panel/Button")
+text_path = NodePath("VBoxContainer/LineEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+margin_right = 1960.0
+margin_bottom = 24.0
+text = "Game Name"
+align = 1
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 1960.0
+margin_bottom = 28.0
+
+[node name="Button" type="Button" parent="VBoxContainer/Panel"]
+anchor_left = 0.25
+anchor_right = 0.75
+text = "Start Game!"
