@@ -8,8 +8,12 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Button",
+_global_script_classes=[ 
+{"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://assets/scripts/Entity.gd"},
+{"base": "Button",
 "class": "BackButton",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/backButton.gd"
@@ -69,8 +73,8 @@ _global_script_class_icons={
 "LoadUtils": "",
 "MainUI": "",
 "MenuChangeButton": "",
-"SavePicker": ""
-}
+"SavePicker": "",
+"Entity":""}
 
 [application]
 
