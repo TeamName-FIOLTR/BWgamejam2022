@@ -1,5 +1,7 @@
 extends Control
 
+class_name UINameSelector
+
 export var button_path : NodePath
 onready var button : Button = get_node(button_path) as Button
 
@@ -15,7 +17,3 @@ func _ready():
 
 func on_text_entered():
 	emit_signal("text_entered",text.text)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
