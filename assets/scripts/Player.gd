@@ -19,6 +19,8 @@ export(NodePath) var player_audio_node
 onready var jump_timer : Timer = get_node(jump_timer_node)
 onready var player_audio_player = get_node(player_audio_node)
 
+#the number of layers that we swap between
+export var layer_count : int = 3
 
 func set_jump_time_max(n_jump_time):
 	jump_time_max = n_jump_time
@@ -27,8 +29,12 @@ func set_jump_time_max(n_jump_time):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(ColMath.get_layer_number(ColMath.Layer.COLLISION_LAYER_TWO))
+	print(ColMath.get_color_layer_bits(ColMath.get_layer_number(ColMath.Layer.COLLISION_LAYER_TWO)))
+	print(ColMath.Layer.COLLISION_LAYER_TWO)
+	
+	collision_mask |= ColMath.Layer.COLLISION_LAYER_TWO
 	jump_timer.wait_time = jump_time_max
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,9 +73,16 @@ func play_landing_sound(pitch, volume):
 	player_audio_player.volume_db = volume
 	player_audio_player.play()
 
-#swaps the game color
-func swap()->void:
-	pass
+#swaps to the given color layer
+func swap_to(color_layer : int)->void:
+	collision_mask = ColMath.get_color_layer_bits(color_layer) | ColMath.Layer.CONSTANT_COLLISION
+	get_parent().modulate = ColMath.get_layer_color(color_layer,layer_count)
+
+#swaps to the next color layer
+func swap_next()->void:
+	print("on layer " + str(ColMath.get_layer_number(collision_mask)))
+	swap_to((ColMath.get_layer_number(collision_mask) + 1) % layer_count)
+
 
 func _input(event):
 	if event is InputEventKey or InputEventJoypadMotion:
@@ -84,7 +97,8 @@ func _input(event):
 	if event.is_action_released("jump") and jumping:
 		dropping = true
 		jumping = false
-
+	if event.is_action_pressed("developer_debug"):
+		swap_next()
 func _on_Jump_Timer_timeout():
 	dropping = true
 	jumping = false
