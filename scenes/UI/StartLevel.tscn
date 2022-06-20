@@ -14,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="mainContainer" type="Panel" parent="."]
+[node name="mainContainer" type="PanelContainer" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 anchor_left = 0.3
@@ -22,18 +22,17 @@ anchor_right = 0.7
 anchor_bottom = 1.0
 theme = SubResource( 1 )
 
-[node name="Content" type="VSplitContainer" parent="mainContainer"]
+[node name="Content" type="Panel" parent="mainContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.25
-anchor_top = 0.25
-anchor_right = 0.75
-anchor_bottom = 0.8
-split_offset = 14
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 761.0
+margin_bottom = 1073.0
 
 [node name="ContentInside" type="Panel" parent="mainContainer/Content"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_right = 384.0
-margin_bottom = 114.0
+anchor_right = 1.0
+anchor_bottom = 0.9
 rect_min_size = Vector2( 200, 100 )
 script = ExtResource( 5 )
 
@@ -51,58 +50,97 @@ anchor_bottom = 1.0
 [node name="VBoxContainer" type="VBoxContainer" parent="mainContainer/Content/ContentInside/VScrollBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/separation = 1
 
-[node name="btnLoadGame" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
-margin_right = 384.0
-margin_bottom = 20.0
+[node name="Control" type="Control" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
+margin_right = 754.0
+margin_bottom = 191.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btnLoadGame" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 0.8
+size_flags_vertical = 3
 text = "Load Game"
 script = ExtResource( 3 )
-BackButtonPath = NodePath("../../../../footer/backButton")
-FromMenuPath = NodePath("../..")
-ToMenuPath = NodePath("../../../savePicker")
+BackButtonPath = NodePath("../../../../../footer/backButton")
+FromMenuPath = NodePath("../../..")
+ToMenuPath = NodePath("../../../../savePicker")
 
-[node name="btnNewGame" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
-margin_top = 24.0
-margin_right = 384.0
-margin_bottom = 44.0
+[node name="Control2" type="Control" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
+margin_top = 192.0
+margin_right = 754.0
+margin_bottom = 383.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="btnNewGame" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control2"]
+anchor_right = 1.0
+anchor_bottom = 0.8
+size_flags_vertical = 3
 text = "New Game"
 script = ExtResource( 3 )
-BackButtonPath = NodePath("../../../../footer/backButton")
-FromMenuPath = NodePath("../..")
-ToMenuPath = NodePath("../../../NewGameNameSelect")
+BackButtonPath = NodePath("../../../../../footer/backButton")
+FromMenuPath = NodePath("../../..")
+ToMenuPath = NodePath("../../../../NewGameNameSelect")
 
-[node name="Settings" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
-margin_top = 48.0
-margin_right = 384.0
-margin_bottom = 68.0
+[node name="Control3" type="Control" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
+margin_top = 384.0
+margin_right = 754.0
+margin_bottom = 575.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Settings" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control3"]
+anchor_right = 1.0
+anchor_bottom = 0.8
+size_flags_vertical = 3
 text = "Settings"
 
-[node name="Credits" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
-margin_top = 72.0
-margin_right = 384.0
-margin_bottom = 92.0
+[node name="Control4" type="Control" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
+margin_top = 576.0
+margin_right = 754.0
+margin_bottom = 767.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Credits" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control4"]
+anchor_right = 1.0
+anchor_bottom = 0.8
+size_flags_vertical = 3
 text = "Credits"
 
-[node name="exit" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
-margin_top = 96.0
-margin_right = 384.0
-margin_bottom = 116.0
+[node name="Control5" type="Control" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer"]
+margin_top = 768.0
+margin_right = 754.0
+margin_bottom = 959.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="exit" type="Button" parent="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control5"]
+anchor_right = 1.0
+anchor_bottom = 0.8
+size_flags_vertical = 3
 text = "Exit"
 
 [node name="footer" type="Panel" parent="mainContainer/Content"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_top = 126.0
-margin_right = 384.0
-margin_bottom = 594.0
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 22.0
 
 [node name="backButton" type="Button" parent="mainContainer/Content/footer"]
-anchor_right = 0.328
-anchor_bottom = 0.094
+anchor_right = 0.2
+anchor_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = "Back"
 script = ExtResource( 4 )
 
 [connection signal="save_pressed" from="mainContainer/Content/ContentInside/savePicker" to="." method="_on_savePicker_save_pressed"]
 [connection signal="text_entered" from="mainContainer/Content/ContentInside/NewGameNameSelect" to="." method="_on_NewGameNameSelect_text_entered"]
-[connection signal="pressed" from="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/btnLoadGame" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/btnNewGame" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control/btnLoadGame" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control2/btnNewGame" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="mainContainer/Content/ContentInside/VScrollBar/VBoxContainer/Control5/exit" to="." method="_on_exit_pressed"]
