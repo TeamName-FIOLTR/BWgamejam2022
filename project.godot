@@ -8,8 +8,12 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Button",
+_global_script_classes=[ 
+{"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://assets/scripts/Entity.gd"},
+{"base": "Button",
 "class": "BackButton",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/backButton.gd"
@@ -23,11 +27,6 @@ _global_script_classes=[ {
 "class": "DualButton",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/dual_button.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Entity",
-"language": "GDScript",
-"path": "res://assets/scripts/Entity.gd"
 }, {
 "base": "Resource",
 "class": "GameSaveResource",
@@ -68,20 +67,25 @@ _global_script_class_icons={
 "BackButton": "",
 "ConfigResource": "",
 "DualButton": "",
-"Entity": "",
 "GameSaveResource": "",
 "Level": "",
 "LineEditHint": "",
 "LoadUtils": "",
 "MainUI": "",
 "MenuChangeButton": "",
-"SavePicker": ""
-}
+"SavePicker": "",
+"Entity":""}
 
 [application]
 
 config/name="BWgameJam"
+run/main_scene="res://scenes/UI/StartLevel.tscn"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://scenes/globals/Globals.tscn"
 
 [debug]
 
@@ -91,11 +95,12 @@ gdscript/completion/autocomplete_setters_and_getters=true
 
 window/size/width=1920
 window/size/height=1080
-window/size/borderless=true
 
 [global]
 
 rate=false
+size=false
+set=false
 
 [input]
 
