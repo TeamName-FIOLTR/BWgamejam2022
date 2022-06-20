@@ -13,6 +13,8 @@ func _ready():
 		var btn = Button.new()
 		btn.text = saveName
 		btn.connect("pressed",self,"emit_save_pressed",[saveName])
+		
+		btn.size_flags_vertical = btn.SIZE_EXPAND | btn.SIZE_FILL
 		btnSaveContainer.add_child(btn)
 		
 func emit_save_pressed(saveName)->void:

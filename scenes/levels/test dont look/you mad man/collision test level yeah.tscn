@@ -43,7 +43,7 @@ gravity = Vector2( 0, 1000 )
 jump_gravity = 1.415
 drop_gravity = 5.476
 jump_speed = 1000.0
-jump_time_max = 1.0
+jump_time_max = 0.25
 jump_cache_time = 100.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

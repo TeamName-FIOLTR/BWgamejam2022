@@ -1,11 +1,10 @@
-extends Control
+extends BackContainerNode
 
 class_name MainUI
 
 func _ready():
 	#initilize the game save dir if it is not already
 	GameSaveResource.initilize_save_dir()
-
 
 func _on_exit_pressed():
 	#leav the game
@@ -19,7 +18,6 @@ func _on_NewGameNameSelect_text_entered(text):
 	GameSaveResource.save(gsr)
 	
 	GameSaveResource.return_to_save(get_tree(),gsr)
-
 
 func _on_savePicker_save_pressed(save):
 	GameSaveResource.load_game(get_tree(),save)

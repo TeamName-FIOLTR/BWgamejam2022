@@ -8,15 +8,16 @@
 
 config_version=4
 
-_global_script_classes=[ 
-{"base": "KinematicBody2D",
-"class": "Entity",
-"language": "GDScript",
-"path": "res://assets/scripts/Entity.gd"},
-{"base": "Button",
+_global_script_classes=[ {
+"base": "Button",
 "class": "BackButton",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/backButton.gd"
+}, {
+"base": "Node",
+"class": "BackContainerNode",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/backContainer.gd"
 }, {
 "base": "Resource",
 "class": "ConfigResource",
@@ -27,6 +28,16 @@ _global_script_classes=[
 "class": "DualButton",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/dual_button.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://assets/scripts/Entity.gd"
+}, {
+"base": "Button",
+"class": "ExitButton",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/btnExit.gd"
 }, {
 "base": "Resource",
 "class": "GameSaveResource",
@@ -48,7 +59,7 @@ _global_script_classes=[
 "language": "GDScript",
 "path": "res://assets/scripts/statics/load_utils.gd"
 }, {
-"base": "Control",
+"base": "BackContainerNode",
 "class": "MainUI",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/GameStart.gd"
@@ -61,12 +72,25 @@ _global_script_classes=[
 "base": "ScrollContainer",
 "class": "SavePicker",
 "language": "GDScript",
-"path": "res://scenes/UI/SaveViewUI.gd"
+"path": "res://assets/scripts/UI/SaveViewUI.gd"
+}, {
+"base": "Control",
+"class": "UINameSelector",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/NameSelector.gd"
+}, {
+"base": "UINameSelector",
+"class": "UINewGame",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/NewGameSelector.gd"
 } ]
 _global_script_class_icons={
 "BackButton": "",
+"BackContainerNode": "",
 "ConfigResource": "",
 "DualButton": "",
+"Entity": "",
+"ExitButton": "",
 "GameSaveResource": "",
 "Level": "",
 "LineEditHint": "",
@@ -74,7 +98,9 @@ _global_script_class_icons={
 "MainUI": "",
 "MenuChangeButton": "",
 "SavePicker": "",
-"Entity":""}
+"UINameSelector": "",
+"UINewGame": ""
+}
 
 [application]
 
