@@ -19,7 +19,7 @@ static func get_layer_number(bits : int)->int:
 	
 	return count - 1
 
-static func get_layer_color(layer_number : int , Layer_Count : int = DEFAULT_LAYER_COUNT,offset : float = 0.0)->Color:
+static func get_layer_color(layer_number : int , Layer_Count : int = DEFAULT_LAYER_COUNT,offset : float = 0.5)->Color:
 	return Color.from_hsv(float(layer_number) / float(Layer_Count) + offset,1.0,1.0)
 
 const DEFAULT_LAYER_COUNT = 3

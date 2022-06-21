@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/UI/MenuChangeButton.gd"
 }, {
+"base": "Area2D",
+"class": "Pickup",
+"language": "GDScript",
+"path": "res://assets/scripts/generics/Pickups.gd"
+}, {
 "base": "Entity",
 "class": "Player",
 "language": "GDScript",
@@ -73,6 +78,11 @@ _global_script_classes=[ {
 "class": "SavePicker",
 "language": "GDScript",
 "path": "res://scenes/UI/SaveViewUI.gd"
+}, {
+"base": "Pickup",
+"class": "Tuna",
+"language": "GDScript",
+"path": "res://assets/scripts/pickups/TunaCan.gd"
 } ]
 _global_script_class_icons={
 "BackButton": "",
@@ -86,8 +96,10 @@ _global_script_class_icons={
 "LoadUtils": "",
 "MainUI": "",
 "MenuChangeButton": "",
+"Pickup": "",
 "Player": "",
-"SavePicker": ""
+"SavePicker": "",
+"Tuna": ""
 }
 
 [application]

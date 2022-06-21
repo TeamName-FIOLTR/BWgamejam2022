@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enviroments/Basic Swap Box.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/enviroments/DEATHLAZER.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=6]
+[ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -184,13 +185,13 @@ mesh = SubResource( 4 )
 
 [node name="Icon" type="Sprite" parent="fadeMixer"]
 material = SubResource( 6 )
-position = Vector2( 369, 152 )
+position = Vector2( 623, 262 )
 scale = Vector2( 1.00296, 0.943432 )
 texture = ExtResource( 3 )
 
 [node name="DEATHLAZER" parent="fadeMixer" instance=ExtResource( 4 )]
-position = Vector2( 1145, 177 )
-rotation = 1.48165
+position = Vector2( 1022, 33 )
+rotation = -0.00696933
 
 [node name="Basic Swap Box" parent="fadeMixer" instance=ExtResource( 2 )]
 position = Vector2( 860, 548 )
@@ -209,6 +210,9 @@ position = Vector2( 420, 260 )
 scale = Vector2( 0.186628, 0.186628 )
 collision_layer = 11
 collision_mask = 0
+
+[node name="Tuna" parent="fadeMixer" instance=ExtResource( 7 )]
+position = Vector2( 1303, 292 )
 
 [node name="FadePlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 10 )

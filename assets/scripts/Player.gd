@@ -96,6 +96,12 @@ func swap_next()->void:
 	var swap_layer = (ColMath.get_layer_number(collision_mask) + 1) % layer_count
 	swap_to(swap_layer)
 
+#called by a pickup when we enter it
+#sets any and all variables related to the player
+#and the pickup
+func pickup(pick : Area2D)->void:
+	if pick.is_in_group("Tuna"):
+		start_position = pick.position
 
 func _input(event):
 	if not dead:
