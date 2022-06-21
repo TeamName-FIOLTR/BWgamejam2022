@@ -1,26 +1,31 @@
 extends Entity
+class_name Player
 
 export(float) var jump_gravity = 0.2
 export(float) var drop_gravity = 1.0
 export(float) var jump_speed = 100
 export(float) var jump_time_max = 0.3 setget set_jump_time_max
-export(Vector2) var input_velocity = Vector2(0,0)
 export(float) var input_velocity_scale = 500
-export(bool) var jumping = false
-export(bool) var dropping = false
 export(float) var jump_cache_time = 50
-export(float) var jump_cached_time = 50
-export(int) var jump_press_time = 0
-export(bool) var jump_cached = false
 export(float) var coyote_time = 100
-export(int) var last_collision_time = 0
+export(int) var lives = 9
 export(NodePath) var jump_timer_node
 export(NodePath) var player_audio_node
+var input_velocity = Vector2(0,0)
+var jumping = false
+var dropping = false
+var jump_cached_time = 50
+var jump_press_time = 0
+var jump_cached = false
+var last_collision_time = 0
+var start_position : Vector2 = Vector2(0,0)
+var dead = false
 onready var jump_timer : Timer = get_node(jump_timer_node)
 onready var player_audio_player = get_node(player_audio_node)
 
 #the number of layers that we swap between
 export var layer_count : int = 3
+#export(int) var current_layer
 
 func set_jump_time_max(n_jump_time):
 	jump_time_max = n_jump_time
@@ -35,6 +40,7 @@ func _ready():
 	
 	collision_mask |= ColMath.Layer.COLLISION_LAYER_TWO
 	jump_timer.wait_time = jump_time_max
+	start_position = position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -77,11 +83,13 @@ func play_landing_sound(pitch, volume):
 func swap_to(color_layer : int)->void:
 	collision_mask = ColMath.get_color_layer_bits(color_layer) | ColMath.Layer.CONSTANT_COLLISION
 	get_parent().modulate = ColMath.get_layer_color(color_layer,layer_count)
+	get_tree().call_group("Swap Recievers", "recieve_swap", color_layer)
 
 #swaps to the next color layer
 func swap_next()->void:
 	print("on layer " + str(ColMath.get_layer_number(collision_mask)))
-	swap_to((ColMath.get_layer_number(collision_mask) + 1) % layer_count)
+	var swap_layer = (ColMath.get_layer_number(collision_mask) + 1) % layer_count
+	swap_to(swap_layer)
 
 
 func _input(event):
@@ -99,6 +107,23 @@ func _input(event):
 		jumping = false
 	if event.is_action_pressed("developer_debug"):
 		swap_next()
+
+func recieve_player_death():
+#	dead = true
+	lives -= 1
+	var global_pos = global_position
+	if lives < 0:
+		get_tree().call_group("Level Status Recievers", "recieve_level_failed")
+	position = start_position
+#	velocity = Vector2.ZERO
+	swap_next()
+	$deathsound.global_position = global_pos
+	$deathsound.play()
+	$"respawn sound".play()
+	$"Spawn Animation/AnimationPlayer".play("Spawn")
+#	dead = false
+	pass
+
 func _on_Jump_Timer_timeout():
 	dropping = true
 	jumping = false

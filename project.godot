@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/UI/MenuChangeButton.gd"
 }, {
+"base": "Entity",
+"class": "Player",
+"language": "GDScript",
+"path": "res://assets/scripts/Player.gd"
+}, {
 "base": "ScrollContainer",
 "class": "SavePicker",
 "language": "GDScript",
@@ -81,6 +86,7 @@ _global_script_class_icons={
 "LoadUtils": "",
 "MainUI": "",
 "MenuChangeButton": "",
+"Player": "",
 "SavePicker": ""
 }
 
@@ -103,6 +109,7 @@ gdscript/completion/autocomplete_setters_and_getters=true
 
 window/size/width=1920
 window/size/height=1080
+window/size/borderless=true
 
 [global]
 

@@ -1,11 +1,46 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://scenes/enviroments/DEATHLAZER.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/enviroments/Basic Swap Box.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="VisualShader" id=2]
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+uniform float thingy = 0.9;
+uniform vec2 scale_thing = vec2(1.0);
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	float x = UV.x-0.5;
+	float y = UV.y-0.5;
+	float thing = float(!((abs(x*scale_thing.x)<=thingy)&&(abs(y*scale_thing.y)<=thingy)));
+//	SCREEN_PIXEL_SIZE
+//	vec3 thing_vec = vec3()
+	COLOR.rgb = vec3(thing);
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/thingy = 0.318
+shader_param/scale_thing = Vector2( 0.664, 1 )
+
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 
@@ -17,6 +52,7 @@ void vertex() {
 
 void fragment() {
 // Output:0
+	COLOR.r = 0.0;
 
 }
 
@@ -25,12 +61,9 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -361.852, 243 )
-mode = 1
-flags/light_only = false
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+shader = SubResource( 9 )
 
 [sub_resource type="QuadMesh" id=4]
 material = SubResource( 3 )
@@ -92,8 +125,8 @@ void fragment() {
 shader = SubResource( 5 )
 shader_param/forground_in = Color( 0, 1, 0.913725, 1 )
 shader_param/background_in = Color( 0.309804, 0, 0.847059, 1 )
-shader_param/forground_out = Color( 1, 1, 1, 1 )
-shader_param/background_out = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
 shader_param/line_count = 53.419
 shader_param/line_width = 0.018
 shader_param/hatch_angle = 2.863
@@ -101,7 +134,6 @@ shader_param/snap_threshhold_front = 0.628
 shader_param/snap_threshhold_back = 0.72
 
 [node name="collision test level yeah" type="Node2D"]
-modulate = Color( 1, 0, 0.960784, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 256, 233 )
@@ -120,6 +152,7 @@ scale = Vector2( 16.4807, 1 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+material = SubResource( 8 )
 mesh = SubResource( 4 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -130,6 +163,7 @@ scale = Vector2( 16.4807, 1 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+material = SubResource( 8 )
 mesh = SubResource( 4 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
@@ -140,6 +174,7 @@ scale = Vector2( 16.4807, 1 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+material = SubResource( 8 )
 mesh = SubResource( 4 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
@@ -150,6 +185,7 @@ scale = Vector2( 16.4807, 1 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D4"]
+material = SubResource( 8 )
 mesh = SubResource( 4 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
@@ -160,9 +196,31 @@ scale = Vector2( 179.567, 2.5253 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D5"]
+material = SubResource( 8 )
 mesh = SubResource( 4 )
 
 [node name="Icon" type="Sprite" parent="."]
 material = SubResource( 6 )
 position = Vector2( 369, 152 )
 texture = ExtResource( 2 )
+
+[node name="DEATHLAZER" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1045, 67 )
+
+[node name="Basic Swap Box" parent="." instance=ExtResource( 4 )]
+position = Vector2( 860, 548 )
+scale = Vector2( 0.186628, 0.186628 )
+collision_layer = 11
+collision_mask = 0
+
+[node name="Basic Swap Box2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1032, 432 )
+scale = Vector2( 0.186628, 0.186628 )
+collision_layer = 19
+collision_mask = 0
+
+[node name="Basic Swap Box3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 420, 260 )
+scale = Vector2( 0.186628, 0.186628 )
+collision_layer = 11
+collision_mask = 0
