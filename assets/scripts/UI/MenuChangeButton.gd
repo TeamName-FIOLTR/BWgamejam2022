@@ -4,24 +4,17 @@ extends Button
 class_name MenuChangeButton
 
 #the root of the menu that we are working with
-export var BackButtonPath : NodePath
-onready var back_button : BackButton = get_node(BackButtonPath)
+export var root_path : NodePath
+onready var root_node : Control = get_node(root_path)
 
-#the menu that we are swaping from
-export var FromMenuPath : NodePath
-onready var from_menu : Control = get_node(FromMenuPath)
-
-#the menu that we swap to
-export var ToMenuPath : NodePath
-onready var to_menu = get_node(ToMenuPath)
+#the menu that we are swaping to
+export var to_scene : String
 
 func _ready():
 	connect("pressed",self,"on_pressed")
 
 func change_menu()->void:
-	back_button.remember_menu(from_menu)
-	from_menu.visible = false
-	to_menu.visible = true
+	(root_node.get_parent() as BackContainerNode).change_scene(to_scene)
 
 func on_pressed():
 	change_menu()

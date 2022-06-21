@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/UI/SaveViewUI.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/UI/SaveViewUI.gd" type="Script" id=2]
 
 [node name="save_picker" type="ScrollContainer"]
 self_modulate = Color( 0, 0, 0, 1 )
@@ -15,4 +15,6 @@ vbContainer = NodePath("VBoxContainer")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
+size_flags_vertical = 3

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/UI/SaveViewUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scripts/UI/UISaveLoader.gd" type="Script" id=2]
+
+[node name="save_picker" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[connection signal="save_pressed" from="." to="." method="_on_save_picker_save_pressed"]

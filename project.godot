@@ -9,10 +9,20 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ConfirmationDialog",
+"class": "ActionMapDialog",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/KeyPressDialog.gd"
+}, {
 "base": "Button",
 "class": "BackButton",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/backButton.gd"
+}, {
+"base": "Node",
+"class": "BackContainerNode",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/backContainer.gd"
 }, {
 "base": "Node",
 "class": "ColMath",
@@ -34,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/Entity.gd"
 }, {
+"base": "Button",
+"class": "ExitButton",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/btnExit.gd"
+}, {
 "base": "Resource",
 "class": "GameSaveResource",
 "language": "GDScript",
@@ -54,7 +69,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/statics/load_utils.gd"
 }, {
-"base": "Control",
+"base": "BackContainerNode",
 "class": "MainUI",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/GameStart.gd"
@@ -77,19 +92,42 @@ _global_script_classes=[ {
 "base": "ScrollContainer",
 "class": "SavePicker",
 "language": "GDScript",
-"path": "res://scenes/UI/SaveViewUI.gd"
+"path": "res://assets/scripts/UI/SaveViewUI.gd"
+}, {
+"base": "Control",
+"class": "SettingsUI",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/SettingsUI.gd"
 }, {
 "base": "Pickup",
 "class": "Tuna",
 "language": "GDScript",
 "path": "res://assets/scripts/pickups/TunaCan.gd"
+}, {
+"base": "Control",
+"class": "UIControlMapEntry",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/ControlEntryUI.gd"
+}, {
+"base": "Control",
+"class": "UINameSelector",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/NameSelector.gd"
+}, {
+"base": "UINameSelector",
+"class": "UINewGame",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/NewGameSelector.gd"
 } ]
 _global_script_class_icons={
+"ActionMapDialog": "",
 "BackButton": "",
+"BackContainerNode": "",
 "ColMath": "",
 "ConfigResource": "",
 "DualButton": "",
 "Entity": "",
+"ExitButton": "",
 "GameSaveResource": "",
 "Level": "",
 "LineEditHint": "",
@@ -99,7 +137,11 @@ _global_script_class_icons={
 "Pickup": "",
 "Player": "",
 "SavePicker": "",
-"Tuna": ""
+"SettingsUI": "",
+"Tuna": "",
+"UIControlMapEntry": "",
+"UINameSelector": "",
+"UINewGame": ""
 }
 
 [application]
