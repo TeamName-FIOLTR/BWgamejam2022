@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "ConfirmationDialog",
+"class": "ActionMapDialog",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/KeyPressDialog.gd"
+}, {
 "base": "Button",
 "class": "BackButton",
 "language": "GDScript",
@@ -75,6 +80,16 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/UI/SaveViewUI.gd"
 }, {
 "base": "Control",
+"class": "SettingsUI",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/SettingsUI.gd"
+}, {
+"base": "Control",
+"class": "UIControlMapEntry",
+"language": "GDScript",
+"path": "res://assets/scripts/UI/ControlEntryUI.gd"
+}, {
+"base": "Control",
 "class": "UINameSelector",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/NameSelector.gd"
@@ -85,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/UI/NewGameSelector.gd"
 } ]
 _global_script_class_icons={
+"ActionMapDialog": "",
 "BackButton": "",
 "BackContainerNode": "",
 "ConfigResource": "",
@@ -98,6 +114,8 @@ _global_script_class_icons={
 "MainUI": "",
 "MenuChangeButton": "",
 "SavePicker": "",
+"SettingsUI": "",
+"UIControlMapEntry": "",
 "UINameSelector": "",
 "UINewGame": ""
 }
