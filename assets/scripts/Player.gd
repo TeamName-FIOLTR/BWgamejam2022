@@ -1,6 +1,6 @@
 extends Entity
 class_name Player
-
+export(float) var speed = 1.0
 export(float) var jump_gravity = 0.2
 export(float) var drop_gravity = 1.0
 export(float) var jump_speed = 100
@@ -27,6 +27,10 @@ onready var player_audio_player = get_node(player_audio_node)
 export var layer_count : int = 3
 #export(int) var current_layer
 
+#returns the level node that we are in
+func get_level_node()->Level:
+	return get_parent().get_parent() as Level
+
 func set_jump_time_max(n_jump_time):
 	jump_time_max = n_jump_time
 	if not is_inside_tree(): yield(self, "ready")
@@ -49,10 +53,10 @@ func _process(delta):
 	else:
 		velocity += gravity*delta*drop_gravity
 	velocity.x = input_velocity.x
-	var collision = move_and_collide(velocity*delta)
+	var collision = move_and_collide(velocity*delta*speed)
 	if collision:
 		var hit_volume = linear2db(velocity.length()/3000)
-		velocity = move_and_slide(velocity,collision.normal)
+		velocity = move_and_slide(velocity*speed,collision.normal)
 		if dropping:
 			var pitch = lerp(0.9,1.1,randf())
 			play_landing_sound(pitch,hit_volume)
@@ -75,9 +79,10 @@ func jump():
 
 func play_landing_sound(pitch, volume):
 #	var pitch = lerp(0.9,1.1,randf())
-	player_audio_player.pitch_scale = pitch
-	player_audio_player.volume_db = volume
-	player_audio_player.play()
+	if not dead:
+		player_audio_player.pitch_scale = pitch
+		player_audio_player.volume_db = volume
+		player_audio_player.play()
 
 #swaps to the given color layer
 func swap_to(color_layer : int)->void:
@@ -93,36 +98,48 @@ func swap_next()->void:
 
 
 func _input(event):
-	if event is InputEventKey or InputEventJoypadMotion:
-		input_velocity = input_velocity_scale*Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if event.is_action_pressed("jump"):
-		var coyote_jump = (OS.get_ticks_usec()-last_collision_time<=1000.0*coyote_time)
-		if (not (jumping or dropping)) or (dropping and coyote_jump):
-			jump()
-		elif dropping and !jump_cached:
-			jump_cached = true
-			jump_cached_time = OS.get_ticks_usec()
-	if event.is_action_released("jump") and jumping:
-		dropping = true
-		jumping = false
-	if event.is_action_pressed("developer_debug"):
-		swap_next()
+	if not dead:
+		if event is InputEventKey or InputEventJoypadMotion:
+			input_velocity = input_velocity_scale*Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		if event.is_action_pressed("jump"):
+			var coyote_jump = (OS.get_ticks_usec()-last_collision_time<=1000.0*coyote_time)
+			if (not (jumping or dropping)) or (dropping and coyote_jump):
+				jump()
+			elif dropping and !jump_cached:
+				jump_cached = true
+				jump_cached_time = OS.get_ticks_usec()
+		if event.is_action_released("jump") and jumping:
+			dropping = true
+			jumping = false
+		if event.is_action_pressed("developer_debug"):
+			swap_next()
 
 func recieve_player_death():
-#	dead = true
-	lives -= 1
-	var global_pos = global_position
-	if lives < 0:
-		get_tree().call_group("Level Status Recievers", "recieve_level_failed")
-	position = start_position
-#	velocity = Vector2.ZERO
-	swap_next()
-	$deathsound.global_position = global_pos
-	$deathsound.play()
-	$"respawn sound".play()
-	$"Spawn Animation/AnimationPlayer".play("Spawn")
-#	dead = false
-	pass
+	if lives <= 0:
+		$Camera2D/AnimationPlayer.play("screen_shake")
+		get_level_node().fade_death()
+		$level_fail_sound.play()
+		$deathsound.play()
+		speed = 0.05 #slow down for death
+		dead = true
+	else:
+	#	dead = true
+		lives -= 1
+		var global_pos = global_position
+		if lives < 0:
+			get_tree().call_group("Level Status Recievers", "recieve_level_failed")
+		position = start_position
+	#	velocity = Vector2.ZERO
+		swap_next()
+		
+		$deathsound.global_position = global_pos
+		$deathsound.play()
+		
+		$"respawn sound".play()
+		$"Spawn Animation/AnimationPlayer".play("Spawn")
+		
+	#	dead = false
+		pass
 
 func _on_Jump_Timer_timeout():
 	dropping = true

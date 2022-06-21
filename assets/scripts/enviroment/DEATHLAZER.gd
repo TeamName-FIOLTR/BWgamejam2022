@@ -16,7 +16,6 @@ func _ready():
 func _process(delta):
 	var thing = $RayCast2D.get_collider()
 	if thing is Player and not thing == previous_thing:
-		print(thing)
 		get_tree().call_group("Player Death Recievers", "recieve_player_death")
 	elif thing:
 		var y_coord = $RayCast2D.get_collision_point()
@@ -24,6 +23,8 @@ func _process(delta):
 		var local = obj_thing.global_transform.affine_inverse()*y_coord
 #		obj_thing.scale.y = local.y
 		obj_thing.points[1].y = local.y
+	else:
+		$Position2D/Line2D.points[1].y = $RayCast2D.cast_to.y
 	previous_thing = thing
 #	pass
 

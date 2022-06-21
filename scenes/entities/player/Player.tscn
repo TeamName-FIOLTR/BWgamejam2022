@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/CAT TEXT.png" type="Texture" id=2]
 [ext_resource path="res://assets/sound/metal_step_0.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sound/Laser_01.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sound/Menu_Select_00.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/death_noise.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 11 )
@@ -359,6 +360,38 @@ tracks/16/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "screen_shake"
+length = 0.13
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.01, 0.02, 0.07, 0.08, 0.09, 0.13, 0.15, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 10, 10 ), Vector2( -10, 0 ), Vector2( 0, 0 ), Vector2( 10, 10 ), Vector2( -10, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 10, 10 ), Vector2( -10, 0 ) ]
+}
+
 [node name="Player" type="KinematicBody2D" groups=["Player Death Recievers"]]
 script = ExtResource( 1 )
 jump_timer_node = NodePath("Jump Timer")
@@ -375,6 +408,9 @@ texture = ExtResource( 2 )
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="level_fail_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -447,5 +483,12 @@ root_node = NodePath("../Position2D2/Position2D/Line2D")
 playback_speed = 1.55
 anims/RESET = SubResource( 2 )
 anims/Spawn = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+anims/RESET = SubResource( 4 )
+anims/screen_shake = SubResource( 5 )
 
 [connection signal="timeout" from="Jump Timer" to="." method="_on_Jump_Timer_timeout"]
