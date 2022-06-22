@@ -1,0 +1,77 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/art/cat/damage/0002.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/cat/damage/0003.png" type="Texture" id=2]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=3]
+[ext_resource path="res://assets/art/cat/walkAnimation/0005.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/cat/jump/catjump1.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/cat/walkAnimation/0002.png" type="Texture" id=6]
+[ext_resource path="res://assets/scripts/animationTrees/cat.gd" type="Script" id=7]
+[ext_resource path="res://assets/art/cat/idle/0002.png0001.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/cat/idle/0002.png0002.png" type="Texture" id=9]
+[ext_resource path="res://assets/art/cat/walkAnimation/0006.png" type="Texture" id=10]
+[ext_resource path="res://assets/art/cat/walkAnimation/0003.png" type="Texture" id=11]
+[ext_resource path="res://assets/art/cat/walkAnimation/0001.png" type="Texture" id=12]
+[ext_resource path="res://assets/art/cat/idle/0002.png0004.png" type="Texture" id=13]
+[ext_resource path="res://assets/art/cat/jump/catjump3.png" type="Texture" id=14]
+[ext_resource path="res://assets/art/cat/idle/0002.png0006.png" type="Texture" id=15]
+[ext_resource path="res://assets/art/cat/idle/0002.png0003.png" type="Texture" id=16]
+[ext_resource path="res://assets/art/cat/idle/0002.png0005.png" type="Texture" id=17]
+[ext_resource path="res://assets/art/cat/walkAnimation/0004.png" type="Texture" id=18]
+[ext_resource path="res://assets/art/cat/walkAnimation/0007.png" type="Texture" id=19]
+[ext_resource path="res://assets/art/cat/jump/catjump2.png" type="Texture" id=20]
+[ext_resource path="res://assets/art/cat/damage/0001.png" type="Texture" id=21]
+[ext_resource path="res://assets/art/cat/walkAnimation/0008.png" type="Texture" id=22]
+[ext_resource path="res://assets/art/cat/idle/0002.png0007.png" type="Texture" id=23]
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/forground_in = Color( 0, 0, 0, 1 )
+shader_param/background_in = Color( 1, 1, 1, 1 )
+shader_param/forground_out = Color( 1, 1, 1, 1 )
+shader_param/background_out = Color( 0, 0, 0, 1 )
+shader_param/line_count = 5.985
+shader_param/line_width = 0.305
+shader_param/hatch_angle = 2.889
+shader_param/snap_threshhold_front = 0.0
+shader_param/snap_threshhold_back = 0.0
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 20 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "damage",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 18 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 19 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "idle_long",
+"speed": 5.0
+} ]
+
+[node name="AnimatedSprite" type="AnimatedSprite"]
+material = SubResource( 7 )
+position = Vector2( -1, 3 )
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 6 )
+animation = "idle_long"
+frame = 5
+speed_scale = 2.0
+playing = true
+script = ExtResource( 7 )
+
+[node name="long_idle_timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="." to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="long_idle_timer" to="." method="_on_long_idle_timer_timeout"]

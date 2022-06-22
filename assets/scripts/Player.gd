@@ -71,6 +71,7 @@ func _process(delta):
 		last_collision_time = OS.get_ticks_usec()
 	elif not jumping:
 		dropping = true
+	update_animation()
 
 func jump():
 	velocity.y = -jump_speed
@@ -119,6 +120,31 @@ func _input(event):
 			jumping = false
 		if event.is_action_pressed("developer_debug"):
 			swap_next()
+		
+		update_animation()
+#updates the animation of the cat
+func update_animation()->void:
+	if input_velocity.x > 0:
+		$AnimatedSprite.flip_h = true
+	elif input_velocity.x < 0:
+		$AnimatedSprite.flip_h = false
+	
+	if abs(velocity.y) > 0:
+		$AnimatedSprite.playing = false
+		$AnimatedSprite.animation = "jump"
+		if velocity.y > 0.5:
+			$AnimatedSprite.frame = 2
+		elif velocity.y > 0:
+			$AnimatedSprite.frame = 1
+		else:
+			$AnimatedSprite.frame = 0
+	elif not (jumping or dropping):
+		$AnimatedSprite.playing = true
+		if abs(input_velocity.x) > 0:
+			$AnimatedSprite.play("run")
+		else:
+			print("playing idle")
+			$AnimatedSprite.play("idle")
 
 func recieve_player_death():
 	if lives <= 0:
@@ -150,3 +176,4 @@ func recieve_player_death():
 func _on_Jump_Timer_timeout():
 	dropping = true
 	jumping = false
+	update_animation()

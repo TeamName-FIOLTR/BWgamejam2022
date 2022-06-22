@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/collision_math.gd"
 }, {
+"base": "StaticBody2D",
+"class": "CollisionSwapper",
+"language": "GDScript",
+"path": "res://assets/scripts/enviroment/Basic Swap Box.gd"
+}, {
 "base": "Resource",
 "class": "ConfigResource",
 "language": "GDScript",
@@ -124,6 +129,7 @@ _global_script_class_icons={
 "BackButton": "",
 "BackContainerNode": "",
 "ColMath": "",
+"CollisionSwapper": "",
 "ConfigResource": "",
 "DualButton": "",
 "Entity": "",

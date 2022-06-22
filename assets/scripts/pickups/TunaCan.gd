@@ -13,14 +13,14 @@ func set_spawn():
 	collision_layer = 0
 	collision_mask = 0
 	$Particles2D.emitting = true
-	$TunaText.visible = false
+	$Sprite.visible = false
 func unset_spawn():
 	collision_layer = original_collision_layer
 	collision_mask = original_collision_mask
 	monitorable = true
 	monitoring = true
 	$TunaText.visible = true
-	$Particles2D.emitting = false
+	$Sprite.emitting = false
 
 func on_pickup(player)->void:
 	set_spawn()

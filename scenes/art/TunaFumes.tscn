@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=1]
+[ext_resource path="res://assets/art/Tuna/0004.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/Tuna/0003.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/Tuna/0001 (1).png" type="Texture" id=4]
+[ext_resource path="res://assets/art/Tuna/0002.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/forground_in = Color( 0, 0, 0, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 7.266
+shader_param/line_width = 0.006
+shader_param/hatch_angle = 3.811
+shader_param/snap_threshhold_front = 0.162
+shader_param/snap_threshhold_back = 0.124
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="TunaFumes" type="AnimatedSprite"]
+material = SubResource( 2 )
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 1 )
+frame = 2
+speed_scale = 1.5
+playing = true
