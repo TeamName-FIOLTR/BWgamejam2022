@@ -18,3 +18,6 @@ func reload()->void:
 func load_last_save()->void:
 	print("loading save")
 	GameSaveResource.return_to_save(get_tree(),Globals.game_save_data)
+
+func recieve_level_failed():
+	fade_death()

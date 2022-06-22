@@ -43,3 +43,5 @@ position = Vector2( 0, 87 )
 [node name="Line2D" type="Line2D" parent="Position2D"]
 points = PoolVector2Array( 0, 0, 0, 1 )
 default_color = Color( 1, 1, 1, 1 )
+
+[node name="Kill Sound" type="AudioStreamPlayer2D" parent="."]

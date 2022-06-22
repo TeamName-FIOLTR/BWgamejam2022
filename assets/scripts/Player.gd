@@ -121,31 +121,32 @@ func _input(event):
 			swap_next()
 
 func recieve_player_death():
-	if lives <= 0:
-		$Camera2D/AnimationPlayer.play("screen_shake")
-		get_level_node().fade_death()
-		$level_fail_sound.play()
-		$deathsound.play()
-		speed = 0.05 #slow down for death
-		dead = true
-	else:
-	#	dead = true
-		lives -= 1
-		var global_pos = global_position
-		if lives < 0:
-			get_tree().call_group("Level Status Recievers", "recieve_level_failed")
-		position = start_position
-	#	velocity = Vector2.ZERO
-		swap_next()
-		
-		$deathsound.global_position = global_pos
-		$deathsound.play()
-		
-		$"respawn sound".play()
-		$"Spawn Animation/AnimationPlayer".play("Spawn")
-		
-	#	dead = false
-		pass
+	# The entier point of the group call was to not need to do this in the player
+#	dead = true
+	lives -= 1
+	var global_pos = global_position
+	# yeah, right here
+	if lives < 0:
+		get_tree().call_group("Level Status Recievers", "recieve_level_failed")
+	position = start_position
+#	velocity = Vector2.ZERO
+	swap_next()
+	
+#	$deathsound.global_position = global_pos
+#	$deathsound.play()
+	
+	$"respawn sound".play()
+	$"Spawn Animation/AnimationPlayer".play("Spawn")
+	
+#	dead = false
+	pass
+
+func level_failed():
+	$Camera2D/AnimationPlayer.play("screen_shake")
+	$level_fail_sound.play()
+	$deathsound.play()
+	speed = 0.05 #slow down for death
+	dead = true
 
 func _on_Jump_Timer_timeout():
 	dropping = true
