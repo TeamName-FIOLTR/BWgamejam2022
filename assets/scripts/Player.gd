@@ -90,7 +90,7 @@ func swap_to(color_layer : int)->void:
 	collision_mask = ColMath.get_color_layer_bits(color_layer) | ColMath.Layer.CONSTANT_COLLISION
 	get_parent().modulate = ColMath.get_layer_color(color_layer,layer_count)
 	get_tree().call_group("Swap Recievers", "recieve_swap", color_layer)
-
+	$AnimatedSprite.play("damage")
 #swaps to the next color layer
 func swap_next()->void:
 	print("on layer " + str(ColMath.get_layer_number(collision_mask)))
@@ -143,7 +143,6 @@ func update_animation()->void:
 		if abs(input_velocity.x) > 0:
 			$AnimatedSprite.play("run")
 		else:
-			print("playing idle")
 			$AnimatedSprite.play("idle")
 
 func recieve_player_death():

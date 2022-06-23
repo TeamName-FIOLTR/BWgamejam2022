@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enviroments/Basic Swap Box.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/enviroments/cityBox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/enviroments/pottedPlant.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -227,6 +228,11 @@ collision_mask = 0
 [node name="Tuna" parent="fadeMixer" instance=ExtResource( 7 )]
 position = Vector2( 1304, 301 )
 scale = Vector2( 1, 1 )
+
+[node name="pottedPlant" parent="fadeMixer" instance=ExtResource( 10 )]
+position = Vector2( 1422, 319 )
+collision_layer = 5
+invert_bits = true
 
 [node name="FadePlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 10 )

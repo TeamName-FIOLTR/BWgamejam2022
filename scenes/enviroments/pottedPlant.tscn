@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/shaders/swap_hatch.gdshader" type="Shader" id=1]
+[ext_resource path="res://assets/art/background_assets/plants/shaded_pot_plant.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/enviroment/Basic Swap Box.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/swapped = false
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 100.0
+shader_param/line_width = 0.001
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 1.828
+shader_param/snap_threshhold_back = 0.155
+shader_param/outline_width = 0.009
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19, 15.75 )
+
+[node name="pottedPlant" type="StaticBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 3 )
+invert_bits = false
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 2, -33 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -19.25 )
+shape = SubResource( 1 )
