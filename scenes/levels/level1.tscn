@@ -114,13 +114,13 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[node name="level1" type="Node2D"]
+[node name="level1" type="Node2D" groups=["Level Status Recievers"]]
 script = ExtResource( 1 )
 
 [node name="fadeMixer" type="Node2D" parent="."]
 
 [node name="Player" parent="fadeMixer" instance=ExtResource( 5 )]
-position = Vector2( 626, -20 )
+position = Vector2( 1073, 209 )
 gravity = Vector2( 0, 1000 )
 jump_gravity = 1.415
 drop_gravity = 5.476

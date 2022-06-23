@@ -10,7 +10,6 @@ func anim_finished(anim):
 	match anim:
 		"fade":
 			reload()
-			
 func fade_death()->void:
 	$FadePlayer.play("fade")
 func reload()->void:
@@ -20,4 +19,5 @@ func load_last_save()->void:
 	GameSaveResource.return_to_save(get_tree(),Globals.game_save_data)
 
 func recieve_level_failed():
-	fade_death()
+#	fade_death()
+	pass

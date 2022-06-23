@@ -17,6 +17,8 @@ func _process(delta):
 	var thing = $RayCast2D.get_collider()
 	if thing is Player and not thing == previous_thing:
 		get_tree().call_group("Player Death Recievers", "recieve_player_death")
+		$"Kill Sound".global_position = thing.global_position
+		$"Kill Sound".play()
 	elif thing:
 		var y_coord = $RayCast2D.get_collision_point()
 		var obj_thing : Line2D = $Position2D/Line2D

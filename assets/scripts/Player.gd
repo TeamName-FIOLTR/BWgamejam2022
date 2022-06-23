@@ -45,6 +45,8 @@ func _ready():
 	collision_mask |= ColMath.Layer.COLLISION_LAYER_TWO
 	jump_timer.wait_time = jump_time_max
 	start_position = position
+	$"respawn sound".play()
+	$"Spawn Animation/AnimationPlayer".play("Spawn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -87,8 +89,10 @@ func play_landing_sound(pitch, volume):
 #swaps to the given color layer
 func swap_to(color_layer : int)->void:
 	collision_mask = ColMath.get_color_layer_bits(color_layer) | ColMath.Layer.CONSTANT_COLLISION
-	get_parent().modulate = ColMath.get_layer_color(color_layer,layer_count)
+	var swap_color = ColMath.get_layer_color(color_layer,layer_count)
+	get_parent().modulate = swap_color
 	get_tree().call_group("Swap Recievers", "recieve_swap", color_layer)
+	get_tree().call_group("Swap Recievers", "recieve_swap_color", swap_color)
 
 #swaps to the next color layer
 func swap_next()->void:
@@ -124,10 +128,12 @@ func recieve_player_death():
 	# The entier point of the group call was to not need to do this in the player
 #	dead = true
 	lives -= 1
-	var global_pos = global_position
-	# yeah, right here
+	get_tree().call_group("Player Status Recievers", "recieve_player_lives", lives)
 	if lives < 0:
 		get_tree().call_group("Level Status Recievers", "recieve_level_failed")
+		return 0
+	var global_pos = global_position
+	# yeah, right here
 	position = start_position
 #	velocity = Vector2.ZERO
 	swap_next()
@@ -136,15 +142,16 @@ func recieve_player_death():
 #	$deathsound.play()
 	
 	$"respawn sound".play()
+	$"Spawn Animation/AnimationPlayer".stop()
 	$"Spawn Animation/AnimationPlayer".play("Spawn")
 	
 #	dead = false
 	pass
 
-func level_failed():
+func recieve_level_failed():
 	$Camera2D/AnimationPlayer.play("screen_shake")
 	$level_fail_sound.play()
-	$deathsound.play()
+#	$deathsound.play()
 	speed = 0.05 #slow down for death
 	dead = true
 
