@@ -133,7 +133,7 @@ collision_layer = 5
 collision_mask = 0
 
 [node name="Player" parent="fadeMixer" instance=ExtResource( 5 )]
-position = Vector2( 535, 414 )
+position = Vector2( 1033, 334 )
 gravity = Vector2( 0, 1000 )
 jump_gravity = 1.415
 drop_gravity = 5.476
@@ -203,8 +203,8 @@ scale = Vector2( 1.00296, 0.943432 )
 texture = ExtResource( 3 )
 
 [node name="DEATHLAZER" parent="fadeMixer" instance=ExtResource( 4 )]
-position = Vector2( 1022, 33 )
-rotation = -0.00696933
+position = Vector2( 895, 239 )
+rotation = 1.55596
 
 [node name="Basic Swap Box" parent="fadeMixer" instance=ExtResource( 2 )]
 position = Vector2( 860, 548 )

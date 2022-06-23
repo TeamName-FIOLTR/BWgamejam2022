@@ -150,6 +150,7 @@ func recieve_player_death():
 	if lives <= 0:
 		$Camera2D/AnimationPlayer.play("screen_shake")
 		get_level_node().fade_death()
+		get_tree().call_group("Level Status Recievers", "recieve_level_failed")
 		$level_fail_sound.play()
 		$deathsound.play()
 		speed = 0.05 #slow down for death
@@ -158,8 +159,6 @@ func recieve_player_death():
 	#	dead = true
 		lives -= 1
 		var global_pos = global_position
-		if lives < 0:
-			get_tree().call_group("Level Status Recievers", "recieve_level_failed")
 		position = start_position
 	#	velocity = Vector2.ZERO
 		swap_next()
