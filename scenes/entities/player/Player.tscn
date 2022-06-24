@@ -1,15 +1,29 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/CAT TEXT.png" type="Texture" id=2]
+[ext_resource path="res://scenes/art/CatSprite.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sound/metal_step_0.ogg" type="AudioStream" id=3]
 [ext_resource path="res://assets/sound/Laser_01.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sound/Menu_Select_00.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sound/WarpDrive_00.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/UI/Gameplay UI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 11 )
+extents = Vector2( 27, 16 )
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 14 )
+shader_param/forground_in = Color( 0, 0, 0, 1 )
+shader_param/background_in = Color( 1, 1, 1, 1 )
+shader_param/forground_out = Color( 1, 1, 1, 1 )
+shader_param/background_out = Color( 0, 0, 0, 1 )
+shader_param/line_count = 5.985
+shader_param/line_width = 0.305
+shader_param/hatch_angle = 2.889
+shader_param/snap_threshhold_front = 0.0
+shader_param/snap_threshhold_back = 0.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -402,9 +416,9 @@ player_audio_node = NodePath("AudioStreamPlayer2D")
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.041462, 0.041462 )
-texture = ExtResource( 2 )
+[node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
+material = SubResource( 6 )
+frame = 0
 
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3

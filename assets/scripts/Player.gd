@@ -73,6 +73,7 @@ func _process(delta):
 		last_collision_time = OS.get_ticks_usec()
 	elif not jumping:
 		dropping = true
+	update_animation()
 
 func jump():
 	velocity.y = -jump_speed
@@ -93,7 +94,7 @@ func swap_to(color_layer : int)->void:
 	get_parent().modulate = swap_color
 	get_tree().call_group("Swap Recievers", "recieve_swap", color_layer)
 	get_tree().call_group("Swap Recievers", "recieve_swap_color", swap_color)
-
+	$AnimatedSprite.play("damage")
 #swaps to the next color layer
 func swap_next()->void:
 	print("on layer " + str(ColMath.get_layer_number(collision_mask)))
@@ -123,6 +124,30 @@ func _input(event):
 			jumping = false
 		if event.is_action_pressed("developer_debug"):
 			swap_next()
+		
+		update_animation()
+#updates the animation of the cat
+func update_animation()->void:
+	if input_velocity.x > 0:
+		$AnimatedSprite.flip_h = true
+	elif input_velocity.x < 0:
+		$AnimatedSprite.flip_h = false
+	
+	if abs(velocity.y) > 0:
+		$AnimatedSprite.playing = false
+		$AnimatedSprite.animation = "jump"
+		if velocity.y > 0.5:
+			$AnimatedSprite.frame = 2
+		elif velocity.y > 0:
+			$AnimatedSprite.frame = 1
+		else:
+			$AnimatedSprite.frame = 0
+	elif not (jumping or dropping):
+		$AnimatedSprite.playing = true
+		if abs(input_velocity.x) > 0:
+			$AnimatedSprite.play("run")
+		else:
+			$AnimatedSprite.play("idle")
 
 func recieve_player_death():
 	# The entier point of the group call was to not need to do this in the player
@@ -132,6 +157,7 @@ func recieve_player_death():
 	if lives < 0:
 		get_tree().call_group("Level Status Recievers", "recieve_level_failed")
 		return 0
+	
 	var global_pos = global_position
 	# yeah, right here
 	position = start_position
@@ -145,16 +171,22 @@ func recieve_player_death():
 	$"Spawn Animation/AnimationPlayer".stop()
 	$"Spawn Animation/AnimationPlayer".play("Spawn")
 	
-#	dead = false
-	pass
 
 func recieve_level_failed():
+	speed = 0.05 #slow down for death
+	print("level failed setting speed")
+	print(speed)
+	
 	$Camera2D/AnimationPlayer.play("screen_shake")
 	$level_fail_sound.play()
 #	$deathsound.play()
-	speed = 0.05 #slow down for death
+	dead = true
+	$Camera2D/AnimationPlayer.play("screen_shake")
+	$level_fail_sound.play()
+	$deathsound.play()
 	dead = true
 
 func _on_Jump_Timer_timeout():
 	dropping = true
 	jumping = false
+	update_animation()

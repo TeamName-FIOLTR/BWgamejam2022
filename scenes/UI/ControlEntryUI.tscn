@@ -29,6 +29,8 @@ valign = 1
 anchor_left = 0.8
 anchor_right = 0.98
 anchor_bottom = 1.0
+focus_mode = 0
+enabled_focus_mode = 0
 text = "Re-Map"
 
 [connection signal="pressed" from="ChangeBtn" to="." method="_on_ChangeBtn_pressed"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/scripts/UI/SoundSlider.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/Laser_01.wav" type="AudioStream" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+expand_margin_top = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 0 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0 )
+
+[node name="SoundSlider" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+display_text_path = NodePath("Control/Channel Percentage")
+volume_slider_path = NodePath("Control/HSlider")
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 1.0
+
+[node name="HSlider" type="HSlider" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 3 )
+
+[node name="Channel Percentage" type="Label" parent="Control"]
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Test Text"
+align = 1
+valign = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource( 2 )
+autoplay = true
+
+[connection signal="ready" from="." to="." method="_on_SoundSlider_ready"]
+[connection signal="value_changed" from="Control/HSlider" to="." method="_on_HSlider_value_changed"]
