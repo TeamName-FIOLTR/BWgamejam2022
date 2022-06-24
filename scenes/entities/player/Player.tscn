@@ -15,15 +15,15 @@ extents = Vector2( 27, 16 )
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 shader = ExtResource( 14 )
-shader_param/forground_in = Color( 0, 0, 0, 1 )
-shader_param/background_in = Color( 1, 1, 1, 1 )
-shader_param/forground_out = Color( 1, 1, 1, 1 )
-shader_param/background_out = Color( 0, 0, 0, 1 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
 shader_param/line_count = 5.985
 shader_param/line_width = 0.305
 shader_param/hatch_angle = 2.889
-shader_param/snap_threshhold_front = 0.0
-shader_param/snap_threshhold_back = 0.0
+shader_param/snap_threshhold_front = -0.497
+shader_param/snap_threshhold_back = 0.053
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -418,7 +418,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 material = SubResource( 6 )
-frame = 0
+frame = 1
 
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3

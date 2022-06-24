@@ -31,6 +31,6 @@ animations = [ {
 material = SubResource( 2 )
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 1 )
-frame = 2
+frame = 1
 speed_scale = 1.5
 playing = true

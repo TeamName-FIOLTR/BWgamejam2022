@@ -79,7 +79,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/statics/load_utils.gd"
 }, {
-"base": "BackContainerNode",
+"base": "Control",
 "class": "MainUI",
 "language": "GDScript",
 "path": "res://assets/scripts/UI/GameStart.gd"
@@ -119,11 +119,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/UI/ControlEntryUI.gd"
 }, {
-"base": "Control",
-"class": "UINameSelector",
-"language": "GDScript",
-"path": "res://assets/scripts/UI/NameSelector.gd"
-}, {
 "base": "UINameSelector",
 "class": "UINewGame",
 "language": "GDScript",
@@ -152,7 +147,6 @@ _global_script_class_icons={
 "SettingsUI": "",
 "Tuna": "",
 "UIControlMapEntry": "",
-"UINameSelector": "",
 "UINewGame": ""
 }
 

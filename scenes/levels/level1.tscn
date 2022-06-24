@@ -1,15 +1,18 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=1]
-[ext_resource path="res://scenes/enviroments/Basic Swap Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/puzzle elements/Basic Swap Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://scenes/enviroments/DEATHLAZER.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=6]
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/enviroments/cityBox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/enviroments/pottedPlant.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/puzzle elements/Physics Puzzle Box.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -86,6 +89,49 @@ shader_param/line_width = 0.018
 shader_param/hatch_angle = 2.863
 shader_param/snap_threshhold_front = 0.628
 shader_param/snap_threshhold_back = 0.72
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = SubResource( 12 )
+shader_param/swapped = true
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
 
 [sub_resource type="Animation" id=10]
 length = 0.001
@@ -197,7 +243,43 @@ shape = SubResource( 1 )
 material = SubResource( 8 )
 mesh = SubResource( 4 )
 
+[node name="StaticBody2D8" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( -83, 505 )
+rotation = -1.57079
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D8"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D8"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 1082, -155 )
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D9"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D9"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 2269, 585 )
+rotation = -1.57079
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D10"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D10"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
 [node name="Icon" type="Sprite" parent="fadeMixer"]
+visible = false
 material = SubResource( 6 )
 position = Vector2( 522, 251 )
 scale = Vector2( 1.00296, 0.943432 )
@@ -233,6 +315,29 @@ scale = Vector2( 1, 1 )
 position = Vector2( 1422, 319 )
 collision_layer = 5
 invert_bits = true
+
+[node name="Lever" parent="fadeMixer" instance=ExtResource( 11 )]
+position = Vector2( 530, 441 )
+scale = Vector2( 0.273858, 0.273858 )
+connected_elements = [ NodePath("../DEATHLAZER") ]
+
+[node name="Physics Puzzle Box" parent="fadeMixer" instance=ExtResource( 12 )]
+material = SubResource( 13 )
+position = Vector2( 1184, 207 )
+scale = Vector2( 0.195782, 0.195782 )
+collision_layer = 26
+collision_mask = 3
+move_when_enabled = false
+move_when_disabled = true
+
+[node name="Button" parent="fadeMixer" instance=ExtResource( 13 )]
+position = Vector2( 1361, 855 )
+scale = Vector2( 0.686777, 0.686777 )
+togglable = true
+connected_elements = [ NodePath("../DEATHLAZER2") ]
+
+[node name="DEATHLAZER2" parent="fadeMixer" instance=ExtResource( 4 )]
+position = Vector2( 1693, 586 )
 
 [node name="FadePlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 10 )

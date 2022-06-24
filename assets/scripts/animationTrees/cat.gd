@@ -12,6 +12,9 @@ func _on_AnimatedSprite_animation_finished():
 		"idle_long":
 			stop()
 			frame = 6
+			if not $"Sleepy Particles".emitting:
+				$"Sleepy Particles".emitting = true
+			print("as;dlkfj sloop")
 		"damage":
 			.play("idle")
 
@@ -43,3 +46,9 @@ func play(anim : String="idle", backwords : bool=false)->void:
 func _on_long_idle_timer_timeout():
 	play("idle_long")
 
+
+
+func _on_AnimatedSprite_frame_changed():
+	if $"Sleepy Particles".emitting and animation != "idle_long":
+		$"Sleepy Particles".emitting = false
+	pass # Replace with function body.

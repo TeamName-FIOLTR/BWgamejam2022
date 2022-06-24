@@ -46,6 +46,7 @@ void fragment() {
 					forground_out,background_out);
 	if (!swapped) {
 		vec2 rotated_uv = rotate(hatch_angle,UV);
+//		vec2 rotated_uv = rotate(hatch_angle,SCREEN_UV)*0.1;
 		float distance_to_front = distance_squared(original_color,forground_in);
 		float distance_to_back = distance_squared(original_color,background_in);
 		

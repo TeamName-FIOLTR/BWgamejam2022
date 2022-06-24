@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/art/cool cube.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/enviroment/Basic Swap Box.gd" type="Script" id=3]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=12]
 code = "shader_type canvas_item;
 
 uniform bool swapped = false;
@@ -40,7 +40,7 @@ void light() {
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 12 )
 shader_param/swapped = true
 shader_param/frequency = 5.956
 shader_param/size = 417.389

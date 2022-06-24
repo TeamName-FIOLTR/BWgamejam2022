@@ -15,4 +15,5 @@ func load_last_save()->void:
 	GameSaveResource.return_to_save(get_tree(),Globals.game_save_data)
 
 func recieve_level_failed():
-	fade_death()
+	pass
+#	fade_death()

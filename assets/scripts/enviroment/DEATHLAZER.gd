@@ -29,9 +29,28 @@ func _process(delta):
 		$Position2D/Line2D.points[1].y = $RayCast2D.cast_to.y
 	previous_thing = thing
 #	pass
+func enable_lazer():
+	$RayCast2D.visible = true
+	$Position2D.visible = true
+
+func set_lazer_state(on):
+#	$RayCast2D.visible = on
+	$RayCast2D.enabled = on
+	$Position2D.visible = on
+	if !on:
+		$"Lazer Enable Sound".play()
+	else:
+		$"Lazer Disable Sound".play()
 
 func recieve_swap(swap_idx):
 	$RayCast2D.set_collision_mask(0)
 	$RayCast2D.set_collision_mask_bit(0, true)
 	$RayCast2D.set_collision_mask_bit(1, true)
 	$RayCast2D.set_collision_mask_bit(2+swap_idx, true)
+
+
+func _on_Lever_Flipped(flipped):
+	set_lazer_state(flipped)
+
+func _on_Button_Pressed(pressed):
+	set_lazer_state(pressed)

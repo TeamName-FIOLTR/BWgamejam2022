@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/UI/cooluitheme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/scripts/puzzle elements/Physics Puzzle Box.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 12 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 64 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 64, 64 )
+
+[node name="Physics Puzzle Box" type="RigidBody2D"]
+material = SubResource( 2 )
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 75.2
+sleeping = true
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+use_parent_material = true
+shape = SubResource( 3 )
+
+[node name="Panel" type="Panel" parent="CollisionShape2D"]
+use_parent_material = true
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 13 )

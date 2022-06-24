@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/UI/cooluitheme.tres" type="Theme" id=1]
+[ext_resource path="res://assets/scripts/puzzle elements/Lever.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 256, 178.5 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Flip"
+length = 0.166667
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Lever Base/Lever:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -45, 0, 0, 0, 0, 45, 0, 0, 0, 0 ),
+"times": PoolRealArray( 0, 0.166667 )
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Lever Base/Lever:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[node name="Lever" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -178.5 )
+shape = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="CollisionShape2D"]
+visible = false
+margin_left = -256.0
+margin_top = -256.0
+margin_right = 256.0
+margin_bottom = 256.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lever Base" type="Line2D" parent="."]
+points = PoolVector2Array( 256, 0, 100, -100, -100, -100, -256, 0, 256, 0 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Lever" type="Line2D" parent="Lever Base"]
+position = Vector2( 0, -100 )
+points = PoolVector2Array( 0, 0, 0, -256 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Lever Head" type="Line2D" parent="Lever Base/Lever"]
+position = Vector2( 0, -256 )
+points = PoolVector2Array( 0, 0, -50, -50, 0, -100, 50, -50, 0, 0 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Flip = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_Lever_body_entered"]

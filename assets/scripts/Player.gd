@@ -177,10 +177,10 @@ func recieve_level_failed():
 	print("level failed setting speed")
 	print(speed)
 	
-	$Camera2D/AnimationPlayer.play("screen_shake")
-	$level_fail_sound.play()
-#	$deathsound.play()
-	dead = true
+#	$Camera2D/AnimationPlayer.play("screen_shake")
+#	$level_fail_sound.play()
+##	$deathsound.play()
+#	dead = true
 	$Camera2D/AnimationPlayer.play("screen_shake")
 	$level_fail_sound.play()
 	$deathsound.play()
