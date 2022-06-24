@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/scripts/UI/ControlEntryUI.gd" type="Script" id=1]
+
+[node name="ControlEntryUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+lbl_control_path = NodePath("ControlLabel")
+lbl_current_control_path = NodePath("CurrentControl")
+
+[node name="ControlLabel" type="Label" parent="."]
+anchor_right = 0.3
+anchor_bottom = 1.0
+text = "Test: "
+align = 2
+valign = 1
+
+[node name="CurrentControl" type="Label" parent="."]
+anchor_left = 0.3
+anchor_right = 0.8
+anchor_bottom = 1.0
+align = 1
+valign = 1
+
+[node name="ChangeBtn" type="Button" parent="."]
+anchor_left = 0.8
+anchor_right = 0.98
+anchor_bottom = 1.0
+text = "Re-Map"
+
+[connection signal="pressed" from="ChangeBtn" to="." method="_on_ChangeBtn_pressed"]

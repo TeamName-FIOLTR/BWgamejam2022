@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/scripts/UI/SettingsUI.gd" type="Script" id=1]
+[ext_resource path="res://scenes/UI/ControlSelectDialog.tscn" type="PackedScene" id=2]
+
+[node name="SettingsUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+vbox_path = NodePath("ScrollContainer/VBoxContainer")
+popup_dialog_path = NodePath("KeyPressDialog")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="KeyPressDialog" parent="." instance=ExtResource( 2 )]
+visible = true
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.6
+
+[connection signal="about_to_show" from="KeyPressDialog" to="KeyPressDialog" method="_on_KeyPressDialog_about_to_show"]
+[connection signal="confirmed" from="KeyPressDialog" to="." method="_on_KeyPressDialog_confirmed"]
+[connection signal="custom_action" from="KeyPressDialog" to="." method="_on_KeyPressDialog_custom_action"]
+[connection signal="custom_action" from="KeyPressDialog" to="KeyPressDialog" method="_on_KeyPressDialog_custom_action"]
+[connection signal="popup_hide" from="KeyPressDialog" to="." method="_on_KeyPressDialog_popup_hide"]
+[connection signal="update_action" from="KeyPressDialog" to="." method="_on_KeyPressDialog_update_action"]
