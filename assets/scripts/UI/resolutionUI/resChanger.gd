@@ -19,7 +19,11 @@ var standard_resolutions = [
 ]
 
 func change_game_aspect(width : int, height : int,scale_factor : int = 0)->void:
-	get_tree().get_root().size = Vector2(width,height)
+	Globals.config_data.resolution = Vector2(width, height)
+	
+	get_tree().get_root().size = Vector2(width, height)
+	
+	Globals.save_config()
 	
 func update_resolution()->void:
 	change_game_aspect(width.numeric_value,height.numeric_value)

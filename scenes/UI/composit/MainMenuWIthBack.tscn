@@ -27,10 +27,7 @@ rect_min_size = Vector2( 200, 100 )
 script = ExtResource( 1 )
 current_scene_name = "MainMenu"
 
-[node name="MainMenu" type="VScrollBar" parent="Content/ContentInside" groups=["menu_root"] instance=ExtResource( 3 )]
-self_modulate = Color( 0, 0, 0, 1 )
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="MainMenu" parent="Content/ContentInside" instance=ExtResource( 3 )]
 
 [node name="footer" type="Panel" parent="Content"]
 self_modulate = Color( 0, 0, 0, 1 )

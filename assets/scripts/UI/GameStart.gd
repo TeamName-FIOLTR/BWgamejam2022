@@ -6,6 +6,7 @@ func _ready():
 	#initilize the game save dir if it is not already
 	GameSaveResource.initilize_save_dir()
 
+
 func _on_exit_pressed():
 	#leav the game
 	get_tree().quit()

@@ -7,15 +7,16 @@ extends Resource
 
 class_name ConfigResource
 
-var resolution : Vector2 = Vector2(1024,600)
-var do_bloom : bool = false
-var do_vsync : bool = false
-var target_fps : int = 60
-
+export var resolution : Vector2 = Vector2(1024,600)
+export var do_bloom : bool = false
+export var do_vsync : bool = false
+export var target_fps : int = 60
+export var audio_bus_db : Dictionary = {}
 
 #convinence function for getting the path of a save resource
 static func get_config_path()->String:
-	return "user://config.res"
+	return "user://config.tres"
+
 
 #convinence function to load a save resource from a game name
 static func get_config()->ConfigResource:
@@ -23,7 +24,26 @@ static func get_config()->ConfigResource:
 
 #save a config resource
 static func save_config(conf : ConfigResource)->void:
-	ResourceLoader.save(get_config_path(),conf)
+	print("config resource saving! " + str(conf.resolution))
+	ResourceSaver.save(get_config_path(),conf)
 
-static func sync_settings(conf : ConfigResource)->void:
+static func sync_settings(tree : SceneTree,conf : ConfigResource)->void:
+	(tree.get_root() as Viewport).size = conf.resolution
+	Engine.target_fps = conf.target_fps
+	OS.set_use_vsync(conf.do_vsync)
 	
+	
+	for channel in conf.audio_bus_db:
+		var idx = AudioServer.get_bus_index(channel)
+		
+		if conf.audio_bus_db[channel] >= 200:
+			AudioServer.set_bus_mute(idx,true)
+		else:
+			AudioServer.set_bus_mute(idx,false)
+			AudioServer.set_bus_volume_db(idx,conf.audio_bus_db[channel])
+
+#convinence function that syncs to the config data and returns a reference to it
+static func get_and_sync_conf(tree : SceneTree)->ConfigResource:
+	var ret_val = get_config()
+	sync_settings(tree,ret_val)
+	return ret_val

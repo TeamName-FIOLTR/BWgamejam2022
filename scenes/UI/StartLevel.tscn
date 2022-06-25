@@ -11,3 +11,5 @@ theme = ExtResource( 4 )
 script = ExtResource( 2 )
 
 [node name="mainContainer" parent="." instance=ExtResource( 1 )]
+
+[connection signal="ready" from="." to="." method="_on_GameStart_ready"]
