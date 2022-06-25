@@ -6,10 +6,10 @@ class_name GameSaveResource
 
 #the name of the last scene that we saved at
 #equivilent to the name of the root node in that level
-var last_level : String = "Level1"
+export var last_level : String = "Level1"
 
 #the name of the save file that we are in
-var game_name : String
+export var game_name : String
 
 #initilizes the directory structure if it is not already
 static func initilize_save_dir()->void:
@@ -61,4 +61,6 @@ static func return_to_save(tree : SceneTree,gsr : GameSaveResource)->void:
 	
 #loads the game with the given name
 static func load_game(tree : SceneTree,game_name : String)->void:
-	return_to_save(tree,get_save(game_name))
+	Globals.game_save_data = get_save(game_name)
+	print("returning to save " + Globals.game_save_data.last_level)
+	return_to_save(tree,Globals.game_save_data)

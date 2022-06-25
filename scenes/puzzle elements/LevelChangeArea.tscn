@@ -1,12 +1,34 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/scripts/puzzle elements/LevelChangeArea.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/CAT TEXT.png" type="Texture" id=2]
+[ext_resource path="res://assets/shaders/swap_hatch.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/swapped = true
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 1, 1, 1, 1 )
+shader_param/background_out = Color( 0, 0, 0, 1 )
+shader_param/line_count = 100.0
+shader_param/line_width = 0.006
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
+shader_param/outline_width = null
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19, 16 )
 
 [node name="LevelChangeArea" type="Area2D"]
 script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( -2, -1 )
+scale = Vector2( 0.01, 0.01 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
