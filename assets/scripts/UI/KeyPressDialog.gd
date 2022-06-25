@@ -25,6 +25,10 @@ func get_action()->String:
 func _on_KeyPressDialog_confirmed():
 	InputMap.action_erase_events(self.action)
 	InputMap.action_add_event(self.action,self.to_add)
+	
+	Globals.config_data.input_map = ConfigResource.encode_input_map()
+	Globals.save_config()
+	
 	$ButtonPressed.text = default_text
 	emit_signal("update_action",self.action)
 

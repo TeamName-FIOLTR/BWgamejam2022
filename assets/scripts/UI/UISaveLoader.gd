@@ -1,4 +1,4 @@
-extends SavePicker
+extends Control
 
 
 func _on_save_picker_save_pressed(save):

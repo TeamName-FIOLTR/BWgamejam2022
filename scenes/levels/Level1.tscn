@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=3]
+[ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=4]
+[ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=5]
+[ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=9]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="."]
+material = ExtResource( 3 )
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -262144, 0, 196609, -196608, 0, 196616, -196607, 0, 196608, -65538, 0, 131075, -65537, 0, 131074, -131072, 0, 196613, -131071, 0, 65546, -131070, 0, 9, -131068, 0, 131073, -131067, 0, 196608, -131065, 0, 8, -131064, 0, 131074, -131063, 0, 131083, -131062, 0, 131074, -131061, 0, 9, -131059, 0, 196609, -65536, 0, 65537, -65534, 0, 131082, -65533, 0, 131074, -65532, 0, 65541, -65531, 0, 6, -65530, 0, 131072, -65529, 0, 196617, -65527, 0, 65537, -65525, 0, 196616, -65524, 0, 10, -65523, 0, 196618, -65522, 0, 131083, -65521, 0, 196610, 0, 0, 65537, 2, 0, 65539, 4, 0, 3, 5, 0, 2, 6, 0, 2, 7, 0, 65538, 9, 0, 65539, 11, 0, 3, 12, 0, 65538, 14, 0, 65537, 131071, 0, 131073, 65536, 0, 196617, 65550, 0, 196616, 65551, 0, 196608, 196607, 0, 1, 131072, 0, 65536, 131086, 0, 131080, 131087, 0, 65538, 262143, 0, 3, 196608, 0, 131081, 196616, 0, 131075, 196617, 0, 131074, 196618, 0, 131074, 196619, 0, 131074, 196620, 0, 131074, 196621, 0, 131074, 196622, 0, 196619, 262144, 0, 131082, 262145, 0, 131074, 262146, 0, 131074, 262147, 0, 196610, 262158, 0, 131082, 262159, 0, 196610, 393215, 0, 131075, 327680, 0, 196619, 327694, 0, 65537, 393216, 0, 65537, 393230, 0, 196616, 393231, 0, 196608, 458752, 0, 65537, 458766, 0, 131080, 458767, 0, 65538, 589823, 0, 131075, 524288, 0, 196618, 524289, 0, 131074, 524290, 0, 131083, 524291, 0, 131074, 524292, 0, 131074, 524293, 0, 11, 524294, 0, 131072, 524295, 0, 131072, 524296, 0, 10, 524297, 0, 131074, 524298, 0, 131074, 524299, 0, 131083, 524300, 0, 131074, 524301, 0, 131074, 524302, 0, 65545, 589826, 0, 65537, 589829, 0, 3, 589830, 0, 2, 589831, 0, 2, 589832, 0, 65538, 589835, 0, 65539, 655362, 0, 65544, 655363, 0, 196610 )
+
+[node name="Player" parent="." instance=ExtResource( 8 )]
+position = Vector2( 571, 861 )
+gravity = Vector2( 0, 1000 )
+jump_gravity = 0.454
+drop_gravity = 2.713
+jump_speed = 1000.0
+
+[node name="Lever" parent="." instance=ExtResource( 9 )]
+position = Vector2( 332, 511 )
+connected_elements = [ NodePath("../DEATHLAZER"), NodePath("../DEATHLAZER2") ]
+
+[node name="Button" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1241, 1028 )
+togglable = true
+connected_elements = [ NodePath("../DEATHLAZER"), NodePath("../DEATHLAZER2") ]
+
+[node name="DEATHLAZER" parent="." instance=ExtResource( 1 )]
+position = Vector2( 745, 90 )
+lazer_on = false
+
+[node name="DEATHLAZER2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 183, 694 )
+rotation = -1.57079
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 2 )]
+
+[node name="Tuna" parent="." instance=ExtResource( 7 )]
+position = Vector2( 190, 477 )
+
+[node name="Tuna2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1748, 349 )
+
+[node name="Levelcamera" type="Camera2D" parent="."]
+position = Vector2( 1028, 532 )
+current = true
+zoom = Vector2( 2, 2 )

@@ -5,7 +5,9 @@ class_name Level
 
 func _ready():
 	add_to_group("Level Status Recievers")
-#	$FadePlayer.connect("animation_finished",self,"anim_finished")
+	Globals.game_save_data.last_level = name
+	Globals.save_game()
+	
 func fade_death()->void:
 	pass
 #	$FadePlayer.play("fade")

@@ -13,7 +13,10 @@ var ready : bool = false
 var channel_id : int = 0 setget set_channel,get_channel
 func set_channel(val : int)->void:
 	channel_id = val
-	vol_slider.value = db2linear(AudioServer.get_bus_volume_db(channel_id))*50
+	if AudioServer.is_bus_mute(channel_id):
+		vol_slider.value = 0
+	else:
+		vol_slider.value = db2linear(AudioServer.get_bus_volume_db(channel_id))*50
 	update_display_text()
 func get_channel()->int:
 	return channel_id
@@ -38,10 +41,23 @@ func _on_HSlider_value_changed(value):
 	if ready:
 		value = value*2.0
 		if value <= 2.0:
+			#1 equates to mute, as we should never go over 0 dv
+			Globals.config_data.audio_bus_db[AudioServer.get_bus_name(channel_id)] = 200
+			Globals.save_config()
+			
 			AudioServer.set_bus_mute(channel_id,true)
 		else:
-			AudioServer.set_bus_volume_db(channel_id,linear2db(value/100))
+			#1 equates to mute, as we should never go over 0 dv
+			var volum = linear2db(value/100)
+			
+			#save configuration
+			Globals.config_data.audio_bus_db[AudioServer.get_bus_name(channel_id)] = volum
+			Globals.save_config()
+			
+			#update live
+			AudioServer.set_bus_volume_db(channel_id,volum)
 			AudioServer.set_bus_mute(channel_id,false)
+		
 		update_display_text()
 func _input(event):
 	if event.is_action_pressed("developer_debug"):

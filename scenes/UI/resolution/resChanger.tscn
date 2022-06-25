@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/scripts/UI/resolutionUI/resChanger.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/UI/lineNumber.gd" type="Script" id=2]
+
+[node name="Resolution Changer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+width_path = NodePath("VBoxContainer/Control/width")
+height_path = NodePath("VBoxContainer/Control/height")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="width" type="LineEdit" parent="VBoxContainer/Control"]
+anchor_left = 0.1
+anchor_right = 0.4
+anchor_bottom = 1.0
+rect_min_size = Vector2( -10000, -10000 )
+align = 1
+script = ExtResource( 2 )
+max_value = -1
+
+[node name="height" type="LineEdit" parent="VBoxContainer/Control"]
+anchor_left = 0.6
+anchor_right = 0.9
+anchor_bottom = 1.0
+rect_min_size = Vector2( -10000, -10000 )
+align = 1
+script = ExtResource( 2 )
+max_value = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/Control"]
+anchor_left = 0.48
+anchor_right = 0.52
+anchor_bottom = 1.0
+text = "X"
+align = 1
+valign = 1
+
+[node name="PreSet" type="Control" parent="VBoxContainer"]
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/PreSet"]
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 1.0
+margin_top = 30.0
+rect_min_size = Vector2( -9999, -9999 )
+text = "Pres"
+
+[connection signal="focus_exited" from="VBoxContainer/Control/width" to="." method="_on_width_focus_exited"]
+[connection signal="number_changed" from="VBoxContainer/Control/width" to="." method="_on_width_number_changed"]
+[connection signal="focus_exited" from="VBoxContainer/Control/height" to="." method="_on_height_focus_exited"]
+[connection signal="number_changed" from="VBoxContainer/Control/height" to="." method="_on_height_number_changed"]
+[connection signal="pressed" from="VBoxContainer/PreSet/Button" to="." method="_on_Button_pressed"]

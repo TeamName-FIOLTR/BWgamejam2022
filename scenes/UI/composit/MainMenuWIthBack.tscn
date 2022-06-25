@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/scripts/UI/backContainer.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/UI/backButtonMainMenu.gd" type="Script" id=2]
+[ext_resource path="res://scenes/UI/MainMenu.tscn" type="PackedScene" id=3]
+
+[node name="mainContainer" type="PanelContainer"]
+self_modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+anchor_left = 0.3
+anchor_right = 0.7
+anchor_bottom = 1.0
+
+[node name="Content" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 402.6
+margin_bottom = 593.0
+
+[node name="ContentInside" type="Control" parent="Content"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 0.9
+margin_top = 20.0
+rect_min_size = Vector2( 200, 100 )
+script = ExtResource( 1 )
+current_scene_name = "MainMenu"
+
+[node name="MainMenu" parent="Content/ContentInside" instance=ExtResource( 3 )]
+
+[node name="footer" type="Panel" parent="Content"]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="backButton" type="Button" parent="Content/footer"]
+anchor_top = 0.198
+anchor_right = 0.2
+anchor_bottom = 0.496
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
+script = ExtResource( 2 )
+back_path = NodePath("../../ContentInside")
+
+[connection signal="pressed" from="Content/footer/backButton" to="Content/footer/backButton" method="_on_backButton_pressed"]

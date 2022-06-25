@@ -6,4 +6,10 @@
 [node name="GameSelector" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="LineEdit" parent="VBoxContainer" index="0"]
+margin_right = 1024.0
+
+[node name="Panel" parent="VBoxContainer" index="1"]
+margin_right = 1024.0
+
 [connection signal="text_entered" from="." to="." method="_on_GameSelector_text_entered"]

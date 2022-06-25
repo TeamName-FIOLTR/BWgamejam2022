@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scripts/UI/ControlEntryUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/Roza.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
 
 [node name="ControlEntryUI" type="Control"]
 anchor_right = 1.0
@@ -30,6 +49,8 @@ anchor_left = 0.8
 anchor_right = 0.98
 anchor_bottom = 1.0
 focus_mode = 0
+custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 enabled_focus_mode = 0
 text = "Re-Map"
 

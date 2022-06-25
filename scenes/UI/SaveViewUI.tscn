@@ -2,19 +2,28 @@
 
 [ext_resource path="res://assets/scripts/UI/SaveViewUI.gd" type="Script" id=2]
 
-[node name="save_picker" type="ScrollContainer"]
-self_modulate = Color( 0, 0, 0, 1 )
+[node name="save_picker" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 5.0
+margin_right = -5.0
+
+[node name="save_picker" type="ScrollContainer" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 vbContainer = NodePath("VBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="save_picker"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 1920.0
-margin_bottom = 1080.0
+margin_right = 507.0
+margin_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 10

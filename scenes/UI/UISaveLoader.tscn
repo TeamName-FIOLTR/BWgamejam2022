@@ -4,6 +4,10 @@
 [ext_resource path="res://assets/scripts/UI/UISaveLoader.gd" type="Script" id=2]
 
 [node name="save_picker" instance=ExtResource( 1 )]
+margin_right = -10.0
 script = ExtResource( 2 )
 
-[connection signal="save_pressed" from="." to="." method="_on_save_picker_save_pressed"]
+[node name="VBoxContainer" parent="save_picker" index="0"]
+margin_right = 504.5
+
+[connection signal="save_pressed" from="save_picker" to="." method="_on_save_picker_save_pressed"]
