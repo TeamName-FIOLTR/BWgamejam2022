@@ -17,6 +17,7 @@ shader_param/outline_width = 0.005
 extents = Vector2( 23, 13.5 )
 
 [node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
