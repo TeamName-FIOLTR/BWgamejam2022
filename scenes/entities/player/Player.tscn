@@ -410,6 +410,10 @@ tracks/0/keys = {
 
 [node name="Player" type="KinematicBody2D" groups=["Level Status Recievers", "Player Death Recievers"]]
 script = ExtResource( 1 )
+gravity = Vector2( 0, 1000 )
+jump_gravity = 0.454
+drop_gravity = 2.713
+jump_speed = 1000.0
 jump_timer_node = NodePath("Jump Timer")
 player_audio_node = NodePath("AudioStreamPlayer2D")
 
@@ -420,7 +424,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 material = SubResource( 6 )
 scale = Vector2( 0.2, 0.2 )
-frame = 0
 
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3

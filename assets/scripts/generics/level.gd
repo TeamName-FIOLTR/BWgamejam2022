@@ -5,8 +5,9 @@ class_name Level
 
 func _ready():
 	add_to_group("Level Status Recievers")
-	Globals.game_save_data.last_level = name
-	Globals.save_game()
+	if Globals.game_save_data:
+		Globals.game_save_data.last_level = name
+		Globals.save_game()
 	
 func fade_death()->void:
 	pass

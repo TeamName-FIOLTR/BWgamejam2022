@@ -6,7 +6,7 @@ class_name GameSaveResource
 
 #the name of the last scene that we saved at
 #equivilent to the name of the root node in that level
-var last_level : String = "level1"
+var last_level : String = "Level1"
 
 #the name of the save file that we are in
 var game_name : String

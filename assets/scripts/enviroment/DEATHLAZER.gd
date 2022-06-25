@@ -13,6 +13,7 @@ func _ready():
 #	set_lazer_state(lazer_on)
 	$RayCast2D.enabled = lazer_on
 	$Position2D.visible = lazer_on
+	add_to_group("Swap Recievers")
 	pass # Replace with function body.
 
 
@@ -48,10 +49,8 @@ func set_lazer_state(on):
 		$"Lazer Disable Sound".play()
 
 func recieve_swap(swap_idx):
-	$RayCast2D.set_collision_mask(0)
-	$RayCast2D.set_collision_mask_bit(0, true)
-	$RayCast2D.set_collision_mask_bit(1, true)
-	$RayCast2D.set_collision_mask_bit(2+swap_idx, true)
+	print("recived swap!")
+	$RayCast2D.collision_mask = ColMath.Layer.CONSTANT_COLLISION | ColMath.Layer.PLAYER | ColMath.get_color_layer_bits(swap_idx)
 
 
 func _on_Lever_Flipped(flipped):

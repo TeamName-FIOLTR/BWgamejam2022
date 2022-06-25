@@ -182,10 +182,8 @@ collision_mask = 0
 
 [node name="Player" parent="fadeMixer" instance=ExtResource( 4 )]
 position = Vector2( 1033, 334 )
-gravity = Vector2( 0, 1000 )
 jump_gravity = 1.415
 drop_gravity = 5.476
-jump_speed = 1000.0
 jump_time_max = 1.0
 jump_cache_time = 100.0
 
