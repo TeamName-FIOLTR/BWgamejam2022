@@ -1,6 +1,319 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://assets/scripts/puzzle elements/Metal Door.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/mech_step_0.ogg" type="AudioStream" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 128, 16 )
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=2]
+function = 27
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=3]
+function = 0
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=4]
+function = 1
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=5]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=6]
+
+[sub_resource type="VisualShaderNodeVectorCompose" id=7]
+
+[sub_resource type="VisualShaderNodeScalarSwitch" id=8]
+default_input_values = [ 0, false, 1, 1.0, 2, 1.0 ]
+
+[sub_resource type="VisualShaderNodeCompare" id=9]
+function = 5
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=10]
+function = 31
+
+[sub_resource type="VisualShaderNodeCompare" id=11]
+default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05 ]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=12]
+uniform_name = "Opened"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=13]
+uniform_name = "Outer_Edge_Thickness"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=14]
+default_input_values = [ 0, 0.0, 1, 0.5 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarSwitch" id=15]
+default_input_values = [ 0, false, 1, 0.0, 2, 0.0 ]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=16]
+function = 31
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=17]
+uniform_name = "Frequency"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=18]
+uniform_name = "Line_Thickness"
+
+[sub_resource type="VisualShaderNodeInput" id=19]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=20]
+
+[sub_resource type="VisualShaderNodeDotProduct" id=21]
+default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 1, 1, 0 ) ]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=22]
+function = 17
+
+[sub_resource type="VisualShaderNodeScalarOp" id=23]
+default_input_values = [ 0, 0.0, 1, 4.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeCompare" id=24]
+default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05 ]
+function = 5
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=25]
+uniform_name = "Rotation_Degrees"
+
+[sub_resource type="VisualShader" id=26]
+code = "shader_type canvas_item;
+uniform float Opened;
+uniform float Outer_Edge_Thickness;
+uniform float Rotation_Degrees;
+uniform float Frequency;
+uniform float Line_Thickness;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:3
+	vec3 n_out3p0 = vec3(UV, 0.0);
+
+// VectorDecompose:4
+	float n_out4p0 = n_out3p0.x;
+	float n_out4p1 = n_out3p0.y;
+	float n_out4p2 = n_out3p0.z;
+
+// ScalarUniform:2
+	float n_out2p0 = Opened;
+
+// ScalarFunc:18
+	float n_out18p0 = 1.0 - n_out2p0;
+
+// Compare:17
+	bool n_out17p0 = n_out4p0<=n_out18p0;
+
+// ScalarUniform:20
+	float n_out20p0 = Outer_Edge_Thickness;
+
+// ScalarFunc:23
+	float n_out23p0 = 1.0 - n_out20p0;
+
+// ScalarOp:21
+	float n_in21p1 = 0.50000;
+	float n_out21p0 = n_out23p0 * n_in21p1;
+
+// Compare:19
+	float n_in19p1 = 0.50000;
+	bool n_out19p0 = (abs(n_out4p1 - n_in19p1) < n_out21p0);
+// VectorCompose:15
+	float n_in15p1 = 0.00000;
+	float n_in15p2 = 0.00000;
+	vec3 n_out15p0 = vec3(n_out2p0, n_in15p1, n_in15p2);
+
+// VectorOp:14
+	vec3 n_out14p0 = n_out15p0 + n_out3p0;
+
+// ScalarUniform:9
+	float n_out9p0 = Rotation_Degrees;
+
+// ScalarFunc:10
+	float n_out10p0 = radians(n_out9p0);
+
+// ScalarFunc:12
+	float n_out12p0 = cos(n_out10p0);
+
+// ScalarFunc:11
+	float n_out11p0 = sin(n_out10p0);
+
+// VectorCompose:13
+	float n_in13p2 = 0.00000;
+	vec3 n_out13p0 = vec3(n_out12p0, n_out11p0, n_in13p2);
+
+// DotProduct:5
+	float n_out5p0 = dot(n_out14p0, n_out13p0);
+
+// ScalarUniform:24
+	float n_out24p0 = Frequency;
+
+// ScalarOp:7
+	float n_out7p0 = n_out5p0 * n_out24p0;
+
+// ScalarFunc:6
+	float n_out6p0 = fract(n_out7p0);
+
+// ScalarUniform:25
+	float n_out25p0 = Line_Thickness;
+
+// Compare:8
+	bool n_out8p0 = n_out6p0<=n_out25p0;
+
+// ScalarSwitch:16
+	float n_in16p2 = 1.00000;
+	float n_out16p0;
+	if(n_out19p0)
+	{
+		n_out16p0 = (n_out8p0 ? 1.0 : 0.0);
+	}
+	else
+	{
+		n_out16p0 = n_in16p2;
+	}
+
+// ScalarSwitch:22
+	float n_in22p2 = 0.00000;
+	float n_out22p0;
+	if(n_out17p0)
+	{
+		n_out22p0 = n_out16p0;
+	}
+	else
+	{
+		n_out22p0 = n_in22p2;
+	}
+
+// Output:0
+	COLOR.rgb = vec3(n_out22p0);
+	COLOR.a = (n_out17p0 ? 1.0 : 0.0);
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( 813.759, 53.5 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 1580, 180 )
+nodes/fragment/2/node = SubResource( 12 )
+nodes/fragment/2/position = Vector2( 300, 20 )
+nodes/fragment/3/node = SubResource( 19 )
+nodes/fragment/3/position = Vector2( -200, 300 )
+nodes/fragment/4/node = SubResource( 20 )
+nodes/fragment/4/position = Vector2( 100, 360 )
+nodes/fragment/5/node = SubResource( 21 )
+nodes/fragment/5/position = Vector2( 80, 140 )
+nodes/fragment/6/node = SubResource( 22 )
+nodes/fragment/6/position = Vector2( 480, 120 )
+nodes/fragment/7/node = SubResource( 23 )
+nodes/fragment/7/position = Vector2( 260, 120 )
+nodes/fragment/8/node = SubResource( 24 )
+nodes/fragment/8/position = Vector2( 780, 20 )
+nodes/fragment/9/node = SubResource( 25 )
+nodes/fragment/9/position = Vector2( -600, 80 )
+nodes/fragment/10/node = SubResource( 2 )
+nodes/fragment/10/position = Vector2( -400, 80 )
+nodes/fragment/11/node = SubResource( 3 )
+nodes/fragment/11/position = Vector2( -180, 80 )
+nodes/fragment/12/node = SubResource( 4 )
+nodes/fragment/12/position = Vector2( -140, 140 )
+nodes/fragment/13/node = SubResource( 5 )
+nodes/fragment/13/position = Vector2( 100, -20 )
+nodes/fragment/14/node = SubResource( 6 )
+nodes/fragment/14/position = Vector2( 224, 234.5 )
+nodes/fragment/15/node = SubResource( 7 )
+nodes/fragment/15/position = Vector2( 440, 220 )
+nodes/fragment/16/node = SubResource( 8 )
+nodes/fragment/16/position = Vector2( 1160, 120 )
+nodes/fragment/17/node = SubResource( 9 )
+nodes/fragment/17/position = Vector2( 880, 200 )
+nodes/fragment/18/node = SubResource( 10 )
+nodes/fragment/18/position = Vector2( 663.206, 217.25 )
+nodes/fragment/19/node = SubResource( 11 )
+nodes/fragment/19/position = Vector2( 900, 360 )
+nodes/fragment/20/node = SubResource( 13 )
+nodes/fragment/20/position = Vector2( 100, 540 )
+nodes/fragment/21/node = SubResource( 14 )
+nodes/fragment/21/position = Vector2( 564.206, 522.25 )
+nodes/fragment/22/node = SubResource( 15 )
+nodes/fragment/22/position = Vector2( 1200, 300 )
+nodes/fragment/23/node = SubResource( 16 )
+nodes/fragment/23/position = Vector2( 300, 540 )
+nodes/fragment/24/node = SubResource( 17 )
+nodes/fragment/24/position = Vector2( -200, 240 )
+nodes/fragment/25/node = SubResource( 18 )
+nodes/fragment/25/position = Vector2( 580, 0 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 4, 0, 5, 0, 7, 0, 7, 0, 6, 0, 6, 0, 8, 0, 9, 0, 10, 0, 10, 0, 11, 0, 10, 0, 12, 0, 12, 0, 13, 0, 11, 0, 13, 1, 13, 0, 5, 1, 2, 0, 15, 0, 15, 0, 14, 0, 3, 0, 14, 1, 14, 0, 5, 0, 4, 0, 17, 0, 2, 0, 18, 0, 18, 0, 17, 1, 4, 1, 19, 0, 21, 0, 19, 2, 20, 0, 23, 0, 23, 0, 21, 0, 24, 0, 7, 1, 8, 0, 16, 1, 17, 0, 22, 0, 19, 0, 16, 0, 16, 0, 22, 1, 25, 0, 8, 1, 17, 0, 0, 1, 22, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = SubResource( 26 )
+shader_param/Opened = 0.0
+shader_param/Outer_Edge_Thickness = 0.31
+shader_param/Rotation_Degrees = 6.0
+shader_param/Frequency = 7.839
+shader_param/Line_Thickness = 0.5
+
+[sub_resource type="QuadMesh" id=28]
+size = Vector2( 256, 32 )
+
+[sub_resource type="Animation" id=29]
+resource_name = "Open"
+length = 0.5
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:opened_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0.9, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:opened_amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
 
 [node name="Metal Door" type="StaticBody2D"]
 script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 128, 0 )
+shape = SubResource( 1 )
+
+[node name="Door Mesh" type="MeshInstance2D" parent="."]
+material = SubResource( 27 )
+position = Vector2( 128, 0 )
+mesh = SubResource( 28 )
+
+[node name="Scale Helper" type="Position2D" parent="."]
+
+[node name="lil ref" type="Position2D" parent="Scale Helper"]
+position = Vector2( 128, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/Open = SubResource( 29 )
+anims/RESET = SubResource( 30 )
+
+[node name="Door Opening Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )

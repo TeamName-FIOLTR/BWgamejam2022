@@ -1,9 +1,53 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/UI/cooluitheme.tres" type="Theme" id=1]
 [ext_resource path="res://assets/scripts/puzzle elements/Lever.gd" type="Script" id=2]
+[ext_resource path="res://assets/sound/metal_interaction1.wav" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 64, 45 )
 
 [sub_resource type="Animation" id=2]
@@ -35,11 +79,12 @@ tracks/0/keys = {
 }
 
 [node name="Lever" type="Area2D"]
+material = SubResource( 4 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -45 )
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 
 [node name="Panel" type="Panel" parent="CollisionShape2D"]
 visible = false
@@ -53,6 +98,7 @@ __meta__ = {
 }
 
 [node name="Lever Base" type="Line2D" parent="."]
+use_parent_material = true
 scale = Vector2( 0.25, 0.25 )
 points = PoolVector2Array( 256, 0, 100, -100, -100, -100, -256, 0, 256, 0 )
 default_color = Color( 1, 1, 1, 1 )
@@ -60,6 +106,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Lever" type="Line2D" parent="Lever Base"]
+use_parent_material = true
 position = Vector2( 0, -100 )
 points = PoolVector2Array( 0, 0, 0, -256 )
 default_color = Color( 1, 1, 1, 1 )
@@ -67,6 +114,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Lever Head" type="Line2D" parent="Lever Base/Lever"]
+use_parent_material = true
 position = Vector2( 0, -256 )
 points = PoolVector2Array( 0, 0, -50, -50, 0, -100, 50, -50, 0, 0 )
 default_color = Color( 1, 1, 1, 1 )
@@ -76,5 +124,8 @@ end_cap_mode = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Flip = SubResource( 2 )
 anims/RESET = SubResource( 3 )
+
+[node name="Lever Flip Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="." to="." method="_on_Lever_body_entered"]

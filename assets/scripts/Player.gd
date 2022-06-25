@@ -128,8 +128,8 @@ func _input(event):
 		if event.is_action_released("jump") and jumping:
 			dropping = true
 			jumping = false
-		if event.is_action_pressed("developer_debug"):
-			swap_next()
+#		if event.is_action_pressed("developer_debug"):
+#			swap_next()
 		
 		update_animation()
 #updates the animation of the cat

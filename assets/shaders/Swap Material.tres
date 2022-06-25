@@ -36,8 +36,9 @@ void light() {
 "
 
 [resource]
+resource_local_to_scene = true
 shader = SubResource( 1 )
-shader_param/swapped = true
+shader_param/swapped = false
 shader_param/frequency = 5.956
 shader_param/size = 417.389
 shader_param/angle_degrees = 45.0

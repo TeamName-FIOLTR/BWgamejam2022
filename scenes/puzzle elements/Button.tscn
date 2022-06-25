@@ -1,8 +1,53 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scripts/puzzle elements/Button.gd" type="Script" id=1]
+[ext_resource path="res://assets/sound/j1987 blinkers click2b.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/j1987 blinkers click2a.wav" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 256, 16 )
 
 [sub_resource type="Animation" id=2]
@@ -78,13 +123,16 @@ tracks/1/keys = {
 }
 
 [node name="Button" type="Area2D"]
+material = SubResource( 5 )
+scale = Vector2( 0.25, 0.75 )
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -36 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="Button" type="Line2D" parent="."]
+use_parent_material = true
 position = Vector2( 0, -32 )
 points = PoolVector2Array( -240, 0, -196, -32, 194, -32, 240, 0 )
 default_color = Color( 1, 1, 1, 1 )
@@ -96,6 +144,7 @@ color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -256, 0, 256, 0, 256, -32, -256, -32 )
 
 [node name="Button Base" type="Line2D" parent="."]
+use_parent_material = true
 points = PoolVector2Array( -256, 0, 256, 0, 256, -32, -256, -32, -256, 0 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
@@ -110,7 +159,15 @@ anims/Released = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, -16 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
+
+[node name="Button Press Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -5.0
+
+[node name="Button Release Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -5.0
 
 [connection signal="body_entered" from="." to="." method="_on_Button_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Button_body_exited"]
