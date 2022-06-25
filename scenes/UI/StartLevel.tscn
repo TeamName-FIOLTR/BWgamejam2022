@@ -4,7 +4,8 @@
 [ext_resource path="res://assets/scripts/UI/GameStart.gd" type="Script" id=2]
 [ext_resource path="res://assets/UI/cattheme.tres" type="Theme" id=4]
 
-[node name="GameStart" type="Control" groups=["main_scene_back"]]
+[node name="GameStart" type="Control" groups=["main_scene_back", "pause_node"]]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 4 )

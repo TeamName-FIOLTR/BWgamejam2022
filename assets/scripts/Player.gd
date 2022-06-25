@@ -107,8 +107,14 @@ func swap_next()->void:
 func pickup(pick : Area2D)->void:
 	if pick.is_in_group("Tuna"):
 		start_position = pick.position
-
+func pause_game()->void:
+	var main_ui = load("res://scenes/UI/StartLevel.tscn").instance()
+	(main_ui as Control).modulate = get_parent().modulate
+	$CanvasLayer.add_child(main_ui)
+	get_tree().paused = true
 func _input(event):
+	if event.is_action_pressed("pause"):
+		pause_game()
 	if not dead:
 		if event is InputEventKey or InputEventJoypadMotion:
 			input_velocity = input_velocity_scale*Input.get_vector("move_left", "move_right", "move_up", "move_down")
