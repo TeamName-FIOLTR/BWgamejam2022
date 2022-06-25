@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/UI/resolution/resChanger.tscn" type="PackedScene" id=1]
+
+[node name="display_options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.8
+anchor_bottom = 0.75
+margin_right = 12.0
+margin_bottom = 12.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 626.4
+margin_bottom = 312.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_right = 626.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Resolution Changer" parent="ScrollContainer/VBoxContainer/Control" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_bottom = 0.6
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Control"]
+anchor_right = 0.45
+anchor_bottom = 1.0
+text = "Resolution:"
+align = 2
+valign = 1
+
+[node name="CheckBloom" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 626.0
+margin_bottom = 208.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/CheckBloom"]
+anchor_right = 0.45
+anchor_bottom = 1.0
+text = "Bloom:"
+align = 2
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/CheckBloom"]
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.75
+
+[node name="CheckBloom2" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 208.0
+margin_right = 626.0
+margin_bottom = 312.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/CheckBloom2"]
+anchor_right = 0.45
+anchor_bottom = 1.0
+text = "Other Option:"
+align = 2
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/CheckBloom2"]
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.75

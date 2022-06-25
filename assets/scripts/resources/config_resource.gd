@@ -7,12 +7,11 @@ extends Resource
 
 class_name ConfigResource
 
-#Example variables that could go inside of global config
-#var resolution
-#var color_blindness ect.
+var resolution : Vector2 = Vector2(1024,600)
+var do_bloom : bool = false
+var do_vsync : bool = false
+var target_fps : int = 60
 
-
-#convinence functions for reading and writing to disc
 
 #convinence function for getting the path of a save resource
 static func get_config_path()->String:
@@ -25,3 +24,6 @@ static func get_config()->ConfigResource:
 #save a config resource
 static func save_config(conf : ConfigResource)->void:
 	ResourceLoader.save(get_config_path(),conf)
+
+static func sync_settings(conf : ConfigResource)->void:
+	
