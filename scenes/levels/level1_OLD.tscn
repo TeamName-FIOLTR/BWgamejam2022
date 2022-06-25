@@ -1,0 +1,350 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=1]
+[ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/puzzle elements/Basic Swap Box.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/puzzle elements/Physics Puzzle Box.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/enviroments/cityBox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/enviroments/pottedPlant.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=13]
+[ext_resource path="res://icon.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+uniform float thingy = 0.9;
+uniform vec2 scale_thing = vec2(1.0);
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	float x = UV.x-0.5;
+	float y = UV.y-0.5;
+	float thing = float(!((abs(x*scale_thing.x)<=thingy)&&(abs(y*scale_thing.y)<=thingy)));
+//	SCREEN_PIXEL_SIZE
+//	vec3 thing_vec = vec3()
+	COLOR.rgb = vec3(thing);
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/thingy = 0.318
+shader_param/scale_thing = Vector2( 0.664, 1 )
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	COLOR.r = 0.0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 9 )
+
+[sub_resource type="QuadMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 20, 20 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 1 )
+shader_param/forground_in = Color( 0, 1, 0.913725, 1 )
+shader_param/background_in = Color( 0.309804, 0, 0.847059, 1 )
+shader_param/forground_out = Color( 1, 1, 1, 1 )
+shader_param/background_out = Color( 0, 0, 0, 1 )
+shader_param/line_count = 53.419
+shader_param/line_width = 0.018
+shader_param/hatch_angle = 2.863
+shader_param/snap_threshhold_front = 0.628
+shader_param/snap_threshhold_back = 0.72
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = SubResource( 12 )
+shader_param/swapped = true
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="level1" type="Node2D" groups=["Level Status Recievers"]]
+script = ExtResource( 13 )
+
+[node name="fadeMixer" type="Node2D" parent="."]
+
+[node name="StaticBody2D6" parent="fadeMixer" instance=ExtResource( 6 )]
+position = Vector2( 621, 413 )
+collision_layer = 6
+collision_mask = 6
+invert_bits = false
+
+[node name="StaticBody2D7" parent="fadeMixer" instance=ExtResource( 9 )]
+position = Vector2( 734, 598 )
+collision_layer = 5
+collision_mask = 0
+
+[node name="Player" parent="fadeMixer" instance=ExtResource( 4 )]
+position = Vector2( 1033, 334 )
+gravity = Vector2( 0, 1000 )
+jump_gravity = 1.415
+drop_gravity = 5.476
+jump_speed = 1000.0
+jump_time_max = 1.0
+jump_cache_time = 100.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 306, 319 )
+scale = Vector2( 16.4807, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 472, 452 )
+scale = Vector2( 16.4807, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D2"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D2"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 781, 609 )
+scale = Vector2( 16.4807, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D3"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D3"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 1321, 328 )
+scale = Vector2( 16.4807, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D4"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D4"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 669, 889 )
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D5"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D5"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( -83, 505 )
+rotation = -1.57079
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D8"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D8"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 1082, -155 )
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D9"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D9"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="fadeMixer"]
+position = Vector2( 2269, 585 )
+rotation = -1.57079
+scale = Vector2( 179.567, 2.5253 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fadeMixer/StaticBody2D10"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="fadeMixer/StaticBody2D10"]
+material = SubResource( 8 )
+mesh = SubResource( 4 )
+
+[node name="Icon" type="Sprite" parent="fadeMixer"]
+visible = false
+material = SubResource( 6 )
+position = Vector2( 522, 251 )
+scale = Vector2( 1.00296, 0.943432 )
+texture = ExtResource( 14 )
+
+[node name="DEATHLAZER" parent="fadeMixer" instance=ExtResource( 12 )]
+position = Vector2( 895, 239 )
+rotation = 1.55596
+
+[node name="Basic Swap Box" parent="fadeMixer" instance=ExtResource( 5 )]
+position = Vector2( 860, 548 )
+scale = Vector2( 0.186628, 0.186628 )
+collision_layer = 11
+collision_mask = 0
+
+[node name="Basic Swap Box2" parent="fadeMixer" instance=ExtResource( 5 )]
+position = Vector2( 1032, 432 )
+scale = Vector2( 0.186628, 0.186628 )
+collision_layer = 19
+collision_mask = 0
+
+[node name="Basic Swap Box3" parent="fadeMixer" instance=ExtResource( 5 )]
+position = Vector2( 420, 260 )
+scale = Vector2( 0.186628, 0.186628 )
+collision_layer = 11
+collision_mask = 0
+
+[node name="Tuna" parent="fadeMixer" instance=ExtResource( 3 )]
+position = Vector2( 1304, 301 )
+scale = Vector2( 1, 1 )
+
+[node name="pottedPlant" parent="fadeMixer" instance=ExtResource( 10 )]
+position = Vector2( 1422, 319 )
+collision_layer = 5
+invert_bits = true
+
+[node name="Lever" parent="fadeMixer" instance=ExtResource( 7 )]
+position = Vector2( 530, 441 )
+scale = Vector2( 0.273858, 0.273858 )
+connected_elements = [ NodePath("../DEATHLAZER") ]
+
+[node name="Physics Puzzle Box" parent="fadeMixer" instance=ExtResource( 8 )]
+material = SubResource( 13 )
+position = Vector2( 1184, 207 )
+scale = Vector2( 0.195782, 0.195782 )
+collision_layer = 26
+collision_mask = 3
+move_when_enabled = false
+move_when_disabled = true
+
+[node name="Button" parent="fadeMixer" instance=ExtResource( 11 )]
+position = Vector2( 1361, 855 )
+scale = Vector2( 0.686777, 0.686777 )
+togglable = true
+connected_elements = [ NodePath("../DEATHLAZER2") ]
+
+[node name="DEATHLAZER2" parent="fadeMixer" instance=ExtResource( 12 )]
+position = Vector2( 1693, 586 )
+
+[node name="TileMap" type="TileMap" parent="fadeMixer"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
+
+[node name="FadePlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 10 )
+anims/fade = SubResource( 11 )

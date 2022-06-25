@@ -5,9 +5,10 @@ class_name Level
 
 func _ready():
 	add_to_group("Level Status Recievers")
-	$FadePlayer.connect("animation_finished",self,"anim_finished")
+#	$FadePlayer.connect("animation_finished",self,"anim_finished")
 func fade_death()->void:
-	$FadePlayer.play("fade")
+	pass
+#	$FadePlayer.play("fade")
 func reload()->void:
 	get_tree().reload_current_scene()
 

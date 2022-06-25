@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/scripts/enviroment/DEATHLAZER.gd" type="Script" id=1]
 [ext_resource path="res://assets/sound/Laser_01.wav" type="AudioStream" id=2]
@@ -10,6 +10,149 @@ size = Vector2( 100, 100 )
 
 [sub_resource type="QuadMesh" id=2]
 size = Vector2( 100, 100 )
+
+[sub_resource type="VisualShaderNodeCompare" id=4]
+default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05 ]
+
+[sub_resource type="VisualShaderNodeScalarInterp" id=5]
+default_input_values = [ 0, 0.4, 1, 0.5, 2, 0.5 ]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=6]
+uniform_name = "Lazer_Min_Thin"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=7]
+default_input_values = [ 0, 0.0, 1, 0.5 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=8]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=9]
+uniform_name = "Frequency"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=10]
+function = 0
+
+[sub_resource type="VisualShaderNodeExpression" id=11]
+size = Vector2( 312, 250 )
+expression = "amp = sin(2.0*3.141592654*frequency*time);"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=12]
+default_input_values = [ 0, 0.0, 1, 1.0 ]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=13]
+default_input_values = [ 0, 0.0, 1, 2.0 ]
+operator = 3
+
+[sub_resource type="VisualShaderNodeInput" id=14]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id=15]
+
+[sub_resource type="VisualShader" id=16]
+code = "shader_type canvas_item;
+uniform float Lazer_Min_Thin;
+uniform float Frequency;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Input:8
+	vec3 n_out8p0 = vec3(UV, 0.0);
+
+// VectorDecompose:9
+	float n_out9p0 = n_out8p0.x;
+	float n_out9p1 = n_out8p0.y;
+	float n_out9p2 = n_out8p0.z;
+
+// ScalarUniform:14
+	float n_out14p0 = Lazer_Min_Thin;
+
+// ScalarOp:15
+	float n_in15p1 = 0.50000;
+	float n_out15p0 = n_out14p0 * n_in15p1;
+
+// Input:2
+	float n_out2p0 = TIME;
+
+// ScalarUniform:3
+	float n_out3p0 = Frequency;
+
+// Expression:5
+	float n_out5p0;
+	n_out5p0 = 0.0;
+	{
+		n_out5p0 = sin(2.0*3.141592654*n_out3p0*n_out2p0);
+	}
+
+// ScalarOp:6
+	float n_in6p1 = 1.00000;
+	float n_out6p0 = n_out5p0 + n_in6p1;
+
+// ScalarOp:7
+	float n_in7p1 = 2.00000;
+	float n_out7p0 = n_out6p0 / n_in7p1;
+
+// ScalarMix:13
+	float n_in13p1 = 0.50000;
+	float n_out13p0 = mix(n_out15p0, n_in13p1, n_out7p0);
+
+// Compare:10
+	float n_in10p1 = 0.50000;
+	bool n_out10p0 = (abs(n_out9p1 - n_in10p1) < n_out13p0);
+// Output:0
+	COLOR.rgb = vec3(n_out10p0 ? 1.0 : 0.0);
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( 294.333, 65 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 1340, 0 )
+nodes/fragment/2/node = SubResource( 8 )
+nodes/fragment/2/position = Vector2( -300, 120 )
+nodes/fragment/3/node = SubResource( 9 )
+nodes/fragment/3/position = Vector2( -280, 180 )
+nodes/fragment/4/node = SubResource( 10 )
+nodes/fragment/4/position = Vector2( 140, 180 )
+nodes/fragment/5/node = SubResource( 11 )
+nodes/fragment/5/position = Vector2( -40, 40 )
+nodes/fragment/5/size = Vector2( 312, 250 )
+nodes/fragment/5/input_ports = "0,0,time;1,0,frequency;"
+nodes/fragment/5/output_ports = "0,0,amp;"
+nodes/fragment/5/expression = "amp = sin(2.0*3.141592654*frequency*time);"
+nodes/fragment/6/node = SubResource( 12 )
+nodes/fragment/6/position = Vector2( 560, 40 )
+nodes/fragment/7/node = SubResource( 13 )
+nodes/fragment/7/position = Vector2( 720, 80 )
+nodes/fragment/8/node = SubResource( 14 )
+nodes/fragment/8/position = Vector2( 660, -40 )
+nodes/fragment/9/node = SubResource( 15 )
+nodes/fragment/9/position = Vector2( 820, -40 )
+nodes/fragment/10/node = SubResource( 4 )
+nodes/fragment/10/position = Vector2( 1100, -60 )
+nodes/fragment/13/node = SubResource( 5 )
+nodes/fragment/13/position = Vector2( 920, 140 )
+nodes/fragment/14/node = SubResource( 6 )
+nodes/fragment/14/position = Vector2( 440, 220 )
+nodes/fragment/15/node = SubResource( 7 )
+nodes/fragment/15/position = Vector2( 680, 240 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 5, 1, 2, 0, 5, 0, 5, 0, 6, 0, 6, 0, 7, 0, 8, 0, 9, 0, 9, 1, 10, 0, 10, 0, 0, 0, 7, 0, 13, 2, 13, 0, 10, 2, 14, 0, 15, 0, 15, 0, 13, 0 )
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = SubResource( 16 )
+shader_param/Lazer_Min_Thin = 0.797
+shader_param/Frequency = 5.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 50, 50 )
@@ -41,26 +184,31 @@ mesh = SubResource( 2 )
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 0, 78 )
 enabled = true
-cast_to = Vector2( 0, 1000 )
+cast_to = Vector2( 0, 5000 )
 collision_mask = 3
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 0, 87 )
+position = Vector2( 0, 80 )
 
 [node name="Line2D" type="Line2D" parent="Position2D"]
-points = PoolVector2Array( 0, 0, 0, 1 )
+material = SubResource( 17 )
+points = PoolVector2Array( 0, 0, 0, 1000 )
 default_color = Color( 1, 1, 1, 1 )
+texture_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="Kill Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+volume_db = -10.0
 
 [node name="Lazer Enable Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = -7.0
+volume_db = -20.0
 
 [node name="Lazer Disable Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-volume_db = -7.0
+volume_db = -20.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

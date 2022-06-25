@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/scripts/puzzle elements/Lever.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 256, 178.5 )
+extents = Vector2( 64, 45 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Flip"
@@ -38,7 +38,7 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -178.5 )
+position = Vector2( 0, -45 )
 shape = SubResource( 1 )
 
 [node name="Panel" type="Panel" parent="CollisionShape2D"]
@@ -53,6 +53,7 @@ __meta__ = {
 }
 
 [node name="Lever Base" type="Line2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
 points = PoolVector2Array( 256, 0, 100, -100, -100, -100, -256, 0, 256, 0 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2

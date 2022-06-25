@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
+[ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=3]
+
+[node name="tilemap testing" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 4010, 2418, -3185, 3323, -832, -3069, 2698, -2572 )
+
+[node name="TileMap" type="TileMap" parent="."]
+material = ExtResource( 3 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( 65542, 0, 131075, 65543, 0, 196610, 65546, 0, 131073, 65547, 0, 196608, 131080, 0, 131073, 131081, 0, 10, 131082, 0, 65547, 131083, 0, 65546, 131084, 0, 9, 196610, 0, 131075, 196611, 0, 11, 196612, 0, 196608, 196615, 0, 131073, 196616, 0, 5, 196617, 0, 65536, 196620, 0, 65537, 262147, 0, 131080, 262148, 0, 65546, 262149, 0, 11, 262150, 0, 131072, 262151, 0, 131077, 262152, 0, 2, 262153, 0, 131081, 262155, 0, 131073, 262156, 0, 196617, 327682, 0, 131073, 327683, 0, 196617, 327685, 0, 3, 327686, 0, 65540, 327687, 0, 65536, 327689, 0, 196616, 327690, 0, 131072, 327691, 0, 5, 327692, 0, 6, 327693, 0, 196608, 393217, 0, 131073, 393218, 0, 5, 393219, 0, 6, 393220, 0, 196608, 393222, 0, 1, 393223, 0, 6, 393224, 0, 10, 393225, 0, 65547, 393226, 0, 2, 393227, 0, 2, 393228, 0, 65540, 393229, 0, 65536, 458753, 0, 3, 458754, 0, 2, 458755, 0, 2, 458756, 0, 65538, 458758, 0, 3, 458759, 0, 2, 458760, 0, 65538, 458764, 0, 3, 458765, 0, 65538 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 578, 309 )

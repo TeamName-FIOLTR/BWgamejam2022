@@ -130,8 +130,12 @@ func _input(event):
 func update_animation()->void:
 	if input_velocity.x > 0:
 		$AnimatedSprite.flip_h = true
+		var sleeparticles = $"AnimatedSprite/Sleepy Particles"
+		sleeparticles.position.x = abs(sleeparticles.position.x)
 	elif input_velocity.x < 0:
 		$AnimatedSprite.flip_h = false
+		var sleeparticles = $"AnimatedSprite/Sleepy Particles"
+		sleeparticles.position.x = -abs(sleeparticles.position.x)
 	
 	if abs(velocity.y) > 0:
 		$AnimatedSprite.playing = false
@@ -183,6 +187,7 @@ func recieve_level_failed():
 #	dead = true
 	$Camera2D/AnimationPlayer.play("screen_shake")
 	$level_fail_sound.play()
+	$level_fail_music.play()
 	$deathsound.play()
 	dead = true
 

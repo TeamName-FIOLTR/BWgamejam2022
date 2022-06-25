@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+uniform float thingything = 0.5;
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original = texture(TEXTURE,UV);
+	COLOR.rgb = vec3(float(original.r>thingything));
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[resource]
+shader = SubResource( 2 )
+shader_param/thingything = 0.837

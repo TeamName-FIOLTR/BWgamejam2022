@@ -4,11 +4,15 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+export(bool) var lazer_on = true
 var killed_player = true
 var previous_thing
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#	set_lazer_state(lazer_on)
+	$RayCast2D.enabled = lazer_on
+	$Position2D.visible = lazer_on
 	pass # Replace with function body.
 
 
@@ -34,6 +38,7 @@ func enable_lazer():
 	$Position2D.visible = true
 
 func set_lazer_state(on):
+	lazer_on = on
 #	$RayCast2D.visible = on
 	$RayCast2D.enabled = on
 	$Position2D.visible = on
@@ -50,7 +55,7 @@ func recieve_swap(swap_idx):
 
 
 func _on_Lever_Flipped(flipped):
-	set_lazer_state(flipped)
+	set_lazer_state(!lazer_on)
 
 func _on_Button_Pressed(pressed):
-	set_lazer_state(pressed)
+	set_lazer_state(!lazer_on)
