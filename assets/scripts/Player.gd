@@ -108,7 +108,7 @@ func pickup(pick : Area2D)->void:
 	if pick.is_in_group("Tuna"):
 		start_position = pick.position
 func pause_game()->void:
-	var main_ui = load("res://scenes/UI/StartLevel.tscn").instance()
+	var main_ui = load("res://scenes/UI/RunTimeUI.tscn").instance()
 	(main_ui as Control).modulate = get_parent().modulate
 	$CanvasLayer.add_child(main_ui)
 	get_tree().paused = true
