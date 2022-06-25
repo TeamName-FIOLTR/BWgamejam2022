@@ -424,6 +424,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 material = SubResource( 6 )
 scale = Vector2( 0.2, 0.2 )
+frame = 1
 
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3
@@ -432,20 +433,25 @@ one_shot = true
 [node name="level_fail_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 volume_db = -3.149
+bus = "Sound Effects"
 
 [node name="level_fail_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+bus = "Music"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "Sound Effects"
 
 [node name="deathsound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -5.598
+bus = "Sound Effects"
 
 [node name="respawn sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = -5.409
+bus = "Sound Effects"
 
 [node name="Spawn Animation" type="Position2D" parent="."]
 rotation = -0.785397

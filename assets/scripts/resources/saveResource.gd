@@ -61,6 +61,7 @@ static func return_to_save(tree : SceneTree,gsr : GameSaveResource)->void:
 	
 #loads the game with the given name
 static func load_game(tree : SceneTree,game_name : String)->void:
+	tree.paused = false
 	Globals.game_save_data = get_save(game_name)
 	print("returning to save " + Globals.game_save_data.last_level)
 	return_to_save(tree,Globals.game_save_data)

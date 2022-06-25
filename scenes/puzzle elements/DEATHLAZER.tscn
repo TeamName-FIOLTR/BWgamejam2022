@@ -200,14 +200,17 @@ end_cap_mode = 2
 [node name="Kill Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sound Effects"
 
 [node name="Lazer Enable Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -20.0
+bus = "Sound Effects"
 
 [node name="Lazer Disable Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -20.0
+bus = "Sound Effects"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

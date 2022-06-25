@@ -17,7 +17,7 @@ anchor_bottom = 0.75
 
 [node name="Pause" type="Control" parent="VBoxContainer"]
 margin_right = 512.0
-margin_bottom = 46.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -28,10 +28,23 @@ size_flags_vertical = 3
 text = "Resume"
 script = ExtResource( 3 )
 
-[node name="Control" type="Control" parent="VBoxContainer"]
-margin_top = 50.0
+[node name="restart" type="Control" parent="VBoxContainer"]
+margin_top = 60.0
 margin_right = 512.0
-margin_bottom = 97.0
+margin_bottom = 117.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="restart" type="Button" parent="VBoxContainer/restart"]
+anchor_right = 1.0
+anchor_bottom = 0.95
+size_flags_vertical = 3
+text = "Restart Level"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_top = 121.0
+margin_right = 512.0
+margin_bottom = 178.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -44,26 +57,10 @@ script = ExtResource( 1 )
 root_path = NodePath("../../..")
 to_scene = "UISaveLoader"
 
-[node name="Control2" type="Control" parent="VBoxContainer"]
-margin_top = 101.0
-margin_right = 512.0
-margin_bottom = 148.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="btnNewGame" type="Button" parent="VBoxContainer/Control2"]
-anchor_right = 1.0
-anchor_bottom = 0.95
-size_flags_vertical = 3
-text = "New Game"
-script = ExtResource( 1 )
-root_path = NodePath("../../..")
-to_scene = "NewGameSelector"
-
 [node name="Control3" type="Control" parent="VBoxContainer"]
-margin_top = 152.0
+margin_top = 182.0
 margin_right = 512.0
-margin_bottom = 198.0
+margin_bottom = 239.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -76,21 +73,8 @@ script = ExtResource( 1 )
 root_path = NodePath("../../..")
 to_scene = "SettingsMenu"
 
-[node name="Control4" type="Control" parent="VBoxContainer"]
-margin_top = 202.0
-margin_right = 512.0
-margin_bottom = 249.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Credits" type="Button" parent="VBoxContainer/Control4"]
-anchor_right = 1.0
-anchor_bottom = 0.95
-size_flags_vertical = 3
-text = "Credits"
-
 [node name="Control5" type="Control" parent="VBoxContainer"]
-margin_top = 253.0
+margin_top = 243.0
 margin_right = 512.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
