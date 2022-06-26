@@ -8,6 +8,11 @@ func _ready():
 	if Globals.game_save_data:
 		print(name + " saving game data")
 		Globals.game_save_data.last_level = name
+		
+		#in the future also use this to store any 
+		#additional save data for the given level
+		Globals.game_save_data.visited_levels[name] = true
+		
 		Globals.save_game()
 	
 func fade_death()->void:

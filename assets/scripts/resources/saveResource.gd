@@ -4,12 +4,21 @@ extends Resource
 
 class_name GameSaveResource
 
+
+#TODO: last_level would be more efficiently stored as an integer
+#but that requires re-writing the level script
+
+
 #the name of the last scene that we saved at
 #equivilent to the name of the root node in that level
 export var last_level : String = "Level1"
 
 #the name of the save file that we are in
 export var game_name : String
+
+#the farthest unlocked level that the player has accessed
+#stored as an intager for convinence
+export var visited_levels : Dictionary
 
 #initilizes the directory structure if it is not already
 static func initilize_save_dir()->void:
@@ -35,6 +44,9 @@ static func get_save_files()->Array:
 				)
 		fname = dir.get_next()
 	return ret_val
+
+static func get_level_name_from_int(number : int)->String:
+	return "level" + str(number)
 
 #convinence function to get the level path
 static func get_scene_path(level_name : String)->String:

@@ -54,10 +54,10 @@ size_flags_vertical = 3
 anchor_right = 1.0
 anchor_bottom = 0.95
 size_flags_vertical = 3
-text = "Load Game"
+text = "Level Select"
 script = ExtResource( 1 )
 root_path = NodePath("../../..")
-to_scene = "UISaveLoader"
+to_scene = "LevelViewUI"
 
 [node name="Control3" type="Control" parent="VBoxContainer"]
 margin_top = 182.0
