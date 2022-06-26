@@ -1,6 +1,6 @@
-extends StaticBody2D
+extends Area2D
 
-class_name CollisionSwapper
+class_name AreaColSwapper
 
 export(bool) var object_enabled : bool = true setget set_object_enabled
 export(bool) var invert_bits : bool = true
@@ -18,5 +18,4 @@ func _ready():
 	add_to_group("Swap Recievers")
 
 func recieve_swap(swap_idx):
-	print("recived swap_idx of " + str(swap_idx))
-	self.object_enabled = !get_collision_layer_bit(2+swap_idx)
+	self.object_enabled = (!get_collision_layer_bit(2+swap_idx))

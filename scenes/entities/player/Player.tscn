@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 27, 16 )
+extents = Vector2( 50.5, 35 )
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
@@ -410,16 +410,21 @@ tracks/0/keys = {
 
 [node name="Player" type="KinematicBody2D" groups=["Level Status Recievers", "Player Death Recievers"]]
 script = ExtResource( 1 )
+gravity = Vector2( 0, 1000 )
+jump_gravity = 0.454
+drop_gravity = 2.713
+jump_speed = 1000.0
 jump_timer_node = NodePath("Jump Timer")
 player_audio_node = NodePath("AudioStreamPlayer2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( 1.5, 5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 material = SubResource( 6 )
-frame = 4
+scale = Vector2( 0.2, 0.2 )
+frame = 1
 
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3
@@ -428,20 +433,25 @@ one_shot = true
 [node name="level_fail_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 volume_db = -3.149
+bus = "Sound Effects"
 
 [node name="level_fail_music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+bus = "Music"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
+bus = "Sound Effects"
 
 [node name="deathsound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = -5.598
+bus = "Sound Effects"
 
 [node name="respawn sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = -5.409
+bus = "Sound Effects"
 
 [node name="Spawn Animation" type="Position2D" parent="."]
 rotation = -0.785397
@@ -505,6 +515,7 @@ anims/RESET = SubResource( 2 )
 anims/Spawn = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
 zoom = Vector2( 2, 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]

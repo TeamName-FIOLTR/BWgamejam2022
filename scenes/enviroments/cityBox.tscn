@@ -5,6 +5,7 @@
 [ext_resource path="res://assets/scripts/enviroment/Basic Swap Box.gd" type="Script" id=3]
 
 [sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
 shader = ExtResource( 2 )
 shader_param/swapped = false
 shader_param/forground_in = Color( 0, 0, 0, 1 )
@@ -14,9 +15,10 @@ shader_param/background_out = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 0.005
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23, 13.5 )
+extents = Vector2( 23, 14.5 )
 
 [node name="StaticBody2D" type="StaticBody2D"]
+scale = Vector2( 2, 2 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -26,5 +28,5 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, -13 )
+position = Vector2( 0, -15.5 )
 shape = SubResource( 1 )

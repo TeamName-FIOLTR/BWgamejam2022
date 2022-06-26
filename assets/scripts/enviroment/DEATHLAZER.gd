@@ -29,6 +29,7 @@ func _ready():
 		collision_layers = ~collision_layers
 #	$RayCast2D.collision_mask = collision_layers
 	$StaticBody2D.collision_layer = collision_layers
+	
 	add_to_group("Swap Recievers")
 	pass # Replace with function body.
 
@@ -66,12 +67,12 @@ func set_lazer_state(on):
 		$"Lazer Disable Sound".play()
 
 func recieve_swap(swap_idx):
-#	$RayCast2D.set_collision_mask(0)
-#	$RayCast2D.set_collision_mask_bit(0, true)
-#	$RayCast2D.set_collision_mask_bit(1, true)
-#	$RayCast2D.set_collision_mask_bit(2+swap_idx, true)
-	self.object_enabled = (!$StaticBody2D.get_collision_layer_bit(2+swap_idx))
+	$RayCast2D.set_collision_mask(0)
+	$RayCast2D.set_collision_mask_bit(0, true)
+	$RayCast2D.set_collision_mask_bit(1, true)
 
+	$RayCast2D.set_collision_mask_bit(2+swap_idx, true)
+	self.object_enabled = (!$StaticBody2D.get_collision_layer_bit(2+swap_idx))
 
 func _on_Lever_Flipped(flipped):
 	set_lazer_state(!lazer_on)

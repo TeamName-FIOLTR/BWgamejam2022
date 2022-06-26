@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scripts/UI/MenuChangeButton.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/UI/btnExit.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/UI/resume_btn.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/UI/restart.gd" type="Script" id=4]
 
-[node name="RunTimeUI" type="VScrollBar" groups=["menu_root"]]
+[node name="MainMenu" type="VScrollBar" groups=["menu_root"]]
 self_modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,9 +16,37 @@ anchor_top = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.75
 
-[node name="Control" type="Control" parent="VBoxContainer"]
+[node name="Pause" type="Control" parent="VBoxContainer"]
 margin_right = 512.0
 margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="resume" type="Button" parent="VBoxContainer/Pause"]
+anchor_right = 1.0
+anchor_bottom = 0.95
+size_flags_vertical = 3
+text = "Resume"
+script = ExtResource( 3 )
+
+[node name="restart" type="Control" parent="VBoxContainer"]
+margin_top = 60.0
+margin_right = 512.0
+margin_bottom = 117.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="restart" type="Button" parent="VBoxContainer/restart"]
+anchor_right = 1.0
+anchor_bottom = 0.95
+size_flags_vertical = 3
+text = "Restart Level"
+script = ExtResource( 4 )
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_top = 121.0
+margin_right = 512.0
+margin_bottom = 178.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -24,31 +54,15 @@ size_flags_vertical = 3
 anchor_right = 1.0
 anchor_bottom = 0.95
 size_flags_vertical = 3
-text = "Load Game"
+text = "Level Select"
 script = ExtResource( 1 )
 root_path = NodePath("../../..")
-to_scene = "UISaveLoader"
-
-[node name="Control2" type="Control" parent="VBoxContainer"]
-margin_top = 60.0
-margin_right = 512.0
-margin_bottom = 117.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="btnNewGame" type="Button" parent="VBoxContainer/Control2"]
-anchor_right = 1.0
-anchor_bottom = 0.95
-size_flags_vertical = 3
-text = "New Game"
-script = ExtResource( 1 )
-root_path = NodePath("../../..")
-to_scene = "NewGameSelector"
+to_scene = "LevelViewUI"
 
 [node name="Control3" type="Control" parent="VBoxContainer"]
-margin_top = 121.0
+margin_top = 182.0
 margin_right = 512.0
-margin_bottom = 178.0
+margin_bottom = 239.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -60,19 +74,6 @@ text = "Settings"
 script = ExtResource( 1 )
 root_path = NodePath("../../..")
 to_scene = "SettingsMenu"
-
-[node name="Control4" type="Control" parent="VBoxContainer"]
-margin_top = 182.0
-margin_right = 512.0
-margin_bottom = 239.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Credits" type="Button" parent="VBoxContainer/Control4"]
-anchor_right = 1.0
-anchor_bottom = 0.95
-size_flags_vertical = 3
-text = "Credits"
 
 [node name="Control5" type="Control" parent="VBoxContainer"]
 margin_top = 243.0
@@ -87,3 +88,6 @@ anchor_bottom = 0.95
 size_flags_vertical = 3
 text = "Exit"
 script = ExtResource( 2 )
+
+[connection signal="pressed" from="VBoxContainer/Pause/resume" to="VBoxContainer/Pause/resume" method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/restart/restart" to="VBoxContainer/restart/restart" method="_on_restart_pressed"]

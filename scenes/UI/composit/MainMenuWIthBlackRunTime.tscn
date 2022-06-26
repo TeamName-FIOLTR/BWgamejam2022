@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/scripts/UI/backContainer.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/UI/backButtonMainMenu.gd" type="Script" id=2]
-[ext_resource path="res://scenes/UI/MainMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/UI/GameRunMenu.tscn" type="PackedScene" id=3]
 
 [node name="mainContainer" type="PanelContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -25,9 +25,9 @@ anchor_bottom = 0.9
 margin_top = 20.0
 rect_min_size = Vector2( 200, 100 )
 script = ExtResource( 1 )
-current_scene_name = "MainMenu"
+current_scene_name = "GameRunMenu"
 
-[node name="RunTimeUI" parent="Content/ContentInside" instance=ExtResource( 3 )]
+[node name="MainMenu" parent="Content/ContentInside" instance=ExtResource( 3 )]
 
 [node name="footer" type="Panel" parent="Content"]
 self_modulate = Color( 0, 0, 0, 1 )
