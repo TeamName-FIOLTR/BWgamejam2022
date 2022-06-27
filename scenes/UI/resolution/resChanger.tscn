@@ -16,7 +16,7 @@ anchor_bottom = 1.0
 
 [node name="Control" type="Control" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 298.0
+margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -46,23 +46,7 @@ text = "X"
 align = 1
 valign = 1
 
-[node name="PreSet" type="Control" parent="VBoxContainer"]
-margin_top = 302.0
-margin_right = 1024.0
-margin_bottom = 600.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/PreSet"]
-anchor_left = 0.25
-anchor_right = 0.75
-anchor_bottom = 1.0
-margin_top = 30.0
-rect_min_size = Vector2( -9999, -9999 )
-text = "Pres"
-
 [connection signal="focus_exited" from="VBoxContainer/Control/width" to="." method="_on_width_focus_exited"]
 [connection signal="number_changed" from="VBoxContainer/Control/width" to="." method="_on_width_number_changed"]
 [connection signal="focus_exited" from="VBoxContainer/Control/height" to="." method="_on_height_focus_exited"]
 [connection signal="number_changed" from="VBoxContainer/Control/height" to="." method="_on_height_number_changed"]
-[connection signal="pressed" from="VBoxContainer/PreSet/Button" to="." method="_on_Button_pressed"]
