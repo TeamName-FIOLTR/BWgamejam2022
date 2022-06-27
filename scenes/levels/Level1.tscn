@@ -178,7 +178,7 @@ texture = ExtResource( 8 )
 [node name="Lever" parent="." instance=ExtResource( 7 )]
 material = SubResource( 5 )
 position = Vector2( 332, 511 )
-connected_elements = [ NodePath("../DEATHLAZER"), NodePath("../DEATHLAZER2") ]
+connected_elements = [ NodePath("../DEATHLAZER"), NodePath("../Metal Door2"), NodePath("../DEATHLAZER2") ]
 
 [node name="Button" parent="." instance=ExtResource( 6 )]
 material = SubResource( 7 )
@@ -202,7 +202,7 @@ rotation = -1.57079
 position = Vector2( 190, 477 )
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
-position = Vector2( 571, 861 )
+position = Vector2( 462, 973 )
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 13 )]
 position = Vector2( 251, 976 )
@@ -220,10 +220,6 @@ position = Vector2( 1692, 340 )
 scale = Vector2( 2, 2 )
 invert_bits = false
 next_level = "level2"
-
-[node name="Metal Door" parent="." instance=ExtResource( 14 )]
-position = Vector2( 1209, 128 )
-rotation = 1.57079
 
 [node name="Metal Door2" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1209, 128 )
