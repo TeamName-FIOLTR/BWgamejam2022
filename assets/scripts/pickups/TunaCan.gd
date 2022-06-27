@@ -8,12 +8,19 @@ func _ready():
 	original_collision_mask = collision_mask
 	original_collision_layer = collision_layer
 	add_to_group("Tuna")
+	add_to_group("Level Change Confirm")
+
+#we are ONLY ok with changing the lvl if we are already
+#selected
+func ok_level_change(lvl_change_area)->bool:
+	return not $Sprite.visible
 
 func set_spawn():
 	collision_layer = 0
 	collision_mask = 0
 	$Particles2D.emitting = true
 	$Sprite.visible = false
+
 func unset_spawn():
 	collision_layer = original_collision_layer
 	collision_mask = original_collision_mask
