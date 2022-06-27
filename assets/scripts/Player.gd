@@ -47,6 +47,7 @@ func _ready():
 	start_position = position
 	$"respawn sound".play()
 	$"Spawn Animation/AnimationPlayer".play("Spawn")
+	swap_next()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

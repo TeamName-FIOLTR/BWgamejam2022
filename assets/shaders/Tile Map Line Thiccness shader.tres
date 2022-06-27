@@ -24,4 +24,4 @@ void light() {
 
 [resource]
 shader = SubResource( 2 )
-shader_param/thingything = 0.837
+shader_param/thingything = 0.877

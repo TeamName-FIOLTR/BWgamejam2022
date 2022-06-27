@@ -1,0 +1,381 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=1]
+[ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/puzzle elements/Metal Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=6]
+[ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=27]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=28]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=29]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=30]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=31]
+resource_local_to_scene = true
+shader = ExtResource( 6 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 5.985
+shader_param/line_width = 0.305
+shader_param/hatch_angle = 2.889
+shader_param/snap_threshhold_front = -0.497
+shader_param/snap_threshhold_back = 0.053
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=32]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=33]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=34]
+resource_local_to_scene = true
+shader = SubResource( 1 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=35]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=36]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=37]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[node name="level6" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+material = ExtResource( 1 )
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -196613, 0, 8, -196612, 0, 131074, -196611, 0, 131074, -196610, 0, 131074, -196609, 0, 131074, -262144, 0, 131074, -262143, 0, 131074, -262142, 0, 131074, -262141, 0, 131074, -262140, 0, 131074, -262139, 0, 131074, -262138, 0, 131074, -262137, 0, 131074, -262136, 0, 131074, -262135, 0, 9, -131077, 0, 65537, -196599, 0, 65537, -65541, 0, 65537, -131063, 0, 65537, -5, 0, 65537, -65527, 0, 65537, 65531, 0, 65537, 65534, 0, 196609, 1, 0, 131073, 2, 0, 131072, 3, 0, 196608, 6, 0, 196609, 9, 0, 65537, 131067, 0, 65537, 131070, 0, 65537, 65537, 0, 1, 65538, 0, 0, 65539, 0, 65536, 65542, 0, 65537, 65545, 0, 65537, 196603, 0, 65537, 196606, 0, 65539, 131073, 0, 3, 131074, 0, 2, 131075, 0, 65538, 131078, 0, 65539, 131081, 0, 65537, 262139, 0, 65537, 196617, 0, 65537, 327675, 0, 65537, 262153, 0, 65537, 393211, 0, 65537, 327689, 0, 65537, 458747, 0, 65544, 458748, 0, 131074, 458749, 0, 131074, 458750, 0, 131074, 458751, 0, 131074, 393216, 0, 131074, 393217, 0, 131074, 393218, 0, 131074, 393219, 0, 131074, 393220, 0, 131074, 393221, 0, 131074, 393222, 0, 131074, 393223, 0, 131074, 393224, 0, 131074, 393225, 0, 65545 )
+
+[node name="LD Metal Door" parent="." instance=ExtResource( 5 )]
+position = Vector2( -128, 368 )
+
+[node name="RU Metal Door2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 768, 16 )
+rotation = 3.14159
+
+[node name="LU Metal Door3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -512, 16 )
+
+[node name="RD Metal Door4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1152, 368 )
+rotation = 3.14159
+
+[node name="LD DEATHLAZER" parent="." instance=ExtResource( 4 )]
+material = SubResource( 23 )
+position = Vector2( 834, 337 )
+collision_layers = 7
+
+[node name="L DEATHLAZER2" parent="." instance=ExtResource( 4 )]
+material = SubResource( 24 )
+position = Vector2( -563, 331 )
+rotation = -1.5708
+collision_layers = 11
+
+[node name="RD DEATHLAZER3" parent="." instance=ExtResource( 4 )]
+material = SubResource( 25 )
+position = Vector2( -193, 333 )
+collision_layers = 11
+
+[node name="RML DEATHLAZER4" parent="." instance=ExtResource( 4 )]
+material = SubResource( 26 )
+position = Vector2( 181, 51 )
+rotation = 1.57079
+collision_layers = 3
+
+[node name="LMR DEATHLAZER5" parent="." instance=ExtResource( 4 )]
+material = SubResource( 27 )
+position = Vector2( 459, 332 )
+rotation = -1.57079
+collision_layers = 11
+
+[node name="RU DEATHLAZER6" parent="." instance=ExtResource( 4 )]
+material = SubResource( 28 )
+position = Vector2( 834, 53 )
+rotation = -3.14159
+collision_layers = 7
+
+[node name="R DEATHLAZER7" parent="." instance=ExtResource( 4 )]
+material = SubResource( 29 )
+position = Vector2( 1203, 54 )
+rotation = 1.57079
+collision_layers = 11
+
+[node name="LU DEATHLAZER8" parent="." instance=ExtResource( 4 )]
+material = SubResource( 30 )
+position = Vector2( -193, 52 )
+rotation = -3.14159
+collision_layers = 15
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 318, 675 )
+
+[node name="AnimatedSprite" parent="Player" index="1"]
+material = SubResource( 31 )
+frame = 1
+
+[node name="Camera2D" parent="Player" index="9"]
+zoom = Vector2( 3, 3 )
+
+[node name="T Lever" parent="." instance=ExtResource( 7 )]
+material = SubResource( 32 )
+position = Vector2( 316, 2 )
+collision_layer = 15
+collision_mask = 0
+connected_elements = [ NodePath("../LD DEATHLAZER"), NodePath("../L DEATHLAZER2"), NodePath("../RD DEATHLAZER3"), NodePath("../RML DEATHLAZER4"), NodePath("../LMR DEATHLAZER5"), NodePath("../RU DEATHLAZER6"), NodePath("../R DEATHLAZER7"), NodePath("../LU DEATHLAZER8") ]
+
+[node name="LD Button" parent="." instance=ExtResource( 8 )]
+material = SubResource( 33 )
+position = Vector2( -384, 769 )
+collision_layer = 23
+collision_mask = 0
+togglable = true
+connected_elements = [ NodePath("../L DEATHLAZER2"), NodePath("../RML DEATHLAZER4") ]
+
+[node name="RD Button2" parent="." instance=ExtResource( 8 )]
+material = SubResource( 34 )
+position = Vector2( 994, 771 )
+collision_layer = 23
+collision_mask = 0
+togglable = true
+connected_elements = [ NodePath("../RD Metal Door4"), NodePath("../LD Metal Door") ]
+
+[node name="RD Lever2" parent="." instance=ExtResource( 7 )]
+material = SubResource( 35 )
+position = Vector2( 1150, 586 )
+rotation = -1.57079
+collision_layer = 27
+collision_mask = 0
+connected_elements = [ NodePath("../R DEATHLAZER7"), NodePath("../RD DEATHLAZER3") ]
+
+[node name="LD Lever3" parent="." instance=ExtResource( 7 )]
+material = SubResource( 36 )
+position = Vector2( -509, 581 )
+rotation = 1.57079
+collision_layer = 19
+collision_mask = 0
+connected_elements = [ NodePath("../L DEATHLAZER2"), NodePath("../LD DEATHLAZER") ]
+
+[node name="BM Lever" parent="." instance=ExtResource( 7 )]
+material = SubResource( 37 )
+position = Vector2( 311, 387 )
+rotation = 3.14159
+collision_layer = 15
+collision_mask = 0
+connected_elements = [ NodePath("../L DEATHLAZER2"), NodePath("../RD Metal Door4") ]
+
+[node name="Tuna" parent="." instance=ExtResource( 9 )]
+position = Vector2( -383, 185 )
+
+[node name="Tuna2" parent="." instance=ExtResource( 9 )]
+position = Vector2( -4, 175 )
+
+[node name="Tuna3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 656, 212 )
+
+[node name="Tuna4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1029, 223 )
+
+[editable path="Player"]

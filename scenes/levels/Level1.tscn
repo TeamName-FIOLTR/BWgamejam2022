@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/puzzle elements/Metal Door.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -26,6 +27,143 @@ shader_param/hatch_angle = 1.858
 shader_param/snap_threshhold_front = 0.165
 shader_param/snap_threshhold_back = 0.165
 
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = SubResource( 6 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=9]
+resource_local_to_scene = true
+shader = SubResource( 3 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
 [node name="Level1" type="Node2D"]
 position = Vector2( -54, -44 )
 script = ExtResource( 1 )
@@ -38,19 +176,23 @@ texture = ExtResource( 8 )
 [node name="TileMap" parent="." instance=ExtResource( 5 )]
 
 [node name="Lever" parent="." instance=ExtResource( 7 )]
+material = SubResource( 5 )
 position = Vector2( 332, 511 )
 connected_elements = [ NodePath("../DEATHLAZER"), NodePath("../DEATHLAZER2") ]
 
 [node name="Button" parent="." instance=ExtResource( 6 )]
+material = SubResource( 7 )
 position = Vector2( 1241, 1028 )
 togglable = true
 connected_elements = [ NodePath("../DEATHLAZER"), NodePath("../DEATHLAZER2") ]
 
 [node name="DEATHLAZER" parent="." instance=ExtResource( 9 )]
+material = SubResource( 8 )
 position = Vector2( 745, 90 )
 lazer_on = false
 
 [node name="DEATHLAZER2" parent="." instance=ExtResource( 9 )]
+material = SubResource( 9 )
 position = Vector2( 183, 694 )
 rotation = -1.57079
 
@@ -78,3 +220,11 @@ position = Vector2( 1692, 340 )
 scale = Vector2( 2, 2 )
 invert_bits = false
 next_level = "level2"
+
+[node name="Metal Door" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1209, 128 )
+rotation = 1.57079
+
+[node name="Metal Door2" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1209, 128 )
+rotation = 1.57079

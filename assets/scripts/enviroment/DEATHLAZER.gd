@@ -15,10 +15,10 @@ var previous_thing
 func set_object_enabled(n_state):
 	object_enabled = n_state
 	if not is_inside_tree(): yield(self, "ready")
-	material.set_shader_param("swapped", object_enabled)
-	$Position2D/Line2D.use_parent_material = object_enabled
+	material.set_shader_param("swapped", !object_enabled)
+	$Position2D/Line2D.use_parent_material = !object_enabled
 #	$RayCast2D.enabled = lazer_on
-	kills_player = !object_enabled
+	kills_player = object_enabled
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -67,12 +67,12 @@ func set_lazer_state(on):
 		$"Lazer Disable Sound".play()
 
 func recieve_swap(swap_idx):
-	$RayCast2D.set_collision_mask(0)
-	$RayCast2D.set_collision_mask_bit(0, true)
-	$RayCast2D.set_collision_mask_bit(1, true)
-
-	$RayCast2D.set_collision_mask_bit(2+swap_idx, true)
-	self.object_enabled = (!$StaticBody2D.get_collision_layer_bit(2+swap_idx))
+#	$RayCast2D.set_collision_mask(0)
+#	$RayCast2D.set_collision_mask_bit(0, true)
+#	$RayCast2D.set_collision_mask_bit(1, true)
+#
+#	$RayCast2D.set_collision_mask_bit(2+swap_idx, true)
+	self.object_enabled = ($StaticBody2D.get_collision_layer_bit(2+swap_idx))
 
 func _on_Lever_Flipped(flipped):
 	set_lazer_state(!lazer_on)

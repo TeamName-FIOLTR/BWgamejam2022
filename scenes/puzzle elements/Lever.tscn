@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/scripts/puzzle elements/Lever.gd" type="Script" id=2]
 [ext_resource path="res://assets/sound/metal_interaction1.wav" type="AudioStream" id=3]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=7]
 code = "shader_type canvas_item;
 
 uniform bool swapped = false;
@@ -41,7 +41,7 @@ void light() {
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 7 )
 shader_param/swapped = false
 shader_param/frequency = 5.956
 shader_param/size = 417.389
