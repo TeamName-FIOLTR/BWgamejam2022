@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=1]
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
@@ -9,6 +9,21 @@
 [ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/art/background_assets/citybackground.png" type="Texture" id=10]
+[ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/enviroments/cityBox.tscn" type="PackedScene" id=12]
+
+[sub_resource type="ShaderMaterial" id=38]
+shader = ExtResource( 6 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 10.0
+shader_param/line_width = 0.001
+shader_param/hatch_angle = 2.884
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
 
 [sub_resource type="Shader" id=22]
 code = "shader_type canvas_item;
@@ -242,6 +257,21 @@ shader_param/angle_degrees = 45.0
 
 [node name="level6" type="Node2D"]
 
+[node name="Citybackground" type="Sprite" parent="."]
+material = SubResource( 38 )
+position = Vector2( 323.5, 209.25 )
+scale = Vector2( 0.942188, 1.13194 )
+texture = ExtResource( 10 )
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 11 )]
+position = Vector2( 648, 706 )
+
+[node name="StaticBody2D2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 483, -55 )
+
+[node name="StaticBody2D3" parent="." instance=ExtResource( 12 )]
+position = Vector2( -70, 767 )
+
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 1 )
 tile_set = ExtResource( 2 )
@@ -314,7 +344,6 @@ position = Vector2( 318, 675 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 31 )
-frame = 1
 
 [node name="Camera2D" parent="Player" index="9"]
 zoom = Vector2( 3, 3 )

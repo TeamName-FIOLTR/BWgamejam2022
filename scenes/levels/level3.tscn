@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scenes/art/mainTileNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=8]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=10]
+[ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 8 )
@@ -205,9 +206,19 @@ material = SubResource( 1 )
 position = Vector2( 2219, -762 )
 texture = ExtResource( 7 )
 
+[node name="CityBack7" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 2399, -324 )
+texture = ExtResource( 7 )
+
 [node name="CityBack3" type="Sprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( 2935, -630 )
+texture = ExtResource( 7 )
+
+[node name="CityBack6" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 3665, -19 )
 texture = ExtResource( 7 )
 
 [node name="CityBack4" type="Sprite" parent="."]
@@ -341,3 +352,7 @@ connected_elements = [ NodePath("../upBlocker"), NodePath("../rightBlocker") ]
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 9 )]
 bus = "Music"
+
+[node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
+position = Vector2( -251, 357 )
+next_level = "level4"

@@ -318,3 +318,4 @@ anims/RESET = SubResource( 30 )
 
 [node name="Door Opening Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+bus = "Sound Effects"

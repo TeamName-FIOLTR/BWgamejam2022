@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=1]
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
@@ -10,6 +10,20 @@
 [ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=9]
 [ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/art/background_assets/city_back2.png" type="Texture" id=11]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=12]
+
+[sub_resource type="ShaderMaterial" id=34]
+shader = ExtResource( 12 )
+shader_param/forground_in = Color( 0, 0, 0, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 13.093
+shader_param/line_width = 0.001
+shader_param/hatch_angle = 3.079
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
 
 [sub_resource type="Shader" id=22]
 code = "shader_type canvas_item;
@@ -206,6 +220,12 @@ shader_param/angle_degrees = 45.0
 
 [node name="level5" type="Node2D"]
 script = ExtResource( 9 )
+
+[node name="CityBack2" type="Sprite" parent="."]
+material = SubResource( 34 )
+position = Vector2( 765, 289 )
+scale = Vector2( 0.936691, 0.936691 )
+texture = ExtResource( 11 )
 
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 1 )
