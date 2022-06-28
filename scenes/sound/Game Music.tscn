@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/music/Modbox-Songmusicextended.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/scripts/Game Music.gd" type="Script" id=2]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" groups=["Level Status Recievers"]]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" groups=["Level Change Confirm", "Level Status Recievers"]]
 stream = ExtResource( 1 )
 autoplay = true
 bus = "Music"

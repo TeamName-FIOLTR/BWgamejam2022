@@ -5,6 +5,9 @@ var game_save_data : GameSaveResource
 #this stores configuration data and is loaded at run time
 var config_data : ConfigResource
 
+#to keep the music from looping as much (easy fix)
+var music_play_position : float
+
 #saves the current configuration file to the disk
 func save_config()->void:
 	ConfigResource.save_config(config_data)

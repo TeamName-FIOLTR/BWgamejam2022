@@ -75,7 +75,9 @@ func _process(delta):
 	elif not jumping:
 		dropping = true
 	update_animation()
-
+	if global_position.y >= 25000 and !dead:
+		get_tree().call_group("Player Death Recievers", "recieve_player_death")
+#		dead = true
 func jump():
 	velocity.y = -jump_speed
 	jumping = true
