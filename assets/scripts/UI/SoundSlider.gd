@@ -59,9 +59,9 @@ func _on_HSlider_value_changed(value):
 			AudioServer.set_bus_mute(channel_id,false)
 		
 		update_display_text()
-func _input(event):
-	if event.is_action_pressed("developer_debug"):
-		$Control/AudioStreamPlayer.play()
+#func _input(event):
+#	if event.is_action_pressed("developer_debug"):
+#		$Control/AudioStreamPlayer.play()
 
 
 func _on_SoundSlider_ready():

@@ -1,0 +1,334 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=4]
+[ext_resource path="res://assets/scripts/generics/level9.gd" type="Script" id=5]
+[ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/puzzle elements/Metal Door.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=10]
+[ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=12]
+
+[sub_resource type="ShaderMaterial" id=33]
+resource_local_to_scene = true
+shader = ExtResource( 10 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 5.985
+shader_param/line_width = 0.305
+shader_param/hatch_angle = 2.889
+shader_param/snap_threshhold_front = -0.497
+shader_param/snap_threshhold_back = 0.053
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "rotat e"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Position2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=29]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=30]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Shader" id=34]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=31]
+resource_local_to_scene = true
+shader = SubResource( 34 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="ShaderMaterial" id=32]
+resource_local_to_scene = true
+shader = SubResource( 34 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[node name="level9" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="TileMap" type="TileMap" parent="."]
+material = ExtResource( 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -196613, 0, 8, -196612, 0, 131074, -196611, 0, 131074, -196610, 0, 131074, -196609, 0, 131074, -262144, 0, 131074, -262143, 0, 131074, -262142, 0, 131074, -262141, 0, 131074, -262140, 0, 131074, -262139, 0, 131074, -262138, 0, 131074, -262137, 0, 131074, -262136, 0, 131074, -262135, 0, 9, -131077, 0, 65537, -196599, 0, 65537, -65541, 0, 65537, -131063, 0, 65537, -5, 0, 65537, -65527, 0, 65537, 65531, 0, 65537, 9, 0, 65537, 131067, 0, 65537, 65545, 0, 65537, 196603, 0, 65537, 131081, 0, 65537, 262139, 0, 65537, 196617, 0, 65537, 327675, 0, 65537, 262153, 0, 65537, 393211, 0, 131082, 393212, 0, 131074, 393213, 0, 131074, 393214, 0, 131074, 393215, 0, 196610, 327685, 0, 131075, 327686, 0, 131074, 327687, 0, 131074, 327688, 0, 131074, 327689, 0, 196619, 458747, 0, 65537, 393225, 0, 65537, 524283, 0, 65537, 458761, 0, 65537, 589819, 0, 65544, 589820, 0, 131074, 589821, 0, 131074, 589822, 0, 131074, 589823, 0, 131074, 524288, 0, 131074, 524289, 0, 131074, 524290, 0, 131074, 524291, 0, 131074, 524292, 0, 131074, 524293, 0, 131074, 524294, 0, 131074, 524295, 0, 131074, 524296, 0, 131074, 524297, 0, 65545 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1053, 924 )
+
+[node name="AnimatedSprite" parent="Player" index="1"]
+material = SubResource( 33 )
+frame = 5
+
+[node name="Camera2D" parent="Player" index="9"]
+zoom = Vector2( 3, 3 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 246, 254 )
+
+[node name="TileMap2" type="TileMap" parent="Position2D"]
+material = ExtResource( 4 )
+position = Vector2( -64, -64 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -1, 0, 131073, -65536, 0, 10, -65535, 0, 196610, 65535, 0, 1, 0, 0, 65536, 131071, 0, 3, 65536, 0, 65546, 65537, 0, 196610 )
+
+[node name="DEATHLAZER" parent="Position2D" instance=ExtResource( 3 )]
+material = SubResource( 23 )
+position = Vector2( -142, 144 )
+collision_layers = 7
+
+[node name="DEATHLAZER2" parent="Position2D" instance=ExtResource( 3 )]
+material = SubResource( 24 )
+position = Vector2( -146, -139 )
+rotation = 1.57079
+collision_layers = 11
+
+[node name="DEATHLAZER3" parent="Position2D" instance=ExtResource( 3 )]
+material = SubResource( 25 )
+position = Vector2( 143, -146 )
+rotation = -3.14159
+collision_layers = 15
+
+[node name="DEATHLAZER4" parent="Position2D" instance=ExtResource( 3 )]
+material = SubResource( 26 )
+position = Vector2( 145, 143 )
+rotation = -1.57079
+scale = Vector2( 1, 1 )
+collision_layers = 3
+
+[node name="Tuna" parent="Position2D" instance=ExtResource( 6 )]
+position = Vector2( 155.572, -3.79633 )
+
+[node name="lazer rotat e" type="AnimationPlayer" parent="."]
+playback_speed = 0.15
+anims/RESET = SubResource( 27 )
+"anims/rotat e" = SubResource( 28 )
+
+[node name="Lever" parent="." instance=ExtResource( 7 )]
+material = SubResource( 29 )
+position = Vector2( 847, 1018 )
+collision_layer = 11
+collision_mask = 0
+connected_elements = [ NodePath("../Position2D/DEATHLAZER"), NodePath("../Position2D/DEATHLAZER2"), NodePath("../Metal Door2") ]
+
+[node name="Lever2" parent="." instance=ExtResource( 7 )]
+material = SubResource( 30 )
+position = Vector2( -229, 1020 )
+collision_layer = 19
+collision_mask = 0
+connected_elements = [ NodePath("../Position2D/DEATHLAZER"), NodePath("../Position2D/DEATHLAZER3"), NodePath("../Metal Door") ]
+
+[node name="Button" parent="." instance=ExtResource( 9 )]
+material = SubResource( 31 )
+position = Vector2( -338, 633 )
+togglable = true
+connected_elements = [ NodePath("../Metal Door"), NodePath("../Metal Door2"), NodePath("../Position2D/DEATHLAZER4"), NodePath("../Position2D/DEATHLAZER2") ]
+
+[node name="Button2" parent="." instance=ExtResource( 9 )]
+material = SubResource( 32 )
+position = Vector2( 954, 644 )
+togglable = true
+connected_elements = [ NodePath("../Metal Door"), NodePath("../Metal Door2"), NodePath("../Position2D/DEATHLAZER3"), NodePath("../Position2D/DEATHLAZER4") ]
+
+[node name="Metal Door" parent="." instance=ExtResource( 8 )]
+position = Vector2( 672, 768 )
+rotation = 1.57079
+opened = true
+
+[node name="Metal Door2" parent="." instance=ExtResource( 8 )]
+position = Vector2( -32, 768 )
+rotation = 1.57079
+opened = true
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 11 )]
+
+[node name="LevelChangeArea" parent="." instance=ExtResource( 12 )]
+position = Vector2( -421, 1007 )
+next_level = "level10"
+
+[editable path="Player"]

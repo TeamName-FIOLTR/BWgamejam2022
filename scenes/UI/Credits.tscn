@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/HiOutline-8wy2.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Roza.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/UI/cattheme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/UI/cooluitheme.tres" type="Theme" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 34
+font_data = ExtResource( 2 )
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_scale = Vector2( 0.75, 0.75 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+margin_left = -227.0
+margin_top = -291.0
+margin_right = 226.0
+margin_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/CenterContainer/VBoxContainer"]
+margin_right = 453.0
+margin_bottom = 65.0
+theme = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+text = "Line Nives"
+align = 1
+
+[node name="Label2" type="Label" parent="Control/CenterContainer/VBoxContainer"]
+margin_top = 69.0
+margin_right = 453.0
+margin_bottom = 582.0
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 2 )
+text = "By Teamname: FIOLTR
+
+Art & Animation: Spoon & SueCutzy
+Programming: Mequam & X3K
+Music: Spoon
+Levels: Mequam & X3K
+GUI: Mequam
+Game Design: All of us
+And You!!!
+
+Sound Effects provided by OpenGameArt.org
+All Rights Reserved"
+align = 1
+valign = 1

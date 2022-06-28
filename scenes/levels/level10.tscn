@@ -1,0 +1,446 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scripts/generics/level10.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/HiOutline-8wy2.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/fonts/Roza.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/UI/cattheme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/UI/cooluitheme.tres" type="Theme" id=7]
+[ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=8]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=9]
+[ext_resource path="res://scenes/puzzle elements/Metal Door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=16]
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 9 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 5.985
+shader_param/line_width = 0.305
+shader_param/hatch_angle = 2.889
+shader_param/snap_threshhold_front = -0.497
+shader_param/snap_threshhold_back = 0.053
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 34
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=39]
+size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=40]
+size = 34
+font_data = ExtResource( 5 )
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=23]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Shader" id=34]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=25]
+resource_local_to_scene = true
+shader = SubResource( 34 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform bool swapped = false;
+uniform float frequency = 1.0;
+uniform float size = 1.0;
+uniform float angle_degrees = 45.0;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Output:0
+	vec4 original_color = texture(TEXTURE,UV);
+	float angle = radians(angle_degrees);
+	vec2 angle_vector = vec2(cos(angle), sin(angle));
+	float thingy_value = floor(mod(-TIME*frequency+dot(SCREEN_UV, angle_vector)*size,2.0));
+	vec4 new_color = vec4(thingy_value);
+	new_color.a = original_color.r*original_color.a*thingy_value;
+	vec4 newer_color = mix(original_color,new_color,float(swapped));
+	COLOR = round(newer_color);
+//	COLOR.a = original_color.r*original_color.a*thingy_value;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = SubResource( 7 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="DynamicFont" id=35]
+size = 37
+font_data = ExtResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=36]
+resource_local_to_scene = true
+shader = SubResource( 22 )
+shader_param/swapped = false
+shader_param/frequency = 5.956
+shader_param/size = 417.389
+shader_param/angle_degrees = 45.0
+
+[sub_resource type="QuadMesh" id=37]
+resource_local_to_scene = true
+size = Vector2( 100, 100 )
+
+[sub_resource type="QuadMesh" id=38]
+resource_local_to_scene = true
+size = Vector2( 100, 100 )
+
+[node name="level10" type="Node2D" groups=["Player Death Recievers"]]
+script = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+pause_mode = 2
+wait_time = 3.0
+one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Player" parent="Node2D" instance=ExtResource( 2 )]
+
+[node name="AnimatedSprite" parent="Node2D/Player" index="1"]
+material = SubResource( 3 )
+
+[node name="respawn sound" parent="Node2D/Player" index="7"]
+pause_mode = 2
+
+[node name="Camera2D" parent="Node2D/Player" index="9"]
+position = Vector2( 0, -250 )
+
+[node name="TileMap" type="TileMap" parent="Node2D"]
+material = ExtResource( 8 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 128, 128 )
+format = 1
+tile_data = PoolIntArray( -1245192, 0, 8, -1245191, 0, 131074, -1245190, 0, 131074, -1245189, 0, 131074, -1245188, 0, 131074, -1245187, 0, 131074, -1245186, 0, 131074, -1245185, 0, 131074, -1310720, 0, 131074, -1310719, 0, 131074, -1310718, 0, 131074, -1310717, 0, 131074, -1310716, 0, 131074, -1310715, 0, 131074, -1310714, 0, 131074, -1310713, 0, 131074, -1310712, 0, 131074, -1310711, 0, 131074, -1310710, 0, 131074, -1310709, 0, 131074, -1310708, 0, 131074, -1310707, 0, 131074, -1310706, 0, 131074, -1310705, 0, 131074, -1310704, 0, 131074, -1310703, 0, 131074, -1310702, 0, 131074, -1310701, 0, 131074, -1310700, 0, 131074, -1310699, 0, 131074, -1310698, 0, 131074, -1310697, 0, 131074, -1310696, 0, 131074, -1310695, 0, 131074, -1310694, 0, 131074, -1310693, 0, 131074, -1310692, 0, 131074, -1310691, 0, 131074, -1310690, 0, 131074, -1310689, 0, 131074, -1310688, 0, 196610, -1179656, 0, 65537, -1114120, 0, 65537, -1048584, 0, 65537, -983048, 0, 65537, -917512, 0, 65537, -851976, 0, 65537, -786440, 0, 65537, -720904, 0, 65537, -655368, 0, 65537, -589832, 0, 65537, -524296, 0, 65537, -458760, 0, 65537, -393224, 0, 65537, -327688, 0, 65537, -262152, 0, 65537, -196616, 0, 65537, -131080, 0, 65537, -65544, 0, 65537, -8, 0, 65537, 65528, 0, 65537, 131064, 0, 65537, 196600, 0, 65537, 262136, 0, 65537, 327672, 0, 65544, 327673, 0, 131074, 327674, 0, 131074, 327675, 0, 131074, 327676, 0, 131074, 327677, 0, 131074, 327678, 0, 131074, 327679, 0, 131074, 262144, 0, 131074, 262145, 0, 131074, 262146, 0, 131074, 262147, 0, 131074, 262148, 0, 131074, 262149, 0, 131074, 262150, 0, 131074, 262151, 0, 131074, 262152, 0, 131074, 262153, 0, 131074, 262154, 0, 131074, 262155, 0, 131074, 262156, 0, 131074, 262157, 0, 131074, 262158, 0, 131074, 262159, 0, 131074, 262160, 0, 131074, 262161, 0, 131074, 262162, 0, 131074, 262163, 0, 131074, 262164, 0, 131074, 262165, 0, 131074, 262166, 0, 131074, 262167, 0, 131074, 262168, 0, 131074, 262169, 0, 131074, 262170, 0, 131074, 262171, 0, 131074, 262172, 0, 131074, 262173, 0, 131074, 262174, 0, 131074, 262175, 0, 131074, 262176, 0, 196610 )
+
+[node name="Control" type="Control" parent="Node2D"]
+margin_top = 147.0
+margin_right = 40.0
+margin_bottom = 187.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Node2D/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/Control/CenterContainer"]
+margin_left = -321.0
+margin_top = -218.0
+margin_right = 320.0
+margin_bottom = 217.0
+
+[node name="Label" type="Label" parent="Node2D/Control/CenterContainer/VBoxContainer"]
+margin_right = 641.0
+margin_bottom = 133.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 1 )
+text = "Congratulations!
+You've Won!!"
+align = 1
+
+[node name="Label2" type="Label" parent="Node2D/Control/CenterContainer/VBoxContainer"]
+margin_top = 137.0
+margin_right = 641.0
+margin_bottom = 435.0
+theme = ExtResource( 6 )
+custom_fonts/font = SubResource( 2 )
+text = "You've beaten this little puzzle game that had absolutely no playtesting!!
+
+You've gotten here through your own sheer intellegence, will, and/or luck!
+Or you just looked up the solution, honestly i don't blame you if you did!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Control2" type="Control" parent="Node2D"]
+margin_left = 1335.0
+margin_top = 147.0
+margin_right = 1375.0
+margin_bottom = 187.0
+rect_pivot_offset = Vector2( -1023, 209 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Node2D/Control2"]
+margin_right = 40.0
+margin_bottom = 40.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/Control2/CenterContainer"]
+margin_left = -227.0
+margin_top = -291.0
+margin_right = 226.0
+margin_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Node2D/Control2/CenterContainer/VBoxContainer"]
+margin_right = 453.0
+margin_bottom = 65.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 39 )
+text = "Line Nives"
+align = 1
+
+[node name="Label2" type="Label" parent="Node2D/Control2/CenterContainer/VBoxContainer"]
+margin_top = 69.0
+margin_right = 453.0
+margin_bottom = 582.0
+theme = ExtResource( 6 )
+custom_fonts/font = SubResource( 40 )
+text = "By Teamname: FIOLTR
+
+Art & Animation: Spoon & SueCutzy
+Programming: Mequam & X3K
+Music: Spoon
+Levels: Mequam & X3K
+GUI: Mequam
+Game Design: All of us
+And You!!!
+
+Sound Effects provided by OpenGameArt.org
+All Rights Reserved"
+align = 1
+valign = 1
+
+[node name="Control3" type="Control" parent="Node2D"]
+margin_left = 2684.0
+margin_top = 147.0
+margin_right = 2724.0
+margin_bottom = 187.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Node2D/Control3"]
+margin_right = 40.0
+margin_bottom = 40.0
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/Control3/CenterContainer"]
+margin_left = -362.0
+margin_top = -55.0
+margin_right = 362.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="Node2D/Control3/CenterContainer/VBoxContainer"]
+margin_right = 724.0
+margin_bottom = 65.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 1 )
+text = "thanks for playing!!!"
+align = 1
+
+[node name="Label2" type="Label" parent="Node2D/Control3/CenterContainer/VBoxContainer"]
+margin_top = 69.0
+margin_right = 724.0
+margin_bottom = 109.0
+theme = ExtResource( 6 )
+custom_fonts/font = SubResource( 2 )
+text = "We hope you had fun!!!!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Tuna" parent="Node2D" instance=ExtResource( 13 )]
+position = Vector2( 3657, 409 )
+
+[node name="Metal Door" parent="Node2D" instance=ExtResource( 10 )]
+position = Vector2( 3888, 465 )
+rotation = -0.293023
+
+[node name="DEATHLAZER" parent="Node2D" instance=ExtResource( 14 )]
+material = SubResource( 23 )
+position = Vector2( 4177, 461 )
+rotation = -3.14159
+lazer_on = false
+
+[node name="Button" parent="Node2D" instance=ExtResource( 12 )]
+material = SubResource( 25 )
+position = Vector2( 3839, 511 )
+togglable = true
+connected_elements = [ NodePath("../Metal Door") ]
+
+[node name="Lever" parent="Node2D" instance=ExtResource( 11 )]
+material = SubResource( 26 )
+position = Vector2( 4061, 510 )
+flipped = true
+connected_elements = [ NodePath("../DEATHLAZER") ]
+
+[node name="Label" type="Label" parent="Node2D"]
+margin_left = -787.0
+margin_top = -2371.0
+margin_right = -449.0
+margin_bottom = -2328.0
+rect_rotation = 39.4519
+custom_fonts/font = SubResource( 35 )
+text = "The credits are that way, silly!"
+align = 1
+valign = 1
+
+[node name="Line2D" type="Line2D" parent="Node2D/Label"]
+position = Vector2( 392.494, 76.0966 )
+points = PoolVector2Array( -100, 0, 75, 0, 30, 30, 75, 0, 30, -30 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="DEATHLAZER2" parent="Node2D" instance=ExtResource( 14 )]
+material = SubResource( 36 )
+position = Vector2( 1194, 3000 )
+rotation = 1.57079
+
+[node name="MeshInstance2D2" parent="Node2D/DEATHLAZER2" index="0"]
+mesh = SubResource( 37 )
+
+[node name="MeshInstance2D3" parent="Node2D/DEATHLAZER2" index="1"]
+mesh = SubResource( 37 )
+
+[node name="MeshInstance2D" parent="Node2D/DEATHLAZER2" index="2"]
+mesh = SubResource( 38 )
+
+[node name="MeshInstance2D4" parent="Node2D/DEATHLAZER2" index="3"]
+mesh = SubResource( 38 )
+
+[node name="RayCast2D" parent="Node2D/DEATHLAZER2" index="4"]
+cast_to = Vector2( 0, 25000 )
+
+[node name="DEATHLAZER3" parent="Node2D" instance=ExtResource( 14 )]
+material = SubResource( 36 )
+position = Vector2( 1194, 3000 )
+rotation = -1.57079
+
+[node name="MeshInstance2D2" parent="Node2D/DEATHLAZER3" index="0"]
+mesh = SubResource( 37 )
+
+[node name="MeshInstance2D3" parent="Node2D/DEATHLAZER3" index="1"]
+mesh = SubResource( 37 )
+
+[node name="MeshInstance2D" parent="Node2D/DEATHLAZER3" index="2"]
+mesh = SubResource( 38 )
+
+[node name="MeshInstance2D4" parent="Node2D/DEATHLAZER3" index="3"]
+mesh = SubResource( 38 )
+
+[node name="RayCast2D" parent="Node2D/DEATHLAZER3" index="4"]
+cast_to = Vector2( 0, 25000 )
+
+[node name="LevelChangeArea" parent="Node2D" instance=ExtResource( 16 )]
+position = Vector2( -471, -2257 )
+next_level = "bonus"
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 15 )]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[editable path="Node2D/Player"]
+[editable path="Node2D/DEATHLAZER2"]
+[editable path="Node2D/DEATHLAZER3"]
