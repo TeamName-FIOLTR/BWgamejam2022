@@ -205,6 +205,10 @@ one_shot = true
 
 [node name="Node2D" type="Node2D" parent="."]
 
+[node name="LevelChangeArea" parent="Node2D" instance=ExtResource( 16 )]
+position = Vector2( -471, -2257 )
+next_level = "bonus"
+
 [node name="Player" parent="Node2D" instance=ExtResource( 2 )]
 
 [node name="AnimatedSprite" parent="Node2D/Player" index="1"]
@@ -432,10 +436,6 @@ mesh = SubResource( 38 )
 
 [node name="RayCast2D" parent="Node2D/DEATHLAZER3" index="4"]
 cast_to = Vector2( 0, 25000 )
-
-[node name="LevelChangeArea" parent="Node2D" instance=ExtResource( 16 )]
-position = Vector2( -471, -2257 )
-next_level = "bonus"
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 15 )]
 

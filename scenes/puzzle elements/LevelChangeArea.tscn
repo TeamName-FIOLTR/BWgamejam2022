@@ -14,19 +14,22 @@ shader_param/background_out = Color( 0, 0, 0, 1 )
 shader_param/outline_width = 0.012
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 247.5, 40.5 )
+extents = Vector2( 159.875, 127.5 )
 
 [node name="LevelChangeArea" type="Area2D"]
-scale = Vector2( 0.25, 0.5 )
+scale = Vector2( 0.25, 0.25 )
+collision_layer = 31
+collision_mask = 31
 script = ExtResource( 1 )
+invert_bits = false
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( 27, -162 )
+position = Vector2( 144, 14 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 26.5, 13.5 )
+position = Vector2( 8, 8 )
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_LevelChangeArea_body_entered"]

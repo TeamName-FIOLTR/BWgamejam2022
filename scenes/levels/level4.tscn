@@ -307,16 +307,16 @@ position = Vector2( 526, 767 )
 collision_layer = 31
 collision_mask = 0
 
+[node name="LevelChangeArea" parent="." instance=ExtResource( 10 )]
+position = Vector2( 525, 868 )
+next_level = "level5"
+
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 517, 290 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 4 )
-frame = 0
-
-[node name="LevelChangeArea" parent="." instance=ExtResource( 10 )]
-position = Vector2( 525, 868 )
-next_level = "level5"
+frame = 5
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 11 )]
 

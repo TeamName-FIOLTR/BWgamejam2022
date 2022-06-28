@@ -201,6 +201,10 @@ rotation = -1.57079
 [node name="Tuna" parent="." instance=ExtResource( 4 )]
 position = Vector2( 190, 477 )
 
+[node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1675, 358 )
+next_level = "level2"
+
 [node name="Player" parent="." instance=ExtResource( 12 )]
 position = Vector2( 462, 973 )
 
@@ -214,11 +218,6 @@ position = Vector2( 876, 1028 )
 
 [node name="StaticBody2D3" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1328, 388 )
-
-[node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1651, 362 )
-invert_bits = false
-next_level = "level2"
 
 [node name="Metal Door2" parent="." instance=ExtResource( 14 )]
 position = Vector2( 1209, 128 )

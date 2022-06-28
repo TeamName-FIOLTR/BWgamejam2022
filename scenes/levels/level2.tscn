@@ -119,6 +119,10 @@ scale = Vector2( 4, 4 )
 collision_layer = 3
 collision_mask = 0
 
+[node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1184, 487 )
+next_level = "level3"
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1072, 1360 )
 
@@ -140,10 +144,5 @@ position = Vector2( 191, 373 )
 position = Vector2( 1209, 1355 )
 collision_layer = 3
 collision_mask = 0
-
-[node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1150, 498 )
-invert_bits = false
-next_level = "level3"
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 12 )]
