@@ -216,8 +216,7 @@ position = Vector2( 876, 1028 )
 position = Vector2( 1328, 388 )
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1692, 340 )
-scale = Vector2( 2, 2 )
+position = Vector2( 1651, 362 )
 invert_bits = false
 next_level = "level2"
 

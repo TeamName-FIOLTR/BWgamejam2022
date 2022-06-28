@@ -348,7 +348,7 @@ position = Vector2( 318, 675 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 31 )
-frame = 0
+frame = 1
 
 [node name="Camera2D" parent="Player" index="9"]
 zoom = Vector2( 3, 3 )
@@ -415,7 +415,7 @@ position = Vector2( 1029, 223 )
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 13 )]
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 14 )]
-position = Vector2( 340, 754 )
+position = Vector2( 323, 740 )
 next_level = "level7"
 
 [editable path="Player"]

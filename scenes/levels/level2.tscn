@@ -142,8 +142,7 @@ collision_layer = 3
 collision_mask = 0
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1205, 454 )
-scale = Vector2( 2, 2 )
+position = Vector2( 1150, 498 )
 invert_bits = false
 next_level = "level3"
 

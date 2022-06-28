@@ -243,7 +243,7 @@ position = Vector2( -28.611, 512 )
 rotation = 1.57079
 
 [node name="Tuna" parent="." instance=ExtResource( 5 )]
-position = Vector2( -224, 691 )
+position = Vector2( -222, 653 )
 
 [node name="DEATHLAZER" parent="." instance=ExtResource( 6 )]
 material = SubResource( 23 )
@@ -307,7 +307,7 @@ rotation = -3.14159
 collision_layers = 19
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 10 )]
-position = Vector2( -228, 693 )
+position = Vector2( -227, 743 )
 next_level = "level6"
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 13 )]

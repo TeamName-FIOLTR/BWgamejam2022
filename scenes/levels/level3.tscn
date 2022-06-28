@@ -354,5 +354,5 @@ connected_elements = [ NodePath("../upBlocker"), NodePath("../rightBlocker") ]
 bus = "Music"
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 11 )]
-position = Vector2( -251, 357 )
+position = Vector2( -134, 355 )
 next_level = "level4"
