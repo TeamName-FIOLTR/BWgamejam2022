@@ -8,7 +8,7 @@ extends CheckBox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	toggle_mode = true
+	pressed = Globals.config_data.do_vsync
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
