@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/shaders/Tile Map Line Thiccness shader.tres" type="Material" id=1]
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/enviroments/cityBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=15]
 
 [sub_resource type="ShaderMaterial" id=38]
 shader = ExtResource( 6 )
@@ -257,6 +259,7 @@ shader_param/size = 417.389
 shader_param/angle_degrees = 45.0
 
 [node name="level6" type="Node2D"]
+script = ExtResource( 15 )
 
 [node name="Citybackground" type="Sprite" parent="."]
 material = SubResource( 38 )
@@ -345,6 +348,7 @@ position = Vector2( 318, 675 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 31 )
+frame = 0
 
 [node name="Camera2D" parent="Player" index="9"]
 zoom = Vector2( 3, 3 )
@@ -409,5 +413,9 @@ position = Vector2( 656, 212 )
 position = Vector2( 1029, 223 )
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 13 )]
+
+[node name="LevelChangeArea" parent="." instance=ExtResource( 14 )]
+position = Vector2( 340, 754 )
+next_level = "level7"
 
 [editable path="Player"]
