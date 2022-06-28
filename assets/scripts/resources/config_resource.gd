@@ -8,8 +8,8 @@ extends Resource
 class_name ConfigResource
 
 export var resolution : Vector2 = Vector2(1024,600)
-export var do_bloom : bool = false
-export var do_vsync : bool = false
+export var do_vsync : bool = true
+export var do_backgrounds : bool = false
 export var target_fps : int = 60
 export var audio_bus_db : Dictionary = {}
 export var input_map : Dictionary = {}
@@ -22,6 +22,9 @@ static func encode_input_map()->Dictionary:
 		ret_val[action] = InputMap.get_action_list(action)[0]
 		
 	return ret_val
+static func sync_backgrounds(tree : SceneTree)->void:
+	for node in tree.get_nodes_in_group("background"):
+		node.visible = false
 #syncs us with a given input map
 static func decode_input_map(inp_map_dict : Dictionary)->void:
 	for act in inp_map_dict:

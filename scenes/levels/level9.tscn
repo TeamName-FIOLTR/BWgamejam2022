@@ -20,8 +20,8 @@ shader_param/forground_in = Color( 1, 1, 1, 1 )
 shader_param/background_in = Color( 0, 0, 0, 1 )
 shader_param/forground_out = Color( 0, 0, 0, 1 )
 shader_param/background_out = Color( 1, 1, 1, 1 )
-shader_param/line_count = 50.0
-shader_param/line_width = 0.006
+shader_param/line_count = 20.0
+shader_param/line_width = 0.002
 shader_param/hatch_angle = 3.05
 shader_param/snap_threshhold_front = 0.165
 shader_param/snap_threshhold_back = 0.165
@@ -242,14 +242,46 @@ shader_param/angle_degrees = 45.0
 [node name="level9" type="Node2D"]
 script = ExtResource( 5 )
 
-[node name="CityBack2" type="Sprite" parent="."]
+[node name="background" type="Node2D" parent="." groups=["background"]]
+
+[node name="CityBack5" type="Sprite" parent="background"]
 material = SubResource( 35 )
-position = Vector2( -58, 598 )
+position = Vector2( 640, -196 )
 texture = ExtResource( 13 )
 
-[node name="CityBack3" type="Sprite" parent="."]
+[node name="CityBack6" type="Sprite" parent="background"]
+material = SubResource( 35 )
+position = Vector2( -154, -250 )
+texture = ExtResource( 13 )
+
+[node name="CityBack7" type="Sprite" parent="background"]
+material = SubResource( 35 )
+position = Vector2( -881, 147 )
+texture = ExtResource( 13 )
+
+[node name="CityBack8" type="Sprite" parent="background"]
+material = SubResource( 35 )
+position = Vector2( -1087, 671 )
+texture = ExtResource( 13 )
+
+[node name="CityBack9" type="Sprite" parent="background"]
+material = SubResource( 35 )
+position = Vector2( 1393, 14 )
+texture = ExtResource( 13 )
+
+[node name="CityBack10" type="Sprite" parent="background"]
+material = SubResource( 35 )
+position = Vector2( 1691, 739 )
+texture = ExtResource( 13 )
+
+[node name="CityBack3" type="Sprite" parent="background"]
 material = SubResource( 35 )
 position = Vector2( 688, 585 )
+texture = ExtResource( 13 )
+
+[node name="CityBack4" type="Sprite" parent="background"]
+material = SubResource( 35 )
+position = Vector2( -74, 556 )
 texture = ExtResource( 13 )
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -270,7 +302,7 @@ position = Vector2( 1053, 924 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 33 )
-frame = 5
+frame = 2
 
 [node name="Camera2D" parent="Player" index="9"]
 zoom = Vector2( 3, 3 )

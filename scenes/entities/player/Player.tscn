@@ -424,7 +424,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" parent="." instance=ExtResource( 2 )]
 material = SubResource( 6 )
 scale = Vector2( 0.2, 0.2 )
-frame = 2
+frame = 4
 
 [node name="Jump Timer" type="Timer" parent="."]
 wait_time = 0.3

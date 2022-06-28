@@ -20,7 +20,7 @@ shader_param/forground_in = Color( 0, 0, 0, 1 )
 shader_param/background_in = Color( 0, 0, 0, 1 )
 shader_param/forground_out = Color( 0, 0, 0, 1 )
 shader_param/background_out = Color( 1, 1, 1, 1 )
-shader_param/line_count = 13.093
+shader_param/line_count = 5.0
 shader_param/line_width = 0.001
 shader_param/hatch_angle = 3.079
 shader_param/snap_threshhold_front = 0.165
@@ -222,7 +222,7 @@ shader_param/angle_degrees = 45.0
 [node name="level5" type="Node2D"]
 script = ExtResource( 9 )
 
-[node name="CityBack2" type="Sprite" parent="."]
+[node name="CityBack2" type="Sprite" parent="." groups=["background"]]
 material = SubResource( 34 )
 position = Vector2( 765, 289 )
 scale = Vector2( 0.936691, 0.936691 )

@@ -19,8 +19,8 @@ shader_param/background_in = Color( 1, 1, 1, 1 )
 shader_param/forground_out = Color( 0, 0, 0, 1 )
 shader_param/background_out = Color( 1, 1, 1, 1 )
 shader_param/line_count = 100.0
-shader_param/line_width = 0.003
-shader_param/hatch_angle = 3.05
+shader_param/line_width = 0.001
+shader_param/hatch_angle = -0.261
 shader_param/snap_threshhold_front = 0.165
 shader_param/snap_threshhold_back = 0.165
 
@@ -201,32 +201,34 @@ shader_param/angle_degrees = 45.0
 [node name="level3" type="Node2D"]
 script = ExtResource( 10 )
 
-[node name="CityBack2" type="Sprite" parent="."]
+[node name="background" type="Node2D" parent="." groups=["background"]]
+
+[node name="CityBack2" type="Sprite" parent="background"]
 material = SubResource( 1 )
 position = Vector2( 2219, -762 )
 texture = ExtResource( 7 )
 
-[node name="CityBack7" type="Sprite" parent="."]
+[node name="CityBack7" type="Sprite" parent="background"]
 material = SubResource( 1 )
-position = Vector2( 2399, -324 )
+position = Vector2( 2494, -314 )
 texture = ExtResource( 7 )
 
-[node name="CityBack3" type="Sprite" parent="."]
+[node name="CityBack3" type="Sprite" parent="background"]
 material = SubResource( 1 )
-position = Vector2( 2935, -630 )
+position = Vector2( 3147, -601 )
 texture = ExtResource( 7 )
 
-[node name="CityBack6" type="Sprite" parent="."]
+[node name="CityBack6" type="Sprite" parent="background"]
 material = SubResource( 1 )
-position = Vector2( 3665, -19 )
+position = Vector2( 3675, -19 )
 texture = ExtResource( 7 )
 
-[node name="CityBack4" type="Sprite" parent="."]
+[node name="CityBack4" type="Sprite" parent="background"]
 material = SubResource( 1 )
-position = Vector2( 1350, -379 )
+position = Vector2( 1486, -330 )
 texture = ExtResource( 7 )
 
-[node name="CityBack5" type="Sprite" parent="."]
+[node name="CityBack5" type="Sprite" parent="background"]
 material = SubResource( 1 )
 position = Vector2( 526, -175 )
 texture = ExtResource( 7 )
@@ -357,4 +359,3 @@ position = Vector2( 3212, -253 )
 connected_elements = [ NodePath("../upBlocker"), NodePath("../rightBlocker") ]
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 9 )]
-bus = "Music"

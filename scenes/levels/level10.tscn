@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,32 @@
 [ext_resource path="res://scenes/puzzle elements/DEATHLAZER.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/art/background_assets/city_back2.png" type="Texture" id=17]
+[ext_resource path="res://assets/art/lamp.png" type="Texture" id=18]
+
+[sub_resource type="ShaderMaterial" id=41]
+shader = ExtResource( 9 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 100.0
+shader_param/line_width = 0.006
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
+
+[sub_resource type="ShaderMaterial" id=42]
+shader = ExtResource( 9 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 100.0
+shader_param/line_width = 0.001
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
 
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
@@ -205,6 +231,20 @@ one_shot = true
 
 [node name="Node2D" type="Node2D" parent="."]
 
+[node name="background" type="Node2D" parent="Node2D" groups=["background"]]
+
+[node name="CityBack2" type="Sprite" parent="Node2D/background"]
+material = SubResource( 41 )
+position = Vector2( 719, 38 )
+scale = Vector2( 0.75, 1 )
+texture = ExtResource( 17 )
+
+[node name="Lamp" type="Sprite" parent="Node2D/background"]
+material = SubResource( 42 )
+position = Vector2( 1812, 286 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 18 )
+
 [node name="LevelChangeArea" parent="Node2D" instance=ExtResource( 16 )]
 position = Vector2( -471, -2257 )
 next_level = "bonus"
@@ -213,12 +253,17 @@ next_level = "bonus"
 
 [node name="AnimatedSprite" parent="Node2D/Player" index="1"]
 material = SubResource( 3 )
+frame = 0
 
 [node name="respawn sound" parent="Node2D/Player" index="7"]
 pause_mode = 2
 
 [node name="Camera2D" parent="Node2D/Player" index="9"]
 position = Vector2( 0, -250 )
+
+[node name="Gameplay UI" parent="Node2D/Player/CanvasLayer" index="0"]
+margin_left = 4.0
+margin_right = 4.0
 
 [node name="TileMap" type="TileMap" parent="Node2D"]
 material = ExtResource( 8 )

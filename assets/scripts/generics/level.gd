@@ -6,15 +6,15 @@ class_name Level
 func _ready():
 	add_to_group("Level Status Recievers")
 	if Globals.game_save_data:
-		print(name + " saving game data")
 		Globals.game_save_data.last_level = name
 		
 		#in the future also use this to store any 
 		#additional save data for the given level
 		Globals.game_save_data.visited_levels[name] = true
-		
 		Globals.save_game()
-	
+		
+		#sync the background to match with the users preferences
+		Globals.sync_background()
 func fade_death()->void:
 	pass
 #	$FadePlayer.play("fade")

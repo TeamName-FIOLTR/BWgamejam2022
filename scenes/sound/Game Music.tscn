@@ -6,4 +6,5 @@
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" groups=["Level Status Recievers"]]
 stream = ExtResource( 1 )
 autoplay = true
+bus = "Music"
 script = ExtResource( 2 )

@@ -142,83 +142,85 @@ shader_param/angle_degrees = 45.0
 [node name="level7" type="Node2D"]
 script = ExtResource( 12 )
 
-[node name="CityBack3" type="Sprite" parent="."]
+[node name="background" type="Node2D" parent="." groups=["background"]]
+
+[node name="CityBack3" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 1817, 170 )
 texture = ExtResource( 10 )
 
-[node name="CityBack4" type="Sprite" parent="."]
+[node name="CityBack4" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 2800, 448 )
 texture = ExtResource( 10 )
 
-[node name="CityBack5" type="Sprite" parent="."]
+[node name="CityBack5" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 1731, 749 )
 texture = ExtResource( 10 )
 
-[node name="CityBack8" type="Sprite" parent="."]
+[node name="CityBack8" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 2626, 1065 )
 texture = ExtResource( 10 )
 
-[node name="CityBack9" type="Sprite" parent="."]
+[node name="CityBack9" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 3520, 204 )
 texture = ExtResource( 10 )
 
-[node name="CityBack10" type="Sprite" parent="."]
+[node name="CityBack10" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 4415, 184 )
 texture = ExtResource( 10 )
 
-[node name="CityBack11" type="Sprite" parent="."]
+[node name="CityBack11" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 5229, 305 )
 texture = ExtResource( 10 )
 
-[node name="CityBack12" type="Sprite" parent="."]
+[node name="CityBack12" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 5966, 525 )
 texture = ExtResource( 10 )
 
-[node name="CityBack13" type="Sprite" parent="."]
+[node name="CityBack13" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 6576, 219 )
 texture = ExtResource( 10 )
 
-[node name="CityBack15" type="Sprite" parent="."]
+[node name="CityBack15" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 6576, 1075 )
 texture = ExtResource( 10 )
 
-[node name="CityBack14" type="Sprite" parent="."]
+[node name="CityBack14" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 6042, 92 )
 texture = ExtResource( 10 )
 
-[node name="CityBack6" type="Sprite" parent="."]
+[node name="CityBack6" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 972, 264 )
 texture = ExtResource( 10 )
 
-[node name="CityBack7" type="Sprite" parent="."]
+[node name="CityBack7" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 689, 888 )
 texture = ExtResource( 10 )
 
-[node name="Citybackground" type="Sprite" parent="."]
+[node name="Citybackground" type="Sprite" parent="background"]
 material = SubResource( 29 )
 position = Vector2( 4730, 1195 )
 scale = Vector2( 1.05104, 1.08704 )
 texture = ExtResource( 7 )
 
-[node name="CityBack16" type="Sprite" parent="."]
+[node name="CityBack16" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 5966, 525 )
 texture = ExtResource( 10 )
 
-[node name="CityBack17" type="Sprite" parent="."]
+[node name="CityBack17" type="Sprite" parent="background"]
 material = SubResource( 30 )
 position = Vector2( 5987, 1331 )
 texture = ExtResource( 10 )

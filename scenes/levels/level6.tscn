@@ -9,7 +9,7 @@
 [ext_resource path="res://scenes/puzzle elements/Lever.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/puzzle elements/Button.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/art/background_assets/citybackground.png" type="Texture" id=10]
+[ext_resource path="res://assets/art/background_assets/city_back2.png" type="Texture" id=10]
 [ext_resource path="res://scenes/enviroments/trashcan.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/enviroments/cityBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=13]
@@ -22,9 +22,9 @@ shader_param/forground_in = Color( 1, 1, 1, 1 )
 shader_param/background_in = Color( 0, 0, 0, 1 )
 shader_param/forground_out = Color( 0, 0, 0, 1 )
 shader_param/background_out = Color( 1, 1, 1, 1 )
-shader_param/line_count = 10.0
+shader_param/line_count = 100.0
 shader_param/line_width = 0.001
-shader_param/hatch_angle = 2.884
+shader_param/hatch_angle = 3.05
 shader_param/snap_threshhold_front = 0.165
 shader_param/snap_threshhold_back = 0.165
 
@@ -261,10 +261,46 @@ shader_param/angle_degrees = 45.0
 [node name="level6" type="Node2D"]
 script = ExtResource( 15 )
 
-[node name="Citybackground" type="Sprite" parent="."]
+[node name="background" type="Node2D" parent="." groups=["background"]]
+
+[node name="CityBack4" type="Sprite" parent="background"]
 material = SubResource( 38 )
-position = Vector2( 323.5, 209.25 )
-scale = Vector2( 0.942188, 1.13194 )
+position = Vector2( 1649, -212 )
+texture = ExtResource( 10 )
+
+[node name="CityBack6" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( -911, -303 )
+texture = ExtResource( 10 )
+
+[node name="CityBack7" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( -153, -949 )
+texture = ExtResource( 10 )
+
+[node name="CityBack8" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( 669, -922 )
+texture = ExtResource( 10 )
+
+[node name="CityBack9" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( 669, -922 )
+texture = ExtResource( 10 )
+
+[node name="CityBack10" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( 1427, -906 )
+texture = ExtResource( 10 )
+
+[node name="CityBack5" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( 1782, 411 )
+texture = ExtResource( 10 )
+
+[node name="CityBack3" type="Sprite" parent="background"]
+material = SubResource( 38 )
+position = Vector2( -1068, 465 )
 texture = ExtResource( 10 )
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 11 )]
@@ -352,7 +388,7 @@ position = Vector2( 318, 675 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 31 )
-frame = 0
+frame = 5
 
 [node name="Camera2D" parent="Player" index="9"]
 zoom = Vector2( 3, 3 )

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/UI/resolution/resChanger.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scripts/UI/targetFPS.gd" type="Script" id=2]
 [ext_resource path="res://assets/scripts/UI/checkVsync.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/UI/do_backgrounds_check.gd" type="Script" id=4]
 
 [node name="display_options" type="Control"]
 anchor_right = 1.0
@@ -25,7 +26,7 @@ custom_constants/separation = 0
 
 [node name="Control" type="Control" parent="ScrollContainer/VBoxContainer"]
 margin_right = 626.0
-margin_bottom = 78.0
+margin_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -42,9 +43,9 @@ align = 2
 valign = 1
 
 [node name="ResolutionSnapper" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 78.0
+margin_top = 62.0
 margin_right = 626.0
-margin_bottom = 156.0
+margin_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -77,9 +78,9 @@ anchor_right = 1.0
 anchor_bottom = 0.75
 
 [node name="vsync" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 156.0
+margin_top = 124.0
 margin_right = 626.0
-margin_bottom = 234.0
+margin_bottom = 187.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -97,8 +98,29 @@ anchor_right = 1.0
 anchor_bottom = 0.75
 script = ExtResource( 3 )
 
+[node name="backgrounds" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 187.0
+margin_right = 626.0
+margin_bottom = 249.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/backgrounds"]
+anchor_right = 0.45
+anchor_bottom = 1.0
+text = "Backgrounds:"
+align = 2
+valign = 1
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/backgrounds"]
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.75
+script = ExtResource( 4 )
+
 [node name="fps" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 234.0
+margin_top = 249.0
 margin_right = 626.0
 margin_bottom = 312.0
 size_flags_horizontal = 3
@@ -123,5 +145,6 @@ min_value = 0
 
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/ResolutionSnapper/Button" to="ScrollContainer/VBoxContainer/Control/Resolution Changer" method="_on_Button_pressed"]
 [connection signal="toggled" from="ScrollContainer/VBoxContainer/vsync/CheckBox" to="ScrollContainer/VBoxContainer/vsync/CheckBox" method="_on_CheckBox_toggled"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/backgrounds/CheckBox" to="ScrollContainer/VBoxContainer/backgrounds/CheckBox" method="_on_CheckBox_toggled"]
 [connection signal="number_changed" from="ScrollContainer/VBoxContainer/fps/CheckBox" to="ScrollContainer/VBoxContainer/Control/Resolution Changer" method="_on_CheckBox_number_changed"]
 [connection signal="number_changed" from="ScrollContainer/VBoxContainer/fps/CheckBox" to="ScrollContainer/VBoxContainer/fps/CheckBox" method="_on_CheckBox_number_changed"]
