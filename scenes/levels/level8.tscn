@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,20 @@
 [ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=10]
+[ext_resource path="res://assets/art/background_assets/city_back2.png" type="Texture" id=11]
+
+[sub_resource type="ShaderMaterial" id=29]
+shader = ExtResource( 10 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 100.0
+shader_param/line_width = 0.001
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
 
 [sub_resource type="Shader" id=22]
 code = "shader_type canvas_item;
@@ -130,6 +144,12 @@ shader_param/angle_degrees = 45.0
 
 [node name="level8" type="Node2D"]
 
+[node name="CityBack2" type="Sprite" parent="."]
+material = SubResource( 29 )
+position = Vector2( 568, 265 )
+scale = Vector2( 0.5, 0.694 )
+texture = ExtResource( 11 )
+
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 5 )
 tile_set = ExtResource( 1 )
@@ -138,7 +158,7 @@ format = 1
 tile_data = PoolIntArray( -131071, 0, 8, -131070, 0, 131074, -131069, 0, 131074, -131068, 0, 131074, -131067, 0, 131074, -131066, 0, 131074, -131065, 0, 9, -65535, 0, 65537, -65529, 0, 65537, 1, 0, 65537, 7, 0, 65537, 65537, 0, 65537, 65540, 0, 196611, 65543, 0, 65537, 131073, 0, 65537, 131079, 0, 65537, 196609, 0, 65537, 196615, 0, 65537, 262145, 0, 65544, 262146, 0, 131074, 262147, 0, 131074, 262148, 0, 131074, 262149, 0, 131074, 262150, 0, 131074, 262151, 0, 65545 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 798, 354 )
+position = Vector2( 812, 399 )
 
 [node name="MRU Metal Door" parent="." instance=ExtResource( 3 )]
 position = Vector2( 640, 162 )

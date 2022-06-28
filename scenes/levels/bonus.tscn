@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=2]
@@ -11,6 +11,25 @@
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/fonts/HiOutline-8wy2.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=13]
+[ext_resource path="res://assets/art/background_assets/citybackground.png" type="Texture" id=14]
+
+[sub_resource type="ShaderMaterial" id=45]
+shader = ExtResource( 13 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 10.0
+shader_param/line_width = 0.001
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
+
+[sub_resource type="DynamicFont" id=44]
+size = 150
+font_data = ExtResource( 12 )
 
 [sub_resource type="Shader" id=22]
 code = "shader_type canvas_item;
@@ -272,6 +291,21 @@ shader_param/angle_degrees = 45.0
 [node name="level7" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="Citybackground" type="Sprite" parent="."]
+material = SubResource( 45 )
+position = Vector2( -14, -38 )
+texture = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -1028.0
+margin_top = 550.0
+margin_right = 19.0
+margin_bottom = 781.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 44 )
+text = "Bonus Level"
+
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 5 )
 tile_set = ExtResource( 2 )
@@ -434,7 +468,7 @@ rotation = 1.57079
 connected_elements = [ NodePath("../R3Metal Door2"), NodePath("../R4Metal Door3") ]
 
 [node name="Tuna" parent="." instance=ExtResource( 9 )]
-position = Vector2( 728, -466 )
+position = Vector2( 731, -355 )
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 10 )]
 position = Vector2( 771, 335 )

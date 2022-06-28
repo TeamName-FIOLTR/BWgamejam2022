@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,19 @@
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=10]
 [ext_resource path="res://scenes/sound/Game Music.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/puzzle elements/LevelChangeArea.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/art/background_assets/city_back2.png" type="Texture" id=13]
+
+[sub_resource type="ShaderMaterial" id=35]
+shader = ExtResource( 10 )
+shader_param/forground_in = Color( 1, 1, 1, 1 )
+shader_param/background_in = Color( 0, 0, 0, 1 )
+shader_param/forground_out = Color( 0, 0, 0, 1 )
+shader_param/background_out = Color( 1, 1, 1, 1 )
+shader_param/line_count = 50.0
+shader_param/line_width = 0.006
+shader_param/hatch_angle = 3.05
+shader_param/snap_threshhold_front = 0.165
+shader_param/snap_threshhold_back = 0.165
 
 [sub_resource type="ShaderMaterial" id=33]
 resource_local_to_scene = true
@@ -229,6 +242,16 @@ shader_param/angle_degrees = 45.0
 [node name="level9" type="Node2D"]
 script = ExtResource( 5 )
 
+[node name="CityBack2" type="Sprite" parent="."]
+material = SubResource( 35 )
+position = Vector2( -58, 598 )
+texture = ExtResource( 13 )
+
+[node name="CityBack3" type="Sprite" parent="."]
+material = SubResource( 35 )
+position = Vector2( 688, 585 )
+texture = ExtResource( 13 )
+
 [node name="TileMap" type="TileMap" parent="."]
 material = ExtResource( 4 )
 tile_set = ExtResource( 1 )
@@ -241,7 +264,7 @@ position = Vector2( 1053, 924 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 33 )
-frame = 5
+frame = 3
 
 [node name="Camera2D" parent="Player" index="9"]
 zoom = Vector2( 3, 3 )
@@ -278,7 +301,6 @@ collision_layers = 15
 material = SubResource( 26 )
 position = Vector2( 145, 143 )
 rotation = -1.57079
-scale = Vector2( 1, 1 )
 collision_layers = 3
 
 [node name="Tuna" parent="Position2D" instance=ExtResource( 6 )]
