@@ -312,7 +312,6 @@ position = Vector2( 513, 224 )
 
 [node name="AnimatedSprite" parent="Player" index="1"]
 material = SubResource( 4 )
-frame = 2
 
 [node name="LevelChangeArea" parent="." instance=ExtResource( 10 )]
 position = Vector2( 522, 767 )
