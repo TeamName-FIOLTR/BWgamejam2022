@@ -1,7 +1,9 @@
-[gd_resource type="Theme" load_steps=25 format=2]
+[gd_resource type="Theme" load_steps=27 format=2]
 
 [ext_resource path="res://assets/fonts/cat_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/art/slider_textures/grabber.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/circle_checked.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/circle_unchecked.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -149,6 +151,8 @@ CheckBox/colors/font_color_hover = Color( 1, 1, 1, 1 )
 CheckBox/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
 CheckBox/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 CheckBox/fonts/font = ExtResource( 1 )
+CheckBox/icons/checked = ExtResource( 3 )
+CheckBox/icons/unchecked = ExtResource( 4 )
 CheckBox/styles/disabled = SubResource( 18 )
 CheckBox/styles/focus = SubResource( 19 )
 CheckBox/styles/hover = SubResource( 20 )
