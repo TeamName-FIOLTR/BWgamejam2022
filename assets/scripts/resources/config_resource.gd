@@ -9,7 +9,7 @@ class_name ConfigResource
 
 export var resolution : Vector2 = Vector2(1024,600)
 export var do_vsync : bool = true
-export var do_backgrounds : bool = false
+export var do_backgrounds : bool = true
 export var target_fps : int = 60
 export var audio_bus_db : Dictionary = {}
 export var input_map : Dictionary = {}
