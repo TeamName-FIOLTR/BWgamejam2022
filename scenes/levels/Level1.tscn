@@ -194,8 +194,8 @@ lazer_on = false
 
 [node name="DEATHLAZER2" parent="." instance=ExtResource( 9 )]
 material = SubResource( 9 )
-position = Vector2( 183, 694 )
-rotation = -1.57079
+position = Vector2( 459, 577 )
+rotation = -7.85397
 
 [node name="AudioStreamPlayer" parent="." instance=ExtResource( 3 )]
 
@@ -207,10 +207,10 @@ position = Vector2( 1675, 358 )
 next_level = "level2"
 
 [node name="Player" parent="." instance=ExtResource( 12 )]
-position = Vector2( 462, 973 )
+position = Vector2( 361, 969 )
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 13 )]
-position = Vector2( 251, 976 )
+position = Vector2( 560, 976 )
 collision_layer = 0
 collision_mask = 0
 
