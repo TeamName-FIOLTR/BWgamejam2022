@@ -291,54 +291,58 @@ shader_param/angle_degrees = 45.0
 [node name="level7" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="CityBack2" type="Sprite" parent="."]
+[node name="background" type="Node2D" parent="." groups=["background"]]
+
+[node name="CityBack2" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( -1338, -574 )
 scale = Vector2( 0.75, 1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack4" type="Sprite" parent="."]
+[node name="CityBack4" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( -790, -1030 )
-scale = Vector2( -1, 1 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack5" type="Sprite" parent="."]
+[node name="CityBack5" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( -218, -1083 )
 scale = Vector2( 0.75, 1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack6" type="Sprite" parent="."]
+[node name="CityBack6" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( 385, -1092 )
 texture = ExtResource( 14 )
 
-[node name="CityBack7" type="Sprite" parent="."]
+[node name="CityBack7" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( 1375, -702 )
 scale = Vector2( 0.75, 1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack8" type="Sprite" parent="."]
+[node name="CityBack8" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( 1002, -1058 )
 scale = Vector2( 0.75, 1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack9" type="Sprite" parent="."]
+[node name="CityBack9" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( 1370, -130 )
-scale = Vector2( -0.75, 1 )
+rotation = 3.14159
+scale = Vector2( 0.75, -1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack10" type="Sprite" parent="."]
+[node name="CityBack10" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( 1335, 396 )
 scale = Vector2( 0.75, 1 )
 texture = ExtResource( 14 )
 
-[node name="CityBack3" type="Sprite" parent="."]
+[node name="CityBack3" type="Sprite" parent="background"]
 material = SubResource( 45 )
 position = Vector2( -1296, 117 )
 scale = Vector2( 0.75, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/art/tilemaps/simple coolio tile map.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/entities/player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/pickups/Tuna.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/shaders/hatch.gdshader" type="Shader" id=10]
 [ext_resource path="res://assets/art/background_assets/city_back2.png" type="Texture" id=11]
+[ext_resource path="res://assets/scripts/generics/level.gd" type="Script" id=12]
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 10 )
@@ -143,6 +144,7 @@ shader_param/size = 417.389
 shader_param/angle_degrees = 45.0
 
 [node name="level8" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="background" type="Node2D" parent="." groups=["background"]]
 
