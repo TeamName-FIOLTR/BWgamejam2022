@@ -139,6 +139,10 @@ default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
+[node name="Polygon2D" type="Polygon2D" parent="Button"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -240, 0, -196, -32, 194, -32, 240, 0 )
+
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( -256, 0, 256, 0, 256, -32, -256, -32 )
@@ -164,10 +168,12 @@ shape = SubResource( 6 )
 [node name="Button Press Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 volume_db = -5.0
+bus = "Sound Effects"
 
 [node name="Button Release Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
 volume_db = -10.0
+bus = "Sound Effects"
 
 [connection signal="body_entered" from="." to="." method="_on_Button_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_Button_body_exited"]
